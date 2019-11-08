@@ -9,7 +9,7 @@ class Item_Test {
 var kaerin:Heroe = null
 var druida:Trabajo = null
 var laBotellita:Item = null
-var partesDelCuerpo: List[ParteDelCuerpo]=null
+//var partesDelCuerpo: List[ParteDelCuerpo]=null
 var manoDerecha= new ParteDelCuerpo
 var cabeza= new ParteDelCuerpo
 
@@ -19,7 +19,7 @@ var cabeza= new ParteDelCuerpo
      druida=new Trabajo("Perro de ambar", Map(Fuerza -> (1+)))
      laBotellita=new Item("botella fogosa", ManoDerecha,Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )))
      
-     val l1= List(manoDerecha)
+     val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
      
      //partesDelCuerpo:+ l1
      /*partesDelCuerpo:+ manoDerecha
@@ -29,7 +29,7 @@ var cabeza= new ParteDelCuerpo
         
      
      
-     kaerin = new Heroe(1,2,3,4, druida, laBotellita,l1 )
+     kaerin = new Heroe(1,2,3,4, druida, laBotellita,partesDelCuerpo )
   }
 
   @Test

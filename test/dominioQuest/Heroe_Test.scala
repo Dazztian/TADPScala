@@ -10,7 +10,7 @@ var heroe:Heroe = null
 var hechicero:Trabajo = null
 var cascoVikingo:Item = null
 var laMataDragones:Item = null
-var partesDelCuerpo: List[ParteDelCuerpo]=null
+//var partesDelCuerpo: List[ParteDelCuerpo]=null
 var manoDerecha= new ParteDelCuerpo
 var cabeza= new ParteDelCuerpo
 
@@ -25,7 +25,8 @@ var cabeza= new ParteDelCuerpo
 
      manoDerecha.itemAsociado=laMataDragones
      
-     val l1= List(manoDerecha)
+          val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
+
      
      //partesDelCuerpo:+ l1
      /*partesDelCuerpo:+ manoDerecha
@@ -34,7 +35,7 @@ var cabeza= new ParteDelCuerpo
      //println(partesDelCuerpo(0).itemAsociado.descripcion)
         
      
-     heroe = new Heroe(1,2,3,4, hechicero, cascoVikingo, l1 )
+     heroe = new Heroe(1,2,3,4, hechicero, cascoVikingo, partesDelCuerpo )
   }
   @Test
   def heroeFuerza_test() = {
