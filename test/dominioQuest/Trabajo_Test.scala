@@ -9,9 +9,13 @@ import org.junit.Assert._
 class Trabajo_Test {
 
 var heroe:Heroe = null
+
 var hechicero:Trabajo = null
+var berserk:Trabajo = null
+
 var cascoVikingo:Item = null
 var laMataDragones:Item = null
+
 //var partesDelCuerpo: List[ParteDelCuerpo]=null
 var manoDerecha= new ParteDelCuerpo
 var cabeza= new ParteDelCuerpo
@@ -20,8 +24,9 @@ var cabeza= new ParteDelCuerpo
   @Before
   def setup() = {
      hechicero=new Trabajo("Perro de ambar", Map(Fuerza -> (158+)))
+     berserk=new Trabajo("Pyria de poder", Map(Hp -> (299+)))
+
      cascoVikingo=new Item("Casco Vikingo",Cabeza, Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )))
-     
      laMataDragones= new Item("La mata dragones", ManoDerecha, Map(Fuerza -> (30<)),Map(Fuerza ->(1000* )))
      
 
@@ -44,6 +49,13 @@ var cabeza= new ParteDelCuerpo
     println("fuerza antes del trabajo: " + heroe.fuerza)
     heroe.aplicarTrabajo(hechicero)
     assertEquals(160, heroe.fuerza)
+  }
+ @Test
+  def cambioDeTrabajo_test() = {
+    println("Organizacion del trabajo anterior " + heroe.especializacion.atributoPrincipal)
+    heroe.aplicarTrabajo(berserk)
+    assertEquals(300, heroe.hp)
+    println("Organizacion del  nuevo trabajo " + heroe.especializacion.atributoPrincipal)
   }
 
 }

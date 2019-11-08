@@ -62,7 +62,8 @@ def aplicarTrabajo(unTrabajo: Trabajo)
     }
     
     
-  }
+  } 
+   this.especializacion=unTrabajo
 }
 
 }
