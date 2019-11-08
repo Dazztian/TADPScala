@@ -1,0 +1,5 @@
+package dominioQuest
+
+class Tarea {
+  
+}
