@@ -10,8 +10,8 @@ var kaerin:Heroe = null
 var druida:Trabajo = null
 var laBotellita:Item = null
 //var partesDelCuerpo: List[ParteDelCuerpo]=null
-var manoDerecha= new ParteDelCuerpo
-var cabeza= new ParteDelCuerpo
+var manoDerecha= new ParteDelCuerpo(None)
+var cabeza= new ParteDelCuerpo(None)
 
 
   @Before
@@ -21,14 +21,7 @@ var cabeza= new ParteDelCuerpo
      
      val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
      
-     //partesDelCuerpo:+ l1
-     /*partesDelCuerpo:+ manoDerecha
-     partesDelCuerpo:+ cabeza*/
-     
-     //println(partesDelCuerpo(0).itemAsociado.descripcion)
-        
-     
-     
+    
      kaerin = new Heroe(1,2,3,4, druida, laBotellita,partesDelCuerpo )
   }
 

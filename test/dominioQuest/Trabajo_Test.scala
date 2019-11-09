@@ -17,8 +17,8 @@ var cascoVikingo:Item = null
 var laMataDragones:Item = null
 
 //var partesDelCuerpo: List[ParteDelCuerpo]=null
-var manoDerecha= new ParteDelCuerpo
-var cabeza= new ParteDelCuerpo
+var manoDerecha: ParteDelCuerpo= null
+var cabeza: ParteDelCuerpo = null
 
 
   @Before
@@ -30,15 +30,9 @@ var cabeza= new ParteDelCuerpo
      laMataDragones= new Item("La mata dragones", ManoDerecha, Map(Fuerza -> (30<)),Map(Fuerza ->(1000* )))
      
 
-     manoDerecha.itemAsociado=laMataDragones
+     manoDerecha.itemAsociado=Some(laMataDragones)
      
      val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
-     
-     //partesDelCuerpo:+ l1
-     /*partesDelCuerpo:+ manoDerecha
-     partesDelCuerpo:+ cabeza*/
-     
-     //println(partesDelCuerpo(0).itemAsociado.descripcion)
         
      
      heroe = new Heroe(1,2,3,4, hechicero, cascoVikingo, partesDelCuerpo)
