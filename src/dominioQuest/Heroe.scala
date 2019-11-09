@@ -9,8 +9,8 @@ case class Heroe (var hp: Int,var fuerza: Int,var velocidad: Int,var inteligenci
 def reduccionStat() {}
 
 
-def equiparItem(unItem: Item) :Heroe 
-= {
+def equiparItem(unItem: Item) :Heroe = 
+{
  if (this.puedePortarItem(unItem))
   {  
     //aplico las modificaciones del item
@@ -50,22 +50,22 @@ return unItem.condiciones.foldLeft(true)
 
 
 
-def aplicarTrabajo(unTrabajo: Trabajo)
+def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
 {
   for ( (stat, modificacion) <- unTrabajo.atributosHeroe)
   {
     //ESTO DEBERIA SER
     //this.statObtenido=modificacion(this.statObtenido)
     stat match {
-      case Fuerza => this.fuerza=modificacion(this.fuerza)
-      case Hp => this.hp=modificacion(this.hp)
-      case Velocidad => this.velocidad=modificacion(this.velocidad)
-      case Inteligencia => this.inteligencia=modificacion(this.inteligencia)
+       case Fuerza => this.copy(fuerza = modificacion(this.fuerza))
+      case Hp => this.copy(hp=modificacion(this.hp))
+      case Velocidad => this.copy(velocidad=modificacion(this.velocidad))
+      case Inteligencia => this.copy(inteligencia=modificacion(this.inteligencia))
     }
     
     
-  } 
-   this.especializacion=unTrabajo
+  }
+  this.copy(especializacion = unTrabajo)
 }
 
 }
