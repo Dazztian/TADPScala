@@ -9,33 +9,31 @@ case class Heroe (var hp: Int,var fuerza: Int,var velocidad: Int,var inteligenci
 def reduccionStat() {}
 
 
-def equiparItem(unItem: Item)
-{
-  if (this.puedePortarItem(unItem))
-  {
-    println("Bien ahi crack podés portar el item")
-    //equipo el item
-      /*this.listaPartes 
-      unItem.parte    */
-    
-    
-    
+def equiparItem(unItem: Item) :Heroe 
+= {
+ if (this.puedePortarItem(unItem))
+  {  
     //aplico las modificaciones del item
+  
      for ( (stat, modificacion) <- unItem.efectos)
     {  //ESTO ES LITERALMENTE IGUAL QUE EN APLICAR TRABAJO
        //LOGICA REPETIDA
       stat match {
-      case Fuerza => this.fuerza=modificacion(this.fuerza)
-      case Hp => this.hp=modificacion(this.hp)
-      case Velocidad => this.velocidad=modificacion(this.velocidad)
-      case Inteligencia => this.inteligencia=modificacion(this.inteligencia)
+      case Fuerza => this.copy(fuerza = modificacion(this.fuerza))
+      case Hp => this.copy(hp=modificacion(this.hp))
+      case Velocidad => this.copy(velocidad=modificacion(this.velocidad))
+      case Inteligencia => this.copy(inteligencia=modificacion(this.inteligencia))
       }
     }
+   //equipo el item  
+   this.copy()      
   }
+ //Esto esta x el caso en el que no pueda equipar el item devuelvo el mismo tipo sin modificar
+ this.copy()  
+}
 
   
-  
-}
+
 
 //Aca deberia poder chequear y que no produzca efecto. Efecto se produce cuando se lo equipa
 def puedePortarItem(unItem: Item) :Boolean =
