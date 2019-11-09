@@ -1,5 +1,5 @@
 package dominioQuest
 
-class Mision {
+class Mision (unaRecomensa: Any,tareas: Tarea*){
   
 }
