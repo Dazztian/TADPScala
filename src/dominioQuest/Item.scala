@@ -1,11 +1,7 @@
 package dominioQuest
 
 //listaCondiciones diccionario: atributo, condicion
-class Item (unaDescripcion: String, dondeSeEquipa: ExtremidadDelCuerpo, listaCondiciones: Map[Stat, Int=>Boolean], listaEfectos: Map[Stat, Int=>Int] )
+case class Item (var descripcion: String,var parte: ExtremidadDelCuerpo,var condiciones: Map[Stat, Int=>Boolean],var efectos: Map[Stat, Int=>Int] )
 {
-  var descripcion=unaDescripcion
-  var parte=dondeSeEquipa
-  var condiciones=listaCondiciones
-  var efectos=listaEfectos
-  
+
 }

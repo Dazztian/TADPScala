@@ -1,19 +1,9 @@
 package dominioQuest
 
-class Heroe (hpHeroe: Int, FuerzaHeroe: Int, VelocidadHeroe: Int,inteligenciaHeroe: Int, 
-    unaEspecializacion: Trabajo, listaDeItems: Item, partesDelCuerpo: List[ParteDelCuerpo] )  
+case class Heroe (var hp: Int,var fuerza: Int,var velocidad: Int,var inteligencia: Int, 
+    var especializacion: Trabajo,var items: Item,var listaPartes: List[ParteDelCuerpo] )  
 {
-
-  var hp=hpHeroe
-  var fuerza=FuerzaHeroe
-  var velocidad=VelocidadHeroe
-  var inteligencia=inteligenciaHeroe
-  var especializacion=unaEspecializacion
-  var items=listaDeItems 
-  
-  //var listaPartes: List[ParteDelCuerpo]=partesDelCuerpo
-  var listaPartes=partesDelCuerpo
-  
+ 
   
 //verifica que como minimo reduzca a  1
 def reduccionStat() {}
@@ -25,8 +15,8 @@ def equiparItem(unItem: Item)
   {
     println("Bien ahi crack podés portar el item")
     //equipo el item
-      this.listaPartes 
-      unItem.parte    
+      /*this.listaPartes 
+      unItem.parte    */
     
     
     

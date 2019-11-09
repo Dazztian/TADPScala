@@ -1,6 +1,6 @@
 package dominioQuest
 
-class Equipo (pozoComun: Int, nombre: String, integrantes: Heroe*) 
+class Equipo (var pozoComun: Int,var nombre: String,var integrantes: List[Heroe]) 
 {
  
   //Devuelvo el heroe que mejor cumple el criterio

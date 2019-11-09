@@ -1,5 +1,5 @@
 package dominioQuest
 
-class Tarea(efectos:Map[Stat, Int=>Int]) {
+case class Tarea(var efectos:Map[Stat, Int=>Int]) {
   
 }

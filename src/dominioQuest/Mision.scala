@@ -1,5 +1,5 @@
 package dominioQuest
 
-class Mision (unaRecomensa: Any,tareas: Tarea*){
+case class Mision (var recomensa: Any,var tareas: List[Tarea]){
   
 }

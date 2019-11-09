@@ -1,9 +1,6 @@
 package dominioQuest
 
 //Define si sos guerrero, ladrón,etc...
-class Trabajo (unAtributoPrincipal:String, unosAtributos: Map[Stat, Int=>Int]) 
-{
-  var atributoPrincipal=unAtributoPrincipal
-  var atributosHeroe= unosAtributos
-  
+case class Trabajo (var atributoPrincipal:String, var atributosHeroe: Map[Stat, Int=>Int]) 
+{  
 }
