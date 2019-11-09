@@ -25,9 +25,23 @@ def equiparItem(unItem: Item)
   {
     println("Bien ahi crack podés portar el item")
     //equipo el item
+      this.listaPartes 
+      unItem.parte    
+    
+    
+    
     //aplico las modificaciones del item
+     for ( (stat, modificacion) <- unItem.efectos)
+    {  //ESTO ES LITERALMENTE IGUAL QUE EN APLICAR TRABAJO
+       //LOGICA REPETIDA
+      stat match {
+      case Fuerza => this.fuerza=modificacion(this.fuerza)
+      case Hp => this.hp=modificacion(this.hp)
+      case Velocidad => this.velocidad=modificacion(this.velocidad)
+      case Inteligencia => this.inteligencia=modificacion(this.inteligencia)
+      }
+    }
   }
-
 
   
   

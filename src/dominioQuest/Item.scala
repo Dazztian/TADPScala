@@ -6,5 +6,6 @@ class Item (unaDescripcion: String, dondeSeEquipa: ExtremidadDelCuerpo, listaCon
   var descripcion=unaDescripcion
   var parte=dondeSeEquipa
   var condiciones=listaCondiciones
+  var efectos=listaEfectos
   
 }
