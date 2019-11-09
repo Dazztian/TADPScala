@@ -11,8 +11,8 @@ var hechicero:Trabajo = null
 var cascoVikingo:Item = null
 var laMataDragones:Item = null
 //var partesDelCuerpo: List[ParteDelCuerpo]=null
-var manoDerecha: ParteDelCuerpo= null
-var cabeza: ParteDelCuerpo = null
+var manoDerecha= new ParteDelCuerpo(None)
+var cabeza= new ParteDelCuerpo(None)
 
 
   @Before
