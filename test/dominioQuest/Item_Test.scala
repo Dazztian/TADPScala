@@ -22,21 +22,19 @@ var cabeza= new ParteDelCuerpo(None)
      val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
      
     
-     kaerin = new Heroe(1,2,3,4, druida, laBotellita,partesDelCuerpo )
+     kaerin = new Heroe(1,40,3,4, druida, laBotellita,partesDelCuerpo )
   }
 
   @Test
   def puedePortarItem_test() = {
-    kaerin.fuerza=40
     assertEquals(true, kaerin.puedePortarItem(laBotellita))
     println("por dios kaerin, largá la botellita!")
   }
   
   @Test
   def estadoPostPortarItem_test() = {
-    kaerin.fuerza=40
-    var nuevoHeroe=kaerin.equiparItem(laBotellita)
-    assertEquals(4, nuevoHeroe.hp)
+    var kaerinConNuevoItem=kaerin.equiparItem(laBotellita)
+    assertEquals(4, kaerinConNuevoItem.hp)
 
   }
 }

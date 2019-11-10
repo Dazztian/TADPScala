@@ -1,7 +1,7 @@
 package dominioQuest
 
-case class Heroe (var hp: Int,var fuerza: Int,var velocidad: Int,var inteligencia: Int, 
-    var especializacion: Trabajo,var items: Item,var listaPartes: List[ParteDelCuerpo] )  
+case class Heroe (val hp: Int,val fuerza: Int,val velocidad: Int,val inteligencia: Int, 
+    val especializacion: Trabajo,val items: Item,val listaPartes: List[ParteDelCuerpo] )  
 {
   def modificarHp(modificacion: Int=>Int) = this.copy(hp = modificacion(this.hp)).verificarParams
   def modificarFuerza(modificacion: Int=>Int) = this.copy(fuerza = modificacion(this.fuerza)).verificarParams
@@ -26,11 +26,12 @@ def equiparItem(unItem: Item) :Heroe =
  if (this.puedePortarItem(unItem))
   {  
     //aplico las modificaciones del item
+     //¿¿¿¿¿Esto no deberia resolverse con un fold?????
      for ( (stat, modificacion) <- unItem.efectos)
     {  
       stat match {
        case Fuerza =>  this.modificarFuerza(modificacion).verificarParams
-      case Hp => this.modificarHp(modificacion).verificarParams
+      case Hp => return this.modificarHp(modificacion).verificarParams
       case Velocidad => this.modificarInteligencia(modificacion).verificarParams
       case Inteligencia => this.modificarVelocidad(modificacion).verificarParams
       }
@@ -61,6 +62,7 @@ return unItem.condiciones.foldLeft(true)
 
 def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
 {
+  //Esto no deberia resolverse con un fold?
   for ( (stat, modificacion) <- unTrabajo.atributosHeroe)
   {
     //ESTO DEBERIA SER
