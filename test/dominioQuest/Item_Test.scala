@@ -29,7 +29,14 @@ var cabeza= new ParteDelCuerpo(None)
   def puedePortarItem_test() = {
     kaerin.fuerza=40
     assertEquals(true, kaerin.puedePortarItem(laBotellita))
-    kaerin.equiparItem(laBotellita)
     println("por dios kaerin, largá la botellita!")
+  }
+  
+  @Test
+  def estadoPostPortarItem_test() = {
+    kaerin.fuerza=40
+    var nuevoHeroe=kaerin.equiparItem(laBotellita)
+    assertEquals(4, nuevoHeroe.hp)
+
   }
 }

@@ -26,15 +26,13 @@ def equiparItem(unItem: Item) :Heroe =
  if (this.puedePortarItem(unItem))
   {  
     //aplico las modificaciones del item
-  
      for ( (stat, modificacion) <- unItem.efectos)
-    {  //ESTO ES LITERALMENTE IGUAL QUE EN APLICAR TRABAJO
-       //LOGICA REPETIDA
+    {  
       stat match {
-       case Fuerza =>  modificarFuerza(modificacion).verificarParams
-      case Hp => modificarHp(modificacion).verificarParams
-      case Velocidad => modificarInteligencia(modificacion).verificarParams
-      case Inteligencia => modificarVelocidad(modificacion).verificarParams
+       case Fuerza =>  this.modificarFuerza(modificacion).verificarParams
+      case Hp => this.modificarHp(modificacion).verificarParams
+      case Velocidad => this.modificarInteligencia(modificacion).verificarParams
+      case Inteligencia => this.modificarVelocidad(modificacion).verificarParams
       }
     }
    //equipo el item  
@@ -66,13 +64,13 @@ def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
   for ( (stat, modificacion) <- unTrabajo.atributosHeroe)
   {
     //ESTO DEBERIA SER
-    //this.statObtenido=modificacion(this.statObtenido)
-    stat match {
-       case Fuerza =>  modificarFuerza(modificacion).verificarParams
-      case Hp => modificarHp(modificacion).verificarParams
-      case Velocidad => modificarInteligencia(modificacion).verificarParams
-      case Inteligencia => modificarVelocidad(modificacion).verificarParams
-    }
+    //this.statObtenido=modificacion(this.statObtenido) 
+      stat match {
+       case Fuerza =>  this.modificarFuerza(modificacion).verificarParams
+      case Hp => this.modificarHp(modificacion).verificarParams
+      case Velocidad => this.modificarInteligencia(modificacion).verificarParams
+      case Inteligencia => this.modificarVelocidad(modificacion).verificarParams
+      }
     
     
   }
