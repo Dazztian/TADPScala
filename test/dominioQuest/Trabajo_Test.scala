@@ -16,7 +16,6 @@ var berserk:Trabajo = null
 var cascoVikingo:Item = null
 var laMataDragones:Item = null
 
-//var partesDelCuerpo: List[ParteDelCuerpo]=null
 var manoDerecha= new ParteDelCuerpo(None)
 var cabeza= new ParteDelCuerpo(None)
 
@@ -42,15 +41,13 @@ var cabeza= new ParteDelCuerpo(None)
  @Test
   def aplicarUnTrabajo_test() = {
     println("fuerza antes del trabajo: " + heroe.fuerza)
-    heroe.aplicarTrabajo(hechicero)
-    assertEquals(160, heroe.fuerza)
+    assertEquals(160,  heroe.aplicarTrabajo(hechicero).fuerza)
   }
  @Test
   def cambioDeTrabajo_test() = {
     println("Organizacion del trabajo anterior " + heroe.especializacion.atributoPrincipal)
-    heroe.aplicarTrabajo(berserk)
-    assertEquals(300, heroe.hp)
-    println("Organizacion del  nuevo trabajo " + heroe.especializacion.atributoPrincipal)
+    assertEquals(300, heroe.aplicarTrabajo(berserk).hp)
+    println("Organizacion del  nuevo trabajo " + heroe.aplicarTrabajo(berserk).especializacion.atributoPrincipal)
   }
 
 }
