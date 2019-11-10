@@ -20,9 +20,10 @@ var cabeza= new ParteDelCuerpo(None)
      laBotellita=new Item("botella fogosa", ManoDerecha,Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )))
      
      val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
-     
+     var listaItems: List[Item]= List(laBotellita)
+
     
-     kaerin = new Heroe(1,40,3,4, druida, laBotellita,partesDelCuerpo )
+     kaerin = new Heroe(1,40,3,4, druida, listaItems,partesDelCuerpo )
   }
 
   @Test
@@ -35,6 +36,11 @@ var cabeza= new ParteDelCuerpo(None)
   def estadoPostPortarItem_test() = {
     var kaerinConNuevoItem=kaerin.equiparItem(laBotellita)
     assertEquals(4, kaerinConNuevoItem.hp)
-
   }
+  @Test
+  def estadoErroneoPostPortarItem_test() = {
+    var kaerinConNuevoItem=kaerin.equiparItem(laBotellita)
+    assertEquals(8, kaerinConNuevoItem.hp)
+  }
+  
 }

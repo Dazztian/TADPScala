@@ -1,12 +1,14 @@
 package dominioQuest
 
 case class Heroe (val hp: Int,val fuerza: Int,val velocidad: Int,val inteligencia: Int, 
-    val especializacion: Trabajo,val items: Item,val listaPartes: List[ParteDelCuerpo] )  
+    val especializacion: Trabajo,val items: List[Item],val listaPartes: List[ParteDelCuerpo] )  
 {
   def modificarHp(modificacion: Int=>Int) = this.copy(hp = modificacion(this.hp)).verificarParams
   def modificarFuerza(modificacion: Int=>Int) = this.copy(fuerza = modificacion(this.fuerza)).verificarParams
   def modificarInteligencia(modificacion: Int=>Int) = this.copy(inteligencia = modificacion(this.inteligencia)).verificarParams
   def modificarVelocidad(modificacion: Int=>Int) = this.copy(velocidad = modificacion(this.velocidad)).verificarParams
+  def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
+
 
    def verificarParams = {
     if (hp < 1)
@@ -26,19 +28,19 @@ def equiparItem(unItem: Item) :Heroe =
  if (this.puedePortarItem(unItem))
   {  
     //aplico las modificaciones del item
-   return  unItem.efectos.foldLeft(this)
-{
+   return  (unItem.efectos.foldLeft(this)
+    {
      (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
       case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2).verificarParams
       case Hp => semilla.modificarHp(diccionarioStatEfecto._2).verificarParams
       case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2).verificarParams
       case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2).verificarParams})
-}
+     })
    //equipo el item  
-   return this.copy()      
+   .copy(items = unItem :: this.items  )      
   }
  //Esto esta x el caso en el que no pueda equipar el item devuelvo el mismo tipo sin modificar
- return  this.copy()  
+ return  this  
 }
   
 
@@ -59,21 +61,17 @@ return unItem.condiciones.foldLeft(true)
 
 def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
 {
-  //Esto no deberia resolverse con un fold?
-  for ( (stat, modificacion) <- unTrabajo.atributosHeroe)
-  {
-    //ESTO DEBERIA SER
-    //this.statObtenido=modificacion(this.statObtenido) 
-      stat match {
-       case Fuerza =>  this.modificarFuerza(modificacion).verificarParams
-      case Hp => this.modificarHp(modificacion).verificarParams
-      case Velocidad => this.modificarInteligencia(modificacion).verificarParams
-      case Inteligencia => this.modificarVelocidad(modificacion).verificarParams
-      }
-    
-    
-  }
-  this.copy(especializacion = unTrabajo)
+ //Esto se resuelve con fold
+   return  (unTrabajo.atributosHeroe.foldLeft(this)
+    {
+     (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
+      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2).verificarParams
+      case Hp => semilla.modificarHp(diccionarioStatEfecto._2).verificarParams
+      case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2).verificarParams
+      case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2).verificarParams})
+     })
+     .copy(especializacion = unTrabajo)
 }
+
 
 }
