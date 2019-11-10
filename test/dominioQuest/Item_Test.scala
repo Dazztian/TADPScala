@@ -38,6 +38,12 @@ var cabeza= new ParteDelCuerpo(None)
     assertEquals(4, kaerinConNuevoItem.hp)
   }
   @Test
+  def cantItemPOSTEquipamiento_test() = {
+    var kaerinConNuevoItem=kaerin.equiparItem(laBotellita)
+    assertEquals(2, kaerinConNuevoItem.items.size)//Porque ya arranca con 1 item
+  }
+  
+  @Test
   def estadoErroneoPostPortarItem_test() = {
     var kaerinConNuevoItem=kaerin.equiparItem(laBotellita)
     assertEquals(8, kaerinConNuevoItem.hp)

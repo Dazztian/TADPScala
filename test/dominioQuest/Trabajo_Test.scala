@@ -33,9 +33,10 @@ var cabeza= new ParteDelCuerpo(None)
      manoDerecha.itemAsociado=Some(laMataDragones)
      
      val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
+     var listaItems: List[Item]= List(cascoVikingo)
         
      
-     heroe = new Heroe(1,2,3,4, hechicero, cascoVikingo, partesDelCuerpo)
+     heroe = new Heroe(1,2,3,4, hechicero, listaItems, partesDelCuerpo)
   }
 
  @Test
