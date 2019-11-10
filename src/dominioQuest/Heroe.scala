@@ -4,10 +4,18 @@ case class Heroe (var hp: Int,var fuerza: Int,var velocidad: Int,var inteligenci
     var especializacion: Trabajo,var items: Item,var listaPartes: List[ParteDelCuerpo] )  
 {
  
+   def verificarParams = {
+    if (hp < 1)
+      throw NoPuedeHpMenorAUno(this)
+    if (fuerza < 1)
+      throw NoPuedeFuerzaMenorAUno(this)
+    if (inteligencia < 1)
+      throw NoPuedeInteligenciaMenorAUno(this)
+    if (velocidad < 1)
+      throw NoPuedeVelocidaMenorAUno(this)
+    this
+  }
   
-//verifica que como minimo reduzca a  1
-def reduccionStat() {}
-
 
 def equiparItem(unItem: Item) :Heroe = 
 {
@@ -57,7 +65,7 @@ def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
     //ESTO DEBERIA SER
     //this.statObtenido=modificacion(this.statObtenido)
     stat match {
-       case Fuerza => this.copy(fuerza = modificacion(this.fuerza))
+       case Fuerza =>  this.copy(fuerza = modificacion(this.fuerza))
       case Hp => this.copy(hp=modificacion(this.hp))
       case Velocidad => this.copy(velocidad=modificacion(this.velocidad))
       case Inteligencia => this.copy(inteligencia=modificacion(this.inteligencia))
