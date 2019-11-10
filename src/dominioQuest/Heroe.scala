@@ -26,24 +26,22 @@ def equiparItem(unItem: Item) :Heroe =
  if (this.puedePortarItem(unItem))
   {  
     //aplico las modificaciones del item
-     //¿¿¿¿¿Esto no deberia resolverse con un fold?????
-     for ( (stat, modificacion) <- unItem.efectos)
-    {  
-      stat match {
-       case Fuerza =>  this.modificarFuerza(modificacion).verificarParams
-      case Hp => return this.modificarHp(modificacion).verificarParams
-      case Velocidad => this.modificarInteligencia(modificacion).verificarParams
-      case Inteligencia => this.modificarVelocidad(modificacion).verificarParams
-      }
-    }
+   return  unItem.efectos.foldLeft(this)
+{
+     (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
+      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2).verificarParams
+      case Hp => semilla.modificarHp(diccionarioStatEfecto._2).verificarParams
+      case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2).verificarParams
+      case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2).verificarParams})
+}
    //equipo el item  
-   this.copy()      
+   return this.copy()      
   }
  //Esto esta x el caso en el que no pueda equipar el item devuelvo el mismo tipo sin modificar
- this.copy()  
+ return  this.copy()  
 }
-
   
+
 
 
 //Aca deberia poder chequear y que no produzca efecto. Efecto se produce cuando se lo equipa
@@ -58,7 +56,6 @@ return unItem.condiciones.foldLeft(true)
  })
   
   }
-
 
 def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
 {
