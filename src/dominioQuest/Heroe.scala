@@ -3,7 +3,11 @@ package dominioQuest
 case class Heroe (var hp: Int,var fuerza: Int,var velocidad: Int,var inteligencia: Int, 
     var especializacion: Trabajo,var items: Item,var listaPartes: List[ParteDelCuerpo] )  
 {
- 
+  def modificarHp(modificacion: Int=>Int) = this.copy(hp = modificacion(this.hp)).verificarParams
+  def modificarFuerza(modificacion: Int=>Int) = this.copy(fuerza = modificacion(this.fuerza)).verificarParams
+  def modificarInteligencia(modificacion: Int=>Int) = this.copy(inteligencia = modificacion(this.inteligencia)).verificarParams
+  def modificarVelocidad(modificacion: Int=>Int) = this.copy(velocidad = modificacion(this.velocidad)).verificarParams
+
    def verificarParams = {
     if (hp < 1)
       throw NoPuedeHpMenorAUno(this)
@@ -27,10 +31,10 @@ def equiparItem(unItem: Item) :Heroe =
     {  //ESTO ES LITERALMENTE IGUAL QUE EN APLICAR TRABAJO
        //LOGICA REPETIDA
       stat match {
-      case Fuerza => this.copy(fuerza = modificacion(this.fuerza))
-      case Hp => this.copy(hp=modificacion(this.hp))
-      case Velocidad => this.copy(velocidad=modificacion(this.velocidad))
-      case Inteligencia => this.copy(inteligencia=modificacion(this.inteligencia))
+       case Fuerza =>  modificarFuerza(modificacion).verificarParams
+      case Hp => modificarHp(modificacion).verificarParams
+      case Velocidad => modificarInteligencia(modificacion).verificarParams
+      case Inteligencia => modificarVelocidad(modificacion).verificarParams
       }
     }
    //equipo el item  
@@ -57,7 +61,6 @@ return unItem.condiciones.foldLeft(true)
   }
 
 
-
 def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
 {
   for ( (stat, modificacion) <- unTrabajo.atributosHeroe)
@@ -65,10 +68,10 @@ def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
     //ESTO DEBERIA SER
     //this.statObtenido=modificacion(this.statObtenido)
     stat match {
-       case Fuerza =>  this.copy(fuerza = modificacion(this.fuerza))
-      case Hp => this.copy(hp=modificacion(this.hp))
-      case Velocidad => this.copy(velocidad=modificacion(this.velocidad))
-      case Inteligencia => this.copy(inteligencia=modificacion(this.inteligencia))
+       case Fuerza =>  modificarFuerza(modificacion).verificarParams
+      case Hp => modificarHp(modificacion).verificarParams
+      case Velocidad => modificarInteligencia(modificacion).verificarParams
+      case Inteligencia => modificarVelocidad(modificacion).verificarParams
     }
     
     
