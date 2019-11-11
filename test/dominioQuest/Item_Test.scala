@@ -9,7 +9,6 @@ class Item_Test {
 var kaerin:Heroe = null
 var druida:Trabajo = null
 var laBotellita:Item = null
-//var partesDelCuerpo: List[ParteDelCuerpo]=null
 var manoDerecha= new ParteDelCuerpo(None)
 var cabeza= new ParteDelCuerpo(None)
 
