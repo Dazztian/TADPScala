@@ -10,17 +10,22 @@ var heroe:Heroe = null
 var hechicero:Trabajo = null
 var cascoVikingo:Item = null
 var laMataDragones:Item = null
-//var partesDelCuerpo: List[ParteDelCuerpo]=null
+
 var manoDerecha= new ParteDelCuerpo(None)
 var cabeza= new ParteDelCuerpo(None)
 
 
   @Before
   def setup() = {
-     hechicero=new Trabajo("Perro de ambar", Map(Fuerza -> (158+)))
-     cascoVikingo=new Item("Casco Vikingo",Cabeza, Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )))
+  
+     var funcionPrueba: Int=>Boolean=(30<)
+     var requi:RequerimientosItem=new RequerimientosItem(hechicero, Map(Fuerza -> funcionPrueba))
+     var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
-     laMataDragones= new Item("La mata dragones", ManoDerecha, Map(Fuerza -> (30<)),Map(Fuerza ->(1000* )))
+     hechicero=new Trabajo("Perro de ambar", Map(Fuerza -> (158+)))
+     
+     cascoVikingo=new Item(Cabeza, Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )),requerimientoPalitoMagico)
+     laMataDragones= new Item(ManoDerecha, Map(Fuerza -> (30<)),Map(Fuerza ->(1000* )), requerimientoPalitoMagico)
      
 
      manoDerecha.itemAsociado=Some(laMataDragones)
