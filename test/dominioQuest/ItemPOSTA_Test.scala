@@ -16,8 +16,12 @@ var manoDerecha= new ParteDelCuerpo(None)
 @Before
   def setup() = {
   
+  
      mago=new Trabajo("Perro de ambar", Map(Fuerza -> (158+)) )
-     var requerimientoPalitoMagico: List[RequerimientosItem]= List((mago, Map(Fuerza -> (100<))) ) 
+  
+     var funcionPrueba: Int=>Boolean=(30<)
+     var requi:RequerimientosItem=new RequerimientosItem(mago, Map(Fuerza -> funcionPrueba))
+     var requerimientoPalitoMagico: List[RequerimientosItem]= List( (requi ) ) 
      
      palitoMagico= new Item( ManoDerecha, Map(Fuerza -> (30>)),Map(Fuerza ->(1000* )),requerimientoPalitoMagico)
      

@@ -11,7 +11,8 @@ case class Item (
     //Resuelve automaticamente las condiciones asociadas a un trabajo
     return condicionesPosta.foldLeft(false)( 
         (semilla,unaCondicion) => semilla  || 
-        (unHeroe.especializacion== unaCondicion.unTrabajo) && unHeroe.cumpleCon(unaCondicion.restriccionesSobreElTrabajo)
+        (unHeroe.especializacion== unaCondicion.unTrabajo) &&
+        unHeroe.cumpleCon(unaCondicion.restriccionesSobreElTrabajo)
         )
     }
 }
