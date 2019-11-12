@@ -14,16 +14,6 @@ case class Heroe (val hp: Int,
   def modificarVelocidad(modificacion: Int=>Int) = this.copy(velocidad = modificacion(this.velocidad)).verificarParams
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
   
-   /*private def getStatActual(unStat: Int, unIncremento: Int) = unStat + unIncremento
-  
-    Esto hay que mergearlo con el caso nuestro
-  def hp = getStatActual(hpBase, especie.incrementoPeso)
-  def fuerza = getStatActual(fuerzaBase, especie.incrementoFuerza)
-  def velocidad = getStatActual(velocidadBase, especie.incrementoVelocidad)
-  def inteligencia = getStatActual(inteligenciaBase, especie.incrementoPeso)*/
-  
-
-
 def getStatActaul(unStat: Stat):Int ={ // TODO ver el tipo del retorno
     this.items.foldLeft(this.aplicarTrabajo(this.especializacion)){
        (semilla,unItem) => semilla.equiparItem(unItem)
