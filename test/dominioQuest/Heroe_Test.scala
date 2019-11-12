@@ -7,42 +7,36 @@ import org.junit.Assert._
 class Heroe_Test {
   
 var heroe:Heroe = null
-var hechicero:Trabajo = null
-var cascoVikingo:Item = null
-var laMataDragones:Item = null
-
+var mago:Trabajo = null
+var palitoMagico:Item = null
 var manoDerecha= new ParteDelCuerpo(None)
-var cabeza= new ParteDelCuerpo(None)
 
 
-  @Before
+
+@Before
   def setup() = {
   
-     var funcionPrueba: Int=>Boolean=(30<)
-     var requi:RequerimientosItem=new RequerimientosItem(hechicero, Map(Fuerza -> funcionPrueba))
+  
+     mago=new Trabajo("Perro de ambar", Map(Fuerza -> (100+)) )
+  
+     var funcionPrueba: Int=>Boolean=(100==)
+     var requi:RequerimientosItem=new RequerimientosItem(mago, Map(Hp -> funcionPrueba))
      var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
-     hechicero=new Trabajo("Perro de ambar", Map(Fuerza -> (158+)))
+     palitoMagico= new Item( ManoDerecha, Map(Fuerza -> (30<)),Map(Fuerza ->(100* )),requerimientoPalitoMagico)
      
-     cascoVikingo=new Item(Cabeza, Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )),requerimientoPalitoMagico)
-     laMataDragones= new Item(ManoDerecha, Map(Fuerza -> (30<)),Map(Fuerza ->(1000* )), requerimientoPalitoMagico)
+     manoDerecha.itemAsociado=Some(palitoMagico)
      
-
-     manoDerecha.itemAsociado=Some(laMataDragones)
+     var partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
+     var listaItems: List[Item]= List(palitoMagico)
+        
      
-     val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
-     var listaItems: List[Item]= List(cascoVikingo)
-
-     
-     heroe = new Heroe(1,2,3,4, hechicero, listaItems, partesDelCuerpo )
+     heroe = new Heroe(100,200,300,400, mago, listaItems, partesDelCuerpo)
   }
-  @Test
-  def heroeFuerza_test() = {
-    assertEquals(2, heroe.fuerza)
+@Test
+  def aceptaItem_test() = {
+  println("#llegaste")
+    assertEquals(true, heroe.puedePortarItem(palitoMagico))
   }
 
-  @Test
-  def heroeTrabajo_test() = {
-    assertEquals("Perro de ambar", heroe.especializacion.atributoPrincipal)
-  }
 }

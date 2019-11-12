@@ -1,4 +1,4 @@
-package dominioQuest
+/*package dominioQuest
 
 
 import org.junit.Before
@@ -50,4 +50,4 @@ var cabeza= new ParteDelCuerpo(None)
     println("Organizacion del  nuevo trabajo " + heroe.aplicarTrabajo(berserk).especializacion.atributoPrincipal)
   }
 
-}
+}*/
