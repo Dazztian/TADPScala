@@ -1,5 +1,9 @@
 package dominioQuest
 
+import org.junit.Before
+import org.junit.Test
+import org.junit.Assert._
+
 class ItemPOSTA_Test {
   
 var heroe:Heroe = null
@@ -11,8 +15,10 @@ var manoDerecha= new ParteDelCuerpo(None)
 
 @Before
   def setup() = {
-     mago=new Trabajo("Perro de ambar", Map(Fuerza -> (158+)))
-     var requerimientoPalitoMagico: List[RequerimientosItem]= List((Mago,Map(Fuerza -> (30<))))
+  
+     mago=new Trabajo("Perro de ambar", Map(Fuerza -> (158+)) )
+     var requerimientoPalitoMagico: List[RequerimientosItem]= List((mago, Map(Fuerza -> (100<))) ) 
+     
      palitoMagico= new Item( ManoDerecha, Map(Fuerza -> (30>)),Map(Fuerza ->(1000* )),requerimientoPalitoMagico)
      
      manoDerecha.itemAsociado=Some(palitoMagico)
@@ -22,6 +28,10 @@ var manoDerecha= new ParteDelCuerpo(None)
         
      
      heroe = new Heroe(100,200,300,400, mago, listaItems, partesDelCuerpo)
+  }
+@Test
+  def aceptaItem_test() = {
+    assertEquals(true, heroe.puedePortarItem(palitoMagico))
   }
 
 }
