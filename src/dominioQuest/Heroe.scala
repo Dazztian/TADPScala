@@ -24,17 +24,30 @@ case class Heroe (val hp: Int,
   
 
 
-def verificarParams = {
-    if (hp < 1)
-      throw NoPuedeHpMenorAUno(this)
-    if (fuerza < 1)
-      throw NoPuedeFuerzaMenorAUno(this)
-    if (inteligencia < 1)
-      throw NoPuedeInteligenciaMenorAUno(this)
-    if (velocidad < 1)
-      throw NoPuedeVelocidaMenorAUno(this)
-    this
+def getStatActaul(unStat: Stat):Int ={ // TODO ver el tipo del retorno
+    this.items.foldLeft(this.aplicarTrabajo(this.especializacion)){
+       (semilla,unItem) => semilla.equiparItem(unItem)
+     }
+    unStat match{
+      case hp => return this.hp
+      case fuerza => return this.fuerza
+      case inteligencia => return this.inteligencia
+      case velocidad => return this.velocidad
+    } 
+ 
   }
+
+  def verificarParams = {
+    if (this.hp < 1)
+     this.copy(hp = 1)
+    if (this.fuerza < 1)
+     this.copy(fuerza = 1)
+    if (this.inteligencia < 1)
+     this.copy(inteligencia = 1)
+    if (this.velocidad < 1)
+     this.copy(velocidad = 1)
+    this
+ }
   
 def equiparItem(unItem: Item) :Heroe = 
 {
