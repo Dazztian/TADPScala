@@ -10,7 +10,8 @@ case class Item (
 //ACA DEBERIA SER UN ANY, XQ BASTA CON QUE CUMPLA 1 DE LOS SETS DE CONDICIONES ASOCIADAS A UN TRABAJO
     //Resuelve automaticamente las condiciones asociadas a un trabajo
     return condicionesPosta.foldLeft(false)( 
-        (semilla,unaCondicion) => semilla  || unHeroe.cumpleCon(unaCondicion.restriccionesSobreElTrabajo)
+        (semilla,unaCondicion) => semilla  || 
+        (unHeroe.especializacion== unaCondicion.unTrabajo) && unHeroe.cumpleCon(unaCondicion.restriccionesSobreElTrabajo)
         )
     }
 }
