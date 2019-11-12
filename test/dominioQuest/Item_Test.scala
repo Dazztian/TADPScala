@@ -15,8 +15,14 @@ var cabeza= new ParteDelCuerpo(None)
 
   @Before
   def setup() = {
-     druida=new Trabajo("Perro de ambar", Map(Fuerza -> (1+)))
-     laBotellita=new Item("botella fogosa", ManoDerecha,Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )))
+  
+    druida=new Trabajo("Perro de ambar", Map(Fuerza -> (1+)))
+    
+     var funcionPrueba: Int=>Boolean=(30<)
+     var requi:RequerimientosItem=new RequerimientosItem(druida, Map(Fuerza -> funcionPrueba))
+     var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
+     
+     laBotellita=new Item(ManoDerecha,Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )), requerimientoPalitoMagico)
      
      val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
      var listaItems: List[Item]= List(laBotellita)
