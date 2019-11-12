@@ -29,12 +29,11 @@ def getStatActaul(unStat: Stat):Int ={ // TODO ver el tipo del retorno
        (semilla,unItem) => semilla.equiparItem(unItem)
      }
     unStat match{
-      case hp => return this.hp
-      case fuerza => return this.fuerza
-      case inteligencia => return this.inteligencia
-      case velocidad => return this.velocidad
-    } 
- 
+      case Hp => return this.hp
+      case Fuerza => return this.fuerza
+      case Inteligencia => return this.inteligencia
+      case Velocidad => return this.velocidad
+    }
   }
 
   def verificarParams = {
