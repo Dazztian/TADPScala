@@ -101,5 +101,19 @@ return condiciones.foldLeft(true)
 
 }
 
+
+def realizarTarea(unaTarea :Tarea):Heroe = {
+  unaTarea match {
+  case PelearContraMonstruo(vidaAReducir) if(this.fuerza<20)=> this.copy(hp =this.hp-vidaAReducir)
+  case ForzarPuerta() => this.especializacion match {
+    case mago =>return this//Esto hay que hacer que matchee 
+    case ladron=>return this
+    case _ =>return this.copy(hp= this.hp-5, fuerza=this.fuerza+1)}  
+  case RobarTalisman() =>return this  
+  }
+  
+  }
+
+
 }
 
