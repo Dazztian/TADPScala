@@ -1,0 +1,11 @@
+
+*.class
+out/production/TADPScala/META-INF/TADPScala.kotlin_module
+.idea/vcs.xml
+.idea/scala_compiler.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/libraries/junit_4_12.xml
+.idea/libraries/hamcrest_core_1_3.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/$PRODUCT_WORKSPACE_FILE$
