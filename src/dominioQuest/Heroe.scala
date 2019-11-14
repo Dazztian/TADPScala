@@ -4,7 +4,7 @@ case class Heroe (val hp: Int,
     val fuerza: Int,
     val velocidad: Int,
     val inteligencia: Int,
-    val especializacion: Trabajo,
+    val especializacion: Option[Trabajo],
     val items: List[Item],
     val listaPartes: List[ParteDelCuerpo] )  {
   
@@ -76,9 +76,9 @@ def parteOcupada(unaParte :Equipamiento) :Boolean=  //Si existe en la lista, me 
   this.listaPartes.filter(x => x==unaParte)(0).estaOcupada() 
 
 
-def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
+def aplicarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
 { 
-  return  (unTrabajo.atributosHeroe.foldLeft(this)
+  return  (unTrabajo.get.atributosHeroe.foldLeft(this)
     {
      (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
       case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2).verificarParams
