@@ -10,5 +10,8 @@ case class Equipo (
   def mejorHeroeSegun(criterio: (Heroe=>Int) ) :Heroe = return integrantes(0)
   
   def obtenerMiembro(miembroNuevo :Heroe):Equipo = 
-     this.copy(integrantes=miembroNuevo:: this.integrantes ) 
+     this.copy(integrantes=miembroNuevo:: this.integrantes )
+     
+  /*def reemplazarMiembro(miembroNuevo :Heroe,miembroAReemplazar :Heroe):Equipo =
+    this.integrantes.exists(miembroAReemplazar)? return true: return false*/
 }

@@ -59,25 +59,23 @@ def equiparItem(unItem: Item) :Heroe =
 }
 
 def puedePortarItem(unItem: Item) :Boolean = 
-  return this.cumpleConAtributosNecesariosDelItem(unItem) && unItem.puedeSerPortadoPor(this) 
+  return  unItem.puedeSerPortadoPor(this)
+  //return /*this.cumpleConAtributosNecesariosDelItem(unItem) &&*/ 
 
-//No se produce efecto xq los atributos son inmutables
+
 def cumpleConAtributosNecesariosDelItem(unItem: Item) :Boolean = 
-return unItem.condiciones.foldLeft(true)
-{(semilla,diccionarioStatCondicion) => semilla &&  (diccionarioStatCondicion._1 match {
-    case Fuerza => diccionarioStatCondicion._2(this.fuerza)
-    case Hp => diccionarioStatCondicion._2(this.hp)
-    case Velocidad => diccionarioStatCondicion._2(this.velocidad)
-    case Inteligencia => diccionarioStatCondicion._2(this.inteligencia)
- })
- //////////////////////////////IMPORTANTE!!!!!////////////////////////////////////////////////////////
-  //Aca HABRIA que añadir que chequee si tiene la parte del cuerpo que corresponda libre para equipar dicho objeto
- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  }
+return unItem.puedeSerPortadoPor(this) && 
+       !this.parteOcupada(unItem.parte)
+
+
+
+def parteOcupada(unaParte :Equipamiento) :Boolean=  //Si existe en la lista, me devuelve si esta ocupada
+  this.listaPartes.filter(x => x==unaParte)(0).estaOcupada() 
+
 
 def aplicarTrabajo(unTrabajo: Trabajo) :Heroe =
-{
-   return  (unTrabajo.atributosHeroe.foldLeft(this)
+{ 
+  return  (unTrabajo.atributosHeroe.foldLeft(this)
     {
      (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
       case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2).verificarParams

@@ -19,7 +19,7 @@ var cabeza= new ParteDelCuerpo(None)
     druida=new Trabajo("Perro de ambar", Map(Fuerza -> (1+)))
     
      var funcionPrueba: Int=>Boolean=(30<)
-     var requi:RequerimientosItem=new RequerimientosItem(druida, Map(Fuerza -> funcionPrueba))
+     var requi:RequerimientosItem=new RequerimientosItem(Some(druida), Map(Fuerza -> funcionPrueba))
      var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
      laBotellita=new Item(ManoDerecha,Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )), requerimientoPalitoMagico)
