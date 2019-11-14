@@ -2,11 +2,14 @@ package dominioQuest
 
 //Define si sos guerrero, ladrón,etc...
 class Trabajo (
-    var atributoPrincipal:Stat,
-    var atributosHeroe: Map[Stat, Int=>Int]){  
+    val atributoPrincipal:Stat,
+    val atributosHeroe: Map[Stat, Int=>Int]){  
 }
 
 case class IncrementosPorNivelBuilderException(msg: String) extends Exception(msg)
 
-/*case class Mago(   atributoPrincipal: Stat, atributosHeroe: Map[Stat, Int=>Int]
-     ) extends Trabajo( atributoPrincipal, atributosHeroe)*/
+case class Mago( override val  atributoPrincipal: Stat, override val atributosHeroe: Map[Stat, Int=>Int]
+     ) extends Trabajo( atributoPrincipal, atributosHeroe)
+
+case class Ladron( override val  atributoPrincipal: Stat, override val atributosHeroe: Map[Stat, Int=>Int]
+     ) extends Trabajo( atributoPrincipal, atributosHeroe)
