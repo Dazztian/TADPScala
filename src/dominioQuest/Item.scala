@@ -2,7 +2,6 @@ package dominioQuest
 
 case class Item (
     var parte: Equipamiento,
-    var condiciones: Map[Stat, Int=>Boolean],
     var efectos: Map[Stat, Int=>Int],
     var condicionesPosta: List[RequerimientosItem])
 {

@@ -22,7 +22,7 @@ var cabeza= new ParteDelCuerpo(None)
      var requi:RequerimientosItem=new RequerimientosItem(Some(druida), Map(Fuerza -> funcionPrueba))
      var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
-     laBotellita=new Item(ManoDerecha,Map(Fuerza -> (30<), Fuerza -> (40==), Hp -> (1==) ), Map(Hp ->(4* )), requerimientoPalitoMagico)
+     laBotellita=new Item(ManoDerecha,Map(Hp ->(4* )), requerimientoPalitoMagico)
      
      val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
      var listaItems: List[Item]= List(laBotellita)

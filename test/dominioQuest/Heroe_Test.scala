@@ -23,7 +23,7 @@ var manoDerecha= new ParteDelCuerpo(None)
      var requi:RequerimientosItem=new RequerimientosItem(Some(mago), Map(Hp -> funcionPrueba))
      var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
-     palitoMagico= new Item( ManoDerecha, Map(Fuerza -> (30<)),Map(Fuerza ->(100* )),requerimientoPalitoMagico)
+     palitoMagico= new Item( ManoDerecha, Map(Fuerza ->(100* )),requerimientoPalitoMagico)
      
      manoDerecha.itemAsociado=Some(palitoMagico)
      
