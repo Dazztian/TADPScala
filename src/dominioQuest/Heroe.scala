@@ -61,12 +61,12 @@ def equiparItem(unItem: Item) :Heroe =
 //¡¡¡¡REVISAR!!!!
 def puedePortarItem(unItem: Item) :Boolean = 
   return  unItem.puedeSerPortadoPor(this)
-  //return /*this.cumpleConAtributosNecesariosDelItem(unItem) &&*/ 
+  //return /*this.cumpleConRequisitosDelItem(unItem) &&*/ 
 
   
 //¡¡¡¡REVISAR!!!!
 //ESTA ES LA QUE DEBERIAMOS USAR
-def cumpleConAtributosNecesariosDelItem(unItem: Item) :Boolean = 
+def cumpleConRequisitosDelItem(unItem: Item) :Boolean = 
 return unItem.puedeSerPortadoPor(this) && 
        !this.parteOcupada(unItem.parte)
 

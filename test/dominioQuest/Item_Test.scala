@@ -16,7 +16,7 @@ var cabeza= new ParteDelCuerpo(None)
   @Before
   def setup() = {
   
-    druida=new Trabajo("Perro de ambar", Map(Fuerza -> (1+)))
+    druida=new Trabajo(Hp, Map(Fuerza -> (1+)))
     
      var funcionPrueba: Int=>Boolean=(30<)
      var requi:RequerimientosItem=new RequerimientosItem(Some(druida), Map(Fuerza -> funcionPrueba))
