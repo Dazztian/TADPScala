@@ -58,17 +58,20 @@ def equiparItem(unItem: Item) :Heroe =
  return  this  
 }
 
+//¡¡¡¡REVISAR!!!!
 def puedePortarItem(unItem: Item) :Boolean = 
   return  unItem.puedeSerPortadoPor(this)
   //return /*this.cumpleConAtributosNecesariosDelItem(unItem) &&*/ 
 
-
+  
+//¡¡¡¡REVISAR!!!!
+//ESTA ES LA QUE DEBERIAMOS USAR
 def cumpleConAtributosNecesariosDelItem(unItem: Item) :Boolean = 
 return unItem.puedeSerPortadoPor(this) && 
        !this.parteOcupada(unItem.parte)
 
 
-
+//¡¡¡¡REVISAR!!!!
 def parteOcupada(unaParte :Equipamiento) :Boolean=  //Si existe en la lista, me devuelve si esta ocupada
   this.listaPartes.filter(x => x==unaParte)(0).estaOcupada() 
 
@@ -98,5 +101,5 @@ return condiciones.foldLeft(true)
 
 }
 
-}//ACA TERMINA HEROE
+}
 

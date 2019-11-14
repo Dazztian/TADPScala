@@ -12,6 +12,8 @@ case class Equipo (
   def obtenerMiembro(miembroNuevo :Heroe):Equipo = 
      this.copy(integrantes=miembroNuevo:: this.integrantes )
      
-  /*def reemplazarMiembro(miembroNuevo :Heroe,miembroAReemplazar :Heroe):Equipo =
-    this.integrantes.exists(miembroAReemplazar)? return true: return false*/
+  def reemplazarMiembro(miembroNuevo :Heroe,miembroAReemplazar :Heroe):Equipo =
+      this.copy(integrantes=miembroNuevo ::
+      this.integrantes.filter(x => {x!=miembroAReemplazar}))
+    //Obtengo los elementos que NO SON el miembro a reemplazar y le agrego el nuevo miembro
 }
