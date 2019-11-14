@@ -17,7 +17,7 @@ var manoDerecha= new ParteDelCuerpo(None)
   def setup() = {
   
   
-     mago=new Trabajo(Inteligencia, Map(Fuerza -> (100+)) )
+     mago=new Mago(Inteligencia, Map(Fuerza -> (100+)) )
   
      var funcionPrueba: Int=>Boolean=(100==)
      var requi:RequerimientosItem=new RequerimientosItem(Some(mago), Map(Hp -> funcionPrueba))
