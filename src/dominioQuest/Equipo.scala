@@ -8,4 +8,7 @@ case class Equipo (
  
   //Devuelvo el heroe que mejor cumple el criterio
   def mejorHeroeSegun(criterio: (Heroe=>Int) ) :Heroe = return integrantes(0)
+  
+  def obtenerMiembro(miembroNuevo :Heroe):Equipo = 
+     this.copy(integrantes=miembroNuevo:: this.integrantes ) 
 }
