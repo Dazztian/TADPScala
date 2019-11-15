@@ -31,7 +31,7 @@ var manoDerecha= new ParteDelCuerpo(None)
      var listaItems: List[Item]= List(palitoMagico)
         
      
-     heroe = new Heroe(100,200,300,400, mago, listaItems, partesDelCuerpo)
+     heroe = new Heroe(100,200,300,400, Some(mago), listaItems, partesDelCuerpo)
   }
 
 @Test

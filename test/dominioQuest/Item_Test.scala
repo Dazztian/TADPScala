@@ -28,7 +28,7 @@ var cabeza= new ParteDelCuerpo(None)
      var listaItems: List[Item]= List(laBotellita)
 
     
-     kaerin = new Heroe(1,40,3,4, druida, listaItems,partesDelCuerpo )
+     kaerin = new Heroe(1,40,3,4, Some(druida), listaItems,partesDelCuerpo )
   }
 
   @Test
