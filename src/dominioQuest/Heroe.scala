@@ -126,7 +126,8 @@ def realizarTarea(unaTarea :Tarea):Heroe = {
   }
 
 def mainStatSegunEspecializacion(): Int = {
-  return this.hp /*(Some(this.especializacion.atributoPrincipal)match {
+  return this.hp 
+  /*(Some(this.especializacion.atributoPrincipal) match {
       case Hp => return this.hp
       case Fuerza => return this.fuerza
       case Inteligencia => return this.inteligencia
