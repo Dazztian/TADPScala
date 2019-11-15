@@ -106,8 +106,8 @@ def realizarTarea(unaTarea :Tarea):Heroe = {
   unaTarea match {
   case PelearContraMonstruo(vidaAReducir) if(this.fuerza<20)=> this.copy(hp =this.hp-vidaAReducir)
   case ForzarPuerta() => this.especializacion match {
-    case Mago(_,_) =>return this 
-    case Ladron(_,_)=>return this
+    case Some(Mago(_,_)) =>return this 
+    case Some(Ladron(_,_))=>return this
     case _ =>return this.copy(hp= this.hp-5, fuerza=this.fuerza+1)}  
   case RobarTalisman(unTalisman) =>return this.equiparItem(unTalisman)
   }
