@@ -6,7 +6,6 @@ class Trabajo (
     val atributosHeroe: Map[Stat, Int=>Int]){  
 }
 
-case class IncrementosPorNivelBuilderException(msg: String) extends Exception(msg)
 
 case class Mago( override val  atributoPrincipal: Stat, override val atributosHeroe: Map[Stat, Int=>Int]
      ) extends Trabajo( atributoPrincipal, atributosHeroe)

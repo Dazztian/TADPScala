@@ -16,14 +16,23 @@ case class Equipo (
     integrantes.mejorHeroeSegun(_.trabajo.atributoPrincipal)
   }*/
   
+  def obtenerMiembro(miembroNuevo :Heroe):Equipo = 
+     this.copy(integrantes=miembroNuevo:: this.integrantes )
+     
+     
   def reemplazarMiembro(miembroNuevo :Heroe,miembroAReemplazar :Heroe):Equipo =
       this.copy(integrantes=miembroNuevo ::
       this.integrantes.filter(x => {x!=miembroAReemplazar}))
     //Obtengo los elementos que NO SON el miembro a reemplazar y le agrego el nuevo miembro
     
+      
   def obtenerItem(item: Item) = {
-    val heroeGroso = this.mejorHeroeSegun(incrementoEnMainStat)
-    heroeGroso.equiparItem(item)
+  this.integrantes.map(integrante => integrante.equiparItem(item)).
+  sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).
+  head
+  //comparamos por stat
+  //nos quedamos con el head de la lista
+
   }
   
   
