@@ -12,10 +12,12 @@ case class Equipo (
     integrantes.sortWith(criterio(_) > criterio(_)).head
   }
     
-  def lider(): Heroe = {
-    this.integrantes.
-    sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).//comparamos por stat
-  	head//nos quedamos con el head de la lista 
+  def lider(): Option[Heroe] = {
+    val heroesOrdenados= this.integrantes.
+    sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
+    if(heroesOrdenados(0).mainStatSegunEspecializacion() ==heroesOrdenados(1).mainStatSegunEspecializacion())
+    {return None}
+    return Some(heroesOrdenados(0))
   }
   
   def obtenerMiembro(miembroNuevo :Heroe):Equipo = 
