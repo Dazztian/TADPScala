@@ -64,16 +64,24 @@ def puedePortarItem(unItem: Item) :Boolean =
   return  unItem.puedeSerPortadoPor(this)
 
 def incorporarItem(itemNuevo: Item) :Heroe =
-  this.itemOcupadandoParte(itemNuevo.parte) match{
-  case Some(itemViejo) =>  this.reemplazarItem(itemViejo,itemNuevo)
-  case None => this.copy(items = itemNuevo :: this.items) 
+  itemNuevo.parte match{
+  case Some(parte) =>  this.itemOcupadandoParte(parte) match{
+                    case Some(itemViejo) =>  this.reemplazarItem(itemViejo,itemNuevo)
+                    case None => this.copy(items = itemNuevo :: this.items) 
+                }
+  case None => this.copy(items = itemNuevo :: this.items)
+  
 }
+
 
 def reemplazarItem(itemViejo :Item, itemNuevo :Item) :Heroe =
   this.copy(items = itemNuevo :: this.items.filter(item => item.parte != itemNuevo.parte) )
   
 def itemOcupadandoParte(parte :Equipamiento) :Option[Item]= //devuelve none si no hay ningun item  ocupe esa parte o devuelve el item q esta ocupando esa parte
-   this.items.find(item => item.parte == parte)
+   this.items.find(item => item.parte match{
+     case None => false
+     case Some(parteDelItem) => parteDelItem == parte})
+
  
 //def parteOcupada(unaParte :Equipamiento) :Boolean=  //Si existe en la lista, me devuelve si esta ocupada
  // this.listaPartes.filter(parte => parte == unaParte)(0).estaOcupada()

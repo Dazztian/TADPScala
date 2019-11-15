@@ -25,7 +25,7 @@ var tacosDeSarkany:Item = null
      var requi:RequerimientosItem=new RequerimientosItem(Some(druida), Map(Fuerza -> funcionPrueba))
      var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
-     laBotellita=new Item(Manos.derecha,Map(Hp ->(4* )), requerimientoPalitoMagico)
+     laBotellita=new Item(Some(Manos.derecha),Map(Hp ->(4* )), requerimientoPalitoMagico)
      
      //val partesDelCuerpo: List[ParteDelCuerpo]= List(Manos.derecha)
      var listaItems: List[Item]= List(laBotellita)
@@ -36,9 +36,9 @@ var tacosDeSarkany:Item = null
      
       druida=new Trabajo(Hp, Map(Fuerza -> (1+)))
        
-      laBotellitaDeRicky = new Item(Manos.derecha,Map(Hp ->(40* )), requerimientoPalitoMagico)
-      tacosDeSarkany = new Item(Pies, Map(Fuerza -> (300*)), List(new RequerimientosItem(None, Map(Inteligencia ->(3 ==)))))
-      palitoMagico = new Item(Manos.izquiera,Map(Hp ->(40* )), requerimientoPalitoMagico)
+      laBotellitaDeRicky = new Item(Some(Manos.derecha),Map(Hp ->(40* )), requerimientoPalitoMagico)
+      tacosDeSarkany = new Item(Some(Pies), Map(Fuerza -> (300*)), List(new RequerimientosItem(None, Map(Inteligencia ->(3 ==)))))
+      palitoMagico = new Item(Some(Manos.izquiera),Map(Hp ->(40* )), requerimientoPalitoMagico)
   }
 
   @Test
@@ -53,7 +53,7 @@ var tacosDeSarkany:Item = null
     assertEquals(4, kaerinConNuevoItem.hp)
   }
   @Test
-  def cantItemPOSTEquipamientoDeIgualParte_test() = {// como ya tenia un item en la mao derecha, se le reemplaza
+  def cantItemPOSTEquipamientoDeIgualParte_test() = {// como ya tenia un item en la mano derecha, se le reemplaza
    
     var kaerinConNuevoItem=kaerin.equiparItem(laBotellitaDeRicky) 
     
