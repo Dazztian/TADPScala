@@ -6,7 +6,8 @@ case class Heroe (val hp: Int,
     val inteligencia: Int,
     val especializacion: Option[Trabajo],
     val items: List[Item],
-    val listaPartes: List[ParteDelCuerpo] )  {
+    //val listaPartes: List[ParteDelCuerpo] 
+    )  {
   
   def modificarHp(modificacion: Int=>Int) = this.copy(hp = modificacion(this.hp)).verificarParams
   def modificarFuerza(modificacion: Int=>Int) = this.copy(fuerza = modificacion(this.fuerza)).verificarParams
@@ -14,7 +15,7 @@ case class Heroe (val hp: Int,
   def modificarVelocidad(modificacion: Int=>Int) = this.copy(velocidad = modificacion(this.velocidad)).verificarParams
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
   
-def getStatActaul(unStat: Stat):Int ={ // TODO ver el tipo del retorno
+def getStatActaul(unStat: Stat):Int ={ 
     this.items.foldLeft(this.aplicarTrabajo(this.especializacion)){
        (semilla,unItem) => semilla.equiparItem(unItem)
      }
@@ -52,7 +53,7 @@ def equiparItem(unItem: Item) :Heroe =
       case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2).verificarParams})
      })
    //equipo el item  
-   .copy(items = unItem :: this.items  )      
+   .incorporarItem(unItem)     
   }
 //Caso no puede portar item, se devuelve a si mismo
  return  this  
@@ -61,19 +62,21 @@ def equiparItem(unItem: Item) :Heroe =
 //¡¡¡¡REVISAR!!!!
 def puedePortarItem(unItem: Item) :Boolean = 
   return  unItem.puedeSerPortadoPor(this)
-  //return /*this.cumpleConRequisitosDelItem(unItem) &&*/ 
 
+def incorporarItem(itemNuevo: Item) :Heroe =
+  this.itemOcupadandoParte(itemNuevo.parte) match{
+  case Some(itemViejo) =>  this.reemplazarItem(itemViejo,itemNuevo)
+  case None => this.copy(items = itemNuevo :: this.items) 
+}
+
+def reemplazarItem(itemViejo :Item, itemNuevo :Item) :Heroe =
+  this.copy(items = itemNuevo :: this.items.filter(item => item.parte != itemNuevo.parte) )
   
-//¡¡¡¡REVISAR!!!!
-//ESTA ES LA QUE DEBERIAMOS USAR
-def cumpleConRequisitosDelItem(unItem: Item) :Boolean = 
-return unItem.puedeSerPortadoPor(this) && 
-       !this.parteOcupada(unItem.parte)
-
-
-//¡¡¡¡REVISAR!!!!
-def parteOcupada(unaParte :Equipamiento) :Boolean=  //Si existe en la lista, me devuelve si esta ocupada
-  this.listaPartes.filter(x => x==unaParte)(0).estaOcupada() 
+def itemOcupadandoParte(parte :Equipamiento) :Option[Item]= //devuelve none si no hay ningun item  ocupe esa parte o devuelve el item q esta ocupando esa parte
+   this.items.find(item => item.parte == parte)
+ 
+//def parteOcupada(unaParte :Equipamiento) :Boolean=  //Si existe en la lista, me devuelve si esta ocupada
+ // this.listaPartes.filter(parte => parte == unaParte)(0).estaOcupada()
 
 
 def aplicarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
@@ -106,9 +109,9 @@ def realizarTarea(unaTarea :Tarea):Heroe = {
   unaTarea match {
   case PelearContraMonstruo(vidaAReducir) if(this.fuerza<20)=> this.copy(hp =this.hp-vidaAReducir)
   case ForzarPuerta() => this.especializacion match {
-    case Mago(_,_) =>return this//Esto hay que hacer que matchee 
-    case Ladron(_,_)=>return this
-    case _ =>return this.copy(hp= this.hp-5, fuerza=this.fuerza+1)}  
+  //case Mago(_,_) =>return this//Esto hay que hacer que matchee 
+  //case Ladron(_,_)=>return this
+  case _ =>return this.copy(hp= this.hp-5, fuerza=this.fuerza+1)}  
   case RobarTalisman() =>return this  
   }
   

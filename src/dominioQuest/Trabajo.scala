@@ -13,3 +13,7 @@ case class Mago( override val  atributoPrincipal: Stat, override val atributosHe
 
 case class Ladron( override val  atributoPrincipal: Stat, override val atributosHeroe: Map[Stat, Int=>Int]
      ) extends Trabajo( atributoPrincipal, atributosHeroe)
+
+
+//case class Mago(
+ //    ) extends Trabajo(Inteligencia , Map( Fuerza ->(20-),Inteligencia ->(20+)))

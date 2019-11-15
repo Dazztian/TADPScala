@@ -11,6 +11,9 @@ var druida:Trabajo = null
 var laBotellita:Item = null
 var manoDerecha= new ParteDelCuerpo(None)
 var cabeza= new ParteDelCuerpo(None)
+var laBotellitaDeRicky:Item = null
+var palitoMagico:Item = null
+var tacosDeSarkany:Item = null
 
 
   @Before
@@ -22,13 +25,20 @@ var cabeza= new ParteDelCuerpo(None)
      var requi:RequerimientosItem=new RequerimientosItem(Some(druida), Map(Fuerza -> funcionPrueba))
      var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
-     laBotellita=new Item(ManoDerecha,Map(Hp ->(4* )), requerimientoPalitoMagico)
+     laBotellita=new Item(Manos.derecha,Map(Hp ->(4* )), requerimientoPalitoMagico)
      
-     val partesDelCuerpo: List[ParteDelCuerpo]= List(manoDerecha)
+     //val partesDelCuerpo: List[ParteDelCuerpo]= List(Manos.derecha)
      var listaItems: List[Item]= List(laBotellita)
 
     
-     kaerin = new Heroe(1,40,3,4, Some(druida), listaItems,partesDelCuerpo )
+     kaerin = new Heroe(1,40,3,4, Some(druida), listaItems)//,partesDelCuerpo )
+     
+     
+      druida=new Trabajo(Hp, Map(Fuerza -> (1+)))
+       
+      laBotellitaDeRicky = new Item(Manos.derecha,Map(Hp ->(40* )), requerimientoPalitoMagico)
+      tacosDeSarkany = new Item(Pies, Map(Fuerza -> (300*)), List(new RequerimientosItem(None, Map(Inteligencia ->(3 ==)))))
+      palitoMagico = new Item(Manos.izquiera,Map(Hp ->(40* )), requerimientoPalitoMagico)
   }
 
   @Test
@@ -43,15 +53,27 @@ var cabeza= new ParteDelCuerpo(None)
     assertEquals(4, kaerinConNuevoItem.hp)
   }
   @Test
-  def cantItemPOSTEquipamiento_test() = {
-    var kaerinConNuevoItem=kaerin.equiparItem(laBotellita)
-    assertEquals(2, kaerinConNuevoItem.items.size)//Porque ya arranca con 1 item
+  def cantItemPOSTEquipamientoDeIgualParte_test() = {// como ya tenia un item en la mao derecha, se le reemplaza
+   
+    var kaerinConNuevoItem=kaerin.equiparItem(laBotellitaDeRicky) 
+    
+    assertEquals(1, kaerinConNuevoItem.items.size)
+  }
+ @Test
+  def cantItemPOSTEquipamientoDeDistintaManos_test() = {
+   
+    var kaerinConNuevoItem=kaerin.equiparItem(palitoMagico) 
+    
+    assertEquals(2, kaerinConNuevoItem.items.size)
+  }
+ @Test
+  def cantItemPOSTEquipamientoDeDistintaParte_test() = {
+   
+    var kaerinConNuevoItem=kaerin.equiparItem(tacosDeSarkany) 
+    
+    assertEquals(2, kaerinConNuevoItem.items.size)
   }
   
-  @Test
-  def estadoErroneoPostPortarItem_test() = {
-    var kaerinConNuevoItem=kaerin.equiparItem(laBotellita)
-    assertEquals(8, kaerinConNuevoItem.hp)
-  }
+ 
   
 }
