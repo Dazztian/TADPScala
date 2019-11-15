@@ -36,7 +36,7 @@ case class Equipo (
   head//nos quedamos con el head de la lista 
   }
   
-  def realizarMision() :Equipo = {
+  def realizarMision(unaMision:Mision) :Equipo = {
     return this
   }
   
