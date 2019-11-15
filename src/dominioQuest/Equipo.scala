@@ -12,9 +12,11 @@ case class Equipo (
     integrantes.sortWith(criterio(_) > criterio(_)).head
   }
     
-  /*def lider(): Heroe = {
-    integrantes.mejorHeroeSegun(_.trabajo.atributoPrincipal)
-  }*/
+  def lider(): Heroe = {
+    this.integrantes.
+    sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).//comparamos por stat
+  	head//nos quedamos con el head de la lista 
+  }
   
   def obtenerMiembro(miembroNuevo :Heroe):Equipo = 
      this.copy(integrantes=miembroNuevo:: this.integrantes )
@@ -27,12 +29,9 @@ case class Equipo (
     
       
   def obtenerItem(item: Item) = {
-  this.integrantes.map(integrante => integrante.equiparItem(item)).
-  sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).
-  head
-  //comparamos por stat
-  //nos quedamos con el head de la lista
-
+  this.integrantes.map(integrante => integrante.equiparItem(item)).//equipamos el item a los integrantes
+  sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).//comparamos por stat
+  head//nos quedamos con el head de la lista 
   }
   
   
