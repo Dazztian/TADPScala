@@ -136,5 +136,7 @@ def mainStatSegunEspecializacion(): Int = {
     }
   }
 
+
+
 }
 

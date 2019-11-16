@@ -40,4 +40,8 @@ case class Equipo (
     return this
   }
   
+  def getCantIntegrantesPor(unaEspecializacion: Trabajo):Int = {
+    return integrantes.count(i => i.especializacion == unaEspecializacion)
+  }
+  
 }

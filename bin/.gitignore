@@ -9,3 +9,4 @@ out/production/TADPScala/META-INF/TADPScala.kotlin_module
 .idea/libraries/hamcrest_core_1_3.xml
 .idea/codeStyles/codeStyleConfig.xml
 .idea/$PRODUCT_WORKSPACE_FILE$
+/bin/
