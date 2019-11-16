@@ -40,4 +40,19 @@ case class Equipo (
     return this
   }
   
+  /*def getCantLadrones():Int = {
+    return integrantes.filter(heroe =>
+      heroe.especializacion match {
+      case Some(Ladron(_,_))=> true
+      case _=> false}  )
+      .size
+      }*/
+  
+  def getCantLadrones():Int = {
+    return integrantes.count(heroe => heroe.especializacion match {
+      case Some(Ladron(_,_))=> true
+      case _=> false}  )
+      
+      }
+  
 }
