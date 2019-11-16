@@ -24,6 +24,18 @@ case class ForzarPuerta() extends Tarea
   }
 }
 case class RobarTalisman(unItem: Item) extends Tarea
+{
+  def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int =
+  {
+    (unEquipo.lider().get.especializacion) match
+    {
+      case Some(Ladron(_,_)) => unHeroe.velocidad 
+      //case _ ACA DEBERIA TIRAR ERROR!!! 
+    }
+      
+    
+  }
+}
 
 
 
