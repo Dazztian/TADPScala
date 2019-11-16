@@ -44,4 +44,9 @@ var manoDerecha= new ParteDelCuerpo(None)
   println("#llegaste")
     assertEquals(true, heroe.puedePortarItem(palitoMagico))
   }
+
+ @Test
+  def conocerElValorDeTuMainStat() = {
+  assertEquals(heroe.inteligencia,heroe.mainStatSegunEspecializacion)
+  }
 }
