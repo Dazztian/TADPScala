@@ -11,5 +11,5 @@ case object ManoIzquierda extends Equipamiento
 case object Manos extends Equipamiento{
     val tupleManos = new Tuple2(ManoIzquierda, ManoDerecha)  
     val derecha = this.tupleManos._2
-    val izquiera = this.tupleManos._1
+    val izquierda = this.tupleManos._1
 }
