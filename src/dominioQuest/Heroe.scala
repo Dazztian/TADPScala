@@ -73,9 +73,9 @@ def incorporarItem(itemNuevo: Item) :Heroe =
 
 def itemsOcupadandoParte(parteAOcupar :Equipamiento) :List[Item]= 
    this.items.filter(item => item.parte match{
-     case Some(Manos.derecha) => (parteAOcupar == Manos || parteAOcupar == Manos.derecha)
-     case Some(Manos.izquierda) => (parteAOcupar == Manos || parteAOcupar == Manos.izquierda)
-     case Some(Manos) => (parteAOcupar == Manos.izquierda || parteAOcupar == Manos || parteAOcupar == Manos.derecha )
+     case Some(ManoDerecha) => (parteAOcupar == Manos || parteAOcupar == ManoDerecha)
+     case Some(ManoIzquierda) => (parteAOcupar == Manos || parteAOcupar == ManoIzquierda)
+     case Some(Manos) => (parteAOcupar == ManoIzquierda || parteAOcupar == Manos || parteAOcupar == ManoDerecha )
      case Some(parteDelItem) => parteDelItem == parteAOcupar
      case None => false
 })
