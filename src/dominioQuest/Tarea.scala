@@ -1,11 +1,25 @@
 package dominioQuest
 
+ sealed trait ResultTarea { def heroe:  Option[Heroe] }
+  object ResultTarea {
+    def apply(heroe: =>  Option[Heroe]): ResultTarea = try {
+      Success(heroe)
+    } catch {
+      case error: NingunHeroeParaTareaException => Failure(None, error)
+    }
+  }
+
+  case class Success(heroe: Option[Heroe]) extends ResultTarea
+  case class Failure(heroe: Option[Heroe], error: Exception) extends ResultTarea
+  class NingunHeroeParaTareaException extends RuntimeException // TODO hay q mostrar la tarea q no se peude realizar
+
+
 abstract class Tarea{
   type Efecto = Heroe => Heroe
   type Condicion = Heroe => Boolean
   
-  var efectos = List[Efecto]() //TODO: Pasar a que sea un optional
-  var condiciones = List[Condicion]() //TODO: Pasar a que sea un optional
+  var efectos = List[Efecto]() 
+  var condiciones = List[Condicion]()
   
   def facilidad(unHeroe: Heroe, unEquipo:Equipo):Int = {
     return 0
@@ -18,33 +32,34 @@ abstract class Tarea{
     return heroeNuevo
   }
   
-  def realizarTarea(unHeroe:Heroe) = null
+  def realizarTareaPor(unHeroe:Option[Heroe]) :ResultTarea = null
 
 }
 
-case class PelearContraMonstruo(vidaAReducir: Int) extends Tarea
-case class ForzarPuerta() extends Tarea
-case class RobarTalisman(unItem: Item) extends Tarea
-
-
-
-
-/*abstract class Tarea
-{
-  def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int
-}
 
 case class PelearContraMonstruo(vidaAReducir: Int) extends Tarea{
- def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int = 
-  {
-    (unEquipo.lider().get.especializacion) match{
+ override def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int = 
+    unEquipo.lider().flatMap(_.especializacion) match{ //si tiene lider y si este tiene especializacion
+      //case None => 0
       case Some(Guerrero(_,_)) => 20 
-      case _ => 10
+      //case _ => 10
     }
-  }
-  
+ 
+ override def realizarTareaPor(unHeroe: Option[Heroe]) :ResultTarea =
+   unHeroe match{ 
+    case Some(unHeroe) => {
+        if(unHeroe.fuerza<20){
+        Success(Some(unHeroe.copy(hp = unHeroe.hp - vidaAReducir)))
+       }else{
+         throw new NingunHeroeParaTareaException
+       }
+    }
+   case None =>  throw new NingunHeroeParaTareaException
+ } 
 }
-case class ForzarPuerta() extends Tarea
+  
+
+/*case class ForzarPuerta() extends Tarea
 {
   def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int =
   {
@@ -65,7 +80,5 @@ case class RobarTalisman(unItem: Item) extends Tarea
     
   }
 }*/
-
-
 
 

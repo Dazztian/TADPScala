@@ -98,16 +98,17 @@ return condiciones.foldLeft(true)
 }
 
 
-def realizarTarea(unaTarea :Tarea):Heroe = {
-  unaTarea match {
-  case PelearContraMonstruo(vidaAReducir) if(this.fuerza<20)=> this.copy(hp =this.hp-vidaAReducir)
-  case RobarTalisman(unItem) =>return this 
-  case ForzarPuerta() => this.especializacion match {
-    case Some(Mago(_,_)) =>return this 
-    case Some(Ladron(_,_))=>return this
-    case _ =>return this.copy(hp= this.hp-5, fuerza=this.fuerza+1)}  
-     }
-  
+def realizarTarea(unaTarea :Tarea):ResultTarea = {
+  unaTarea.realizarTareaPor(Some(this))
+//  unaTarea match {
+//  case PelearContraMonstruo(vidaAReducir) if(this.fuerza<20)=> this.copy(hp =this.hp-vidaAReducir)
+//  case RobarTalisman(unItem) =>return this 
+//  case ForzarPuerta() => this.especializacion match {
+//    case Some(Mago(_,_)) =>return this 
+//    case Some(Ladron(_,_))=>return this
+//    case _ =>return this.copy(hp= this.hp-5, fuerza=this.fuerza+1)}  
+//     }
+//  
   }
 
 def mainStatSegunEspecializacion(): Int = {
