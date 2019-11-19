@@ -47,10 +47,10 @@ def equiparItem(unItem: Item) :Heroe =
    return  (unItem.efectos.foldLeft(this)
     {
      (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
-      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2).verificarParams
-      case Hp => semilla.modificarHp(diccionarioStatEfecto._2).verificarParams
-      case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2).verificarParams
-      case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2).verificarParams})
+      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2)
+      case Hp => semilla.modificarHp(diccionarioStatEfecto._2)
+      case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2)
+      case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2)})
      })
    //equipo el item  
    .incorporarItem(unItem)     
