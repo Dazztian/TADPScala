@@ -85,10 +85,10 @@ def aplicarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
   return  (unTrabajo.get.atributosHeroe.foldLeft(this)
     {
      (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
-      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2).verificarParams
+      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2)
       case Hp => semilla.modificarHp(diccionarioStatEfecto._2).verificarParams
-      case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2).verificarParams
-      case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2).verificarParams})
+      case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2)
+      case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2)})
      })
      .copy(especializacion = unTrabajo)
 }

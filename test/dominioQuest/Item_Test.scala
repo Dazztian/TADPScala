@@ -33,10 +33,9 @@ var kaerinDefensor:Heroe = null
      
     laBotellita=new Item(Some(ManoDerecha),Map(Hp ->(4* )), requerimientoPalitoMagico)
      
-     //val partesDelCuerpo: List[ParteDelCuerpo]= List(Manos.derecha)
     var listaItems: List[Item]= List(laBotellita)
     
-    kaerin = new Heroe(1,40,3,4, Some(druida), listaItems)//,partesDelCuerpo )
+    kaerin = new Heroe(1,40,3,4, Some(druida), listaItems)
      
    
     druida=new Trabajo(Hp, Map(Fuerza -> (1+)))
