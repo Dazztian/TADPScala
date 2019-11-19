@@ -104,17 +104,13 @@ var kaerinDefensor:Heroe = null
   }
  @Test
   def cantItemPOSTEquipamientoDeItemAmbasManoss_test() = { //antes tenia un item en cada mano
-   //kaerinRecargado.items.foreach(item=>  println(item))
     var kaerinConItem2Manos=kaerinRecargado.equiparItem(arcoViejo) 
-   //kaerinConItem2Manos.items.foreach(item=>  println(item))
     assertEquals(1, kaerinConItem2Manos.items.size)
   } 
  
   @Test
   def cantItemPOSTEquipamientoDeItemAmbasManosss_test() = { //antes tenia un item en ambas manos
-  // kaerinDefensor.items.foreach(item=>  println(item))
     var kaerinDefensorArmado=kaerinDefensor.equiparItem(laBotellitaDeRicky) 
-   //kaerinDefensorArmado.items.foreach(item=>  println(item))
     assertEquals(1, kaerinDefensorArmado.items.size)
   } 
 }

@@ -6,7 +6,6 @@ case class Heroe (val hp: Int,
     val inteligencia: Int,
     val especializacion: Option[Trabajo],
     val items: List[Item],
-    //val listaPartes: List[ParteDelCuerpo] 
     )  {
   
   def modificarHp(modificacion: Int=>Int) = this.copy(hp = modificacion(this.hp)).verificarParams
