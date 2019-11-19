@@ -42,17 +42,8 @@ def equiparItem(unItem: Item) :Heroe =
 {
  if (this.puedePortarItem(unItem))
   {  
-    //aplico las modificaciones del item
-   return  (unItem.efectos.foldLeft(this)
-    {
-     (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
-      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2)
-      case Hp => semilla.modificarHp(diccionarioStatEfecto._2)
-      case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2)
-      case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2)})
-     })
-   //equipo el item  
-   .incorporarItem(unItem)     
+    //aplico las modificaciones del item e incorporo item
+   return  this.modificarStats(unItem.efectos).incorporarItem(unItem)     
   }
 //Caso no puede portar item, se devuelve a si mismo
  return  this  
@@ -81,17 +72,19 @@ def itemsOcupadandoParte(parteAOcupar :Equipamiento) :List[Item]=
 
 def aplicarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
 { 
-  return  (unTrabajo.get.atributosHeroe.foldLeft(this)
+  return  this.modificarStats(unTrabajo.get.atributosHeroe).copy(especializacion = unTrabajo)
+}
+
+def modificarStats(modificadores: Map[Stat, Int=>Int]):Heroe=
+  modificadores.foldLeft(this)
     {
      (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
       case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2)
-      case Hp => semilla.modificarHp(diccionarioStatEfecto._2).verificarParams
+      case Hp => semilla.modificarHp(diccionarioStatEfecto._2)
       case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2)
       case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2)})
-     })
-     .copy(especializacion = unTrabajo)
-}
-
+     }
+     
 //Funcion auxiliar, devuelve true si cumple con todas las condiciones dadas
 def cumpleCon(condiciones: Map[Stat, Int=>Boolean]) :Boolean = 
 return condiciones.foldLeft(true)
