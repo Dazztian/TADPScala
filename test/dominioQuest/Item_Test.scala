@@ -31,7 +31,7 @@ var kaerinDefensor:Heroe = null
     var requi:RequerimientosItem=new RequerimientosItem(Some(druida), Map(Fuerza -> funcionPrueba))
     var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
-    laBotellita=new Item(Some(Manos.derecha),Map(Hp ->(4* )), requerimientoPalitoMagico)
+    laBotellita=new Item(Some(ManoDerecha),Map(Hp ->(4* )), requerimientoPalitoMagico)
      
      //val partesDelCuerpo: List[ParteDelCuerpo]= List(Manos.derecha)
     var listaItems: List[Item]= List(laBotellita)
@@ -43,9 +43,9 @@ var kaerinDefensor:Heroe = null
     
 
     //ITEMS
-    laBotellitaDeRicky = new Item(Some(Manos.derecha),Map(Hp ->(40* )), requerimientoPalitoMagico)
+    laBotellitaDeRicky = new Item(Some(ManoDerecha),Map(Hp ->(40* )), requerimientoPalitoMagico)
     tacosDeSarkany = new Item(Some(Pies), Map(Fuerza -> (300*)), List(new RequerimientosItem(None, Map(Inteligencia ->(3 ==)))))
-    palitoMagico = new Item(Some(Manos.izquierda),Map(Hp ->(40* )), requerimientoPalitoMagico)
+    palitoMagico = new Item(Some(ManoIzquierda),Map(Hp ->(40* )), requerimientoPalitoMagico)
     //talismanDedicacion = new Item(None,Map(Trabajo -> (Trabajo.atributoPrincipal*0.1*)), requerimientoPalitoMagico)
     talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento)
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento)    
