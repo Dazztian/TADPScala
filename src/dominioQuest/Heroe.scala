@@ -29,13 +29,13 @@ def getStatActaul(unStat: Stat):Int ={
 
   def verificarParams = {
     if (this.hp < 1)
-     this.copy(hp = 1)
+     this.copy(hp.max(1))
     if (this.fuerza < 1)
-     this.copy(fuerza = 1)
+     this.copy(fuerza.max(1))
     if (this.inteligencia < 1)
-     this.copy(inteligencia = 1)
+     this.copy(inteligencia.max(1))
     if (this.velocidad < 1)
-     this.copy(velocidad = 1)
+     this.copy(velocidad.max(1))
     this
  }
   
