@@ -27,7 +27,7 @@ case class Equipo (
    
   }
   
-  def obtenerMiembro(miembroNuevo :Heroe):Equipo = 
+  def obtenerMiembro(miembroNuevo :Heroe):Equipo =
      this.copy(integrantes=miembroNuevo:: this.integrantes )
      
      
