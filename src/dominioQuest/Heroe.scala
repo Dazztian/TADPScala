@@ -98,8 +98,8 @@ return condiciones.foldLeft(true)
 }
 
 
-def realizarTarea(unaTarea :Tarea):ResultTarea = {
-  unaTarea.realizarTareaPor(Some(this))
+def realizarTarea(unaTarea :Tarea):Heroe = {
+  unaTarea.cumplirTarea(this)
 //  unaTarea match {
 //  case PelearContraMonstruo(vidaAReducir) if(this.fuerza<20)=> this.copy(hp =this.hp-vidaAReducir)
 //  case RobarTalisman(unItem) =>return this 

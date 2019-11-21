@@ -54,5 +54,7 @@ case class Equipo (
       case _=> false}  )
       
       }
-  
+  def puedeRealizarTarea(unaTarea :Tarea) :Result = {
+    unaTarea.puedeRealizarlaAlgunHeroe(this)
+  }
 }
