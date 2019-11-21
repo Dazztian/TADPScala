@@ -71,8 +71,10 @@ def itemsOcupadandoParte(parteAOcupar :Equipamiento) :List[Item]=
 })
 
 def aplicarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
-{ 
-  return  this.modificarStats(unTrabajo.get.atributosHeroe).copy(especializacion = unTrabajo)
+{ unTrabajo match{
+  case Some(unTrabajo)=> this.modificarStats(unTrabajo.atributosHeroe).copy(especializacion = Some(unTrabajo))
+  case None => this
+  }
 }
 
 def modificarStats(modificadores: Map[Stat, Int=>Int]):Heroe=
