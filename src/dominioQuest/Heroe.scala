@@ -55,13 +55,13 @@ def puedePortarItem(unItem: Item) :Boolean =
 def incorporarItem(itemNuevo: Item) :Heroe =
   
   itemNuevo.parte match{
-    case Some(parte) =>  this.copy(items = itemNuevo :: this.items.filter(item => !this.itemsOcupadandoParte(parte).contains(item))) 
+    case Some(parte) =>  this.copy(items = itemNuevo :: this.items.filter(item => !this.itemsOcupandoParte(parte).contains(item)))
     case None => this.copy(items = itemNuevo :: this.items)
   
 }
 
 
-def itemsOcupadandoParte(parteAOcupar :Equipamiento) :List[Item]= 
+def itemsOcupandoParte(parteAOcupar :Equipamiento) :List[Item]=
    this.items.filter(item => item.parte match{
      case Some(ManoDerecha) => (parteAOcupar == Manos || parteAOcupar == ManoDerecha)
      case Some(ManoIzquierda) => (parteAOcupar == Manos || parteAOcupar == ManoIzquierda)
