@@ -26,6 +26,6 @@ var sinRequerimiento : List[RequerimientosItem] = List()
   @Test
   def someTest()= {
     println(equipo.puedeRealizarTarea(RobarTalisman(arcoViejo)))
-       assertEquals(Failure(equipo,new NingunHeroeParaTareaException),equipo.puedeRealizarTarea(RobarTalisman(arcoViejo)))
+       assertEquals(NoPuedeRealizarse(equipo),equipo.puedeRealizarTarea(RobarTalisman(arcoViejo)))
    }
 }

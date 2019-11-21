@@ -9,7 +9,7 @@ package dominioQuest
     }
   }
 
-  case class NoPuedeReaizarse(equipo :Equipo) extends Result
+  case class NoPuedeRealizarse(equipo :Equipo) extends Result
   case class Success(equipo: Equipo) extends Result
   case class Failure(equipo: Equipo, error: Exception) extends Result
   class NingunHeroeParaTareaException extends RuntimeException // TODO hay q mostrar la tarea q no se peude realizar
@@ -67,9 +67,9 @@ case class RobarTalisman(unItem: Item) extends Tarea
      case Some(lider)=> if(lider.especializacion == Ladron){
            Success(equipo)
          }else{
-           NoPuedeReaizarse(equipo)
+           NoPuedeRealizarse(equipo)
          }
-     case None => NoPuedeReaizarse(equipo)
+     case None => NoPuedeRealizarse(equipo)
    }
 }
 
