@@ -20,24 +20,28 @@ abstract class Tarea{
   type Condicion = Equipo => Boolean
   
   var efectos = List[Efecto]() 
-  var condiciones = List[Condicion]()
+//  var condiciones = List[Condicion]()
   
   def facilidad(unHeroe: Heroe, unEquipo:Equipo):Int = {
     return 0
   }
   
-  def cumplirTarea(unHeroe:Heroe): Heroe = {
+  def cumplirTarea(unHeroe:Heroe, equipo:Equipo): Result = {
     val heroeNuevo = efectos.foldLeft(unHeroe){
       (heroe,efecto) => efecto(heroe)
     }
-    return heroeNuevo
+    return Result(equipo)
   }
   
   def puedeRealizarlaAlgunHeroe(equipo :Equipo) :Result ={
   equipo.integrantes match{
     case Nil => NoPuedeRealizarse(equipo)
     case _ =>Success(equipo) // x default si no se tiene condiciones
+    }
   }
+  
+  def encontrarMejorHeroe(equipo :Equipo):Heroe ={
+    equipo.integrantes.sortWith((primerHeroe,segundoHeroe)=>this.facilidad(primerHeroe, equipo)> this.facilidad(segundoHeroe, equipo))(0)
   }
 
 }
@@ -50,7 +54,12 @@ case class PelearContraMonstruo(vidaAReducir: Int) extends Tarea{
       case Some(Guerrero(_,_)) => 20 
       case Some(_) => 10
     }
- 
+ override def cumplirTarea(unHeroe:Heroe, unEquipo:Equipo):Result ={
+   unHeroe.fuerza<20 match { //podria hacerse con un if? si, podria
+     case true => Success(unEquipo.reemplazarMiembro(unHeroe.copy(hp = unHeroe.hp-1), unHeroe))
+     case _ => Success(unEquipo)
+   }
+ }
 }
   
 
@@ -65,7 +74,9 @@ case class ForzarPuerta() extends Tarea
 }
 case class RobarTalisman(unItem: Item) extends Tarea
 {
-  //def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int ={}
+  override def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int ={
+    return unHeroe.velocidad
+  }
     
    override def puedeRealizarlaAlgunHeroe(equipo :Equipo) :Result = //esta vendria a ser la condicion
      equipo.lider() match{
