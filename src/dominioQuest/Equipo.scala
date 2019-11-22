@@ -30,9 +30,6 @@ case class Equipo (
    
   }
   
-  def obtenerMiembro(miembroNuevo :Heroe):Equipo =
-     this.copy(integrantes=miembroNuevo:: this.integrantes )
-     
      
   def reemplazarMiembro(miembroNuevo :Heroe,miembroAReemplazar :Heroe):Equipo =
       this.copy(integrantes=miembroNuevo ::
@@ -40,28 +37,10 @@ case class Equipo (
     //Obtengo los elementos que NO SON el miembro a reemplazar y le agrego el nuevo miembro
     
       
-//  def obtenerItem(item: Item): Equipo = {
-//   integrantes match{
-//      case Nil => this
-//      case unSoloHeroe::Nil => this.reemplazarMiembro(unSoloHeroe.equiparItem(item), unSoloHeroe) // se lo damos a ese nunca va a producir algo negativo con el max
-//      case integrantes =>  integrantes.map(integrante =>
-//          integrante.equiparItem(item)).sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head
-//    }
-//  }
-      
-  def obtenerItem(item: Item): Equipo = {
-   integrantes match{
-      case Nil => this
-      case unSoloHeroe::Nil => this.reemplazarMiembro(unSoloHeroe.equiparItem(item), unSoloHeroe) // se lo damos a ese nunca va a producir algo negativo con el max
-      case integrantes => this.reemplazarMiembro(integrantes.map(integrante =>
-          integrante.equiparItem(item)).sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head, integrantes.sortWith
-          (_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head )
-    }
-  }
-
+     
   
   def realizarMision(unaMision:Mision) :Result = { 
-    unaMision.tareas.foldLeft(Result(this)) { //Result(this)
+    unaMision.tareas.foldLeft(Result(this)) { 
       (previousResult, tarea) => {
         //previusResult.cumplirTarea(heroeElegido, tarea.aplicacion)
         previousResult match{
@@ -73,7 +52,8 @@ case class Equipo (
           case Failure(_,_) => Failure(this,new Exception)
         }
       }
-    } match{
+    }//Termina de foldear
+    match{
       case Success(equipo) => Success(unaMision.recompensa.foldLeft(equipo){
         (Semilla,recompensa)=>{
           recompensa(equipo)
@@ -84,11 +64,35 @@ case class Equipo (
       } 
   }
 
-    type Recompensa = Equipo
+//------------------------------------------   RECOMPENSA      ------------------------------------------------------------
+  
+type Recompensa = Equipo
 
-  def agregarOroPozo(oroNuevo :Int) :Recompensa ={
+def agregarOroPozo(oroNuevo :Int) :Recompensa ={
     this.copy(pozoComun = this.pozoComun + oroNuevo)
   }
+
+def obtenerItem(item: Item): Equipo = {
+   integrantes match{
+      case Nil => this
+      case unSoloHeroe::Nil => this.reemplazarMiembro(unSoloHeroe.equiparItem(item), unSoloHeroe) // se lo damos a ese nunca va a producir algo negativo con el max
+      case integrantes => this.reemplazarMiembro(integrantes.map(integrante =>
+          integrante.equiparItem(item)).sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head, integrantes.sortWith
+          (_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head )
+    }
+  }
+  
+  def obtenerMiembro(miembroNuevo :Heroe):Equipo =
+     this.copy(integrantes=miembroNuevo:: this.integrantes )
+     
+  def incrementarStats(modificadores: Map[Stat, Int=>Int]) :Equipo =
+    this.copy(integrantes= this.integrantes.map(unHeroe => unHeroe.modificarStats(modificadores)))
+     
+  
+  
+  //------------------------------------------   RECOMPENSA      ------------------------------------------------------------
+  
+  
   
   def getCantLadrones():Int = {
     return integrantes.count(heroe => heroe.especializacion match {
