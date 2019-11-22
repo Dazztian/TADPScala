@@ -72,8 +72,8 @@ case class Equipo (
       } 
   }
 
-  def agregarOroPozo(oro :Int)(equipo: Equipo) :Equipo ={
-    equipo.copy(pozoComun = equipo.pozoComun + oro)
+  def agregarOroPozo(equipo: Equipo) ={
+    equipo.copy(pozoComun = equipo.pozoComun + 100)
   }
   
   
