@@ -73,8 +73,17 @@ case class ForzarPuerta() extends Tarea
     return unHeroe.inteligencia + 10 * 
     unEquipo.getCantLadrones()
   }
+  
+  override def cumplirTarea(unHeroe: Heroe, unEquipo: Equipo):Result = {
+    unHeroe.especializacion match{
+      case Some(Mago(_,_)) => Success(unEquipo)
+      case Some(Ladron(_,_)) => Success(unEquipo)
+      case _ => Success(unEquipo.reemplazarMiembro(unHeroe.copy(hp = unHeroe.hp-1,fuerza = unHeroe.fuerza+1), unHeroe))
+    }
+  }
  
 }
+
 case class RobarTalisman(unItem: Item) extends Tarea
 {
   override def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int ={
