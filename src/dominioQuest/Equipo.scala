@@ -49,10 +49,17 @@ case class Equipo (
   }
   
   def realizarMision(unaMision:Mision) :Result = { 
-    unaMision.tareas.foldLeft(Result(this)) {
-      (semilla, tarea) => {
-        val heroeElegido = tarea.encontrarMejorHeroe(this)
-        tarea.cumplirTarea(heroeElegido, this)
+    unaMision.tareas.foldLeft(Result(this)) { //Result(this)
+      (previousResult, tarea) => {
+        //previusResult.cumplirTarea(heroeElegido, tarea.aplicacion)
+        previousResult match{
+          case Success(_) => {
+            val heroeElegido = tarea.encontrarMejorHeroe(this)
+            tarea.cumplirTarea(heroeElegido, this) // devuelve un Result
+          }
+          case NoPuedeRealizarse(_) => NoPuedeRealizarse(this)
+          case Failure(_,_) => Failure(this,new Exception)
+        }
       }
     } match{
       case Success(equipo) => Success(unaMision.recompensa.foldLeft(equipo){
@@ -69,13 +76,6 @@ case class Equipo (
     equipo.copy(pozoComun = equipo.pozoComun + oro)
   }
   
-  /*def getCantLadrones():Int = {
-    return integrantes.filter(heroe =>
-      heroe.especializacion match {
-      case Some(Ladron(_,_))=> true
-      case _=> false}  )
-      .size
-      }*/
   
   def getCantLadrones():Int = {
     return integrantes.count(heroe => heroe.especializacion match {
