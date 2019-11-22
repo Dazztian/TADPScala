@@ -50,7 +50,14 @@ var soloRobar:Mision = null
   }
 
   @Test
-  def equipoCumpleCondicionTarea()= {
+  def equipoCumpleCondicionTareaSimple()= {
+  // TODO
+       assertEquals(Success(equipoConLiderLadron),equipoConLiderLadron.realizarMision(soloRobar))
+  }
+
+  @Test
+  def equipoCumpleCondicionTareaCompleja()= {
+    //TODO
        assertEquals(Success(equipoConLiderLadron),equipoConLiderLadron.realizarMision(misionConRobar))
   }
   

@@ -17,8 +17,13 @@ import dominioQuest.Heroe
   // y se debe informar el estado del equipo, junto con la tarea que no pudo ser resuelta.
 
 
+  //case class NoPuedeRealizarse(equipo :Equipo) extends Result
   case class NoPuedeRealizarse(equipo :Equipo) extends Result
+  {
+    def cumplir(f: Equipo => Equipo) = this
+  }
   case class Success(equipo: Equipo) extends Result
+  
   case class Failure(equipo: Equipo, error: Exception) extends Result
   //class NingunHeroeParaTareaException extends RuntimeException // TODO hay q mostrar la tarea q no se peude realizar
 
