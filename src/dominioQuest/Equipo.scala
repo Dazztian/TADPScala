@@ -7,8 +7,7 @@ case class Equipo (
 {
   //val criterio1:PartialFunction[Heroe,Item]={ def apply(f:Item) = }
   
-  //Devuelvo el heroe que mejor cumple el criterio
-  def mejorHeroeSegun(criterio: (Heroe=>Int) ) : Option[Heroe] = {
+  def mejorHeroeSegun(criterio: (Heroe=>Int) ) : Option[Heroe] = { // TODO repetimos muchas veces logica de match con cantiadad de losta de integrantes
     integrantes match{
       case Nil => None
       case unSoloHeroe::Nil => Some(unSoloHeroe)
@@ -41,10 +40,12 @@ case class Equipo (
     //Obtengo los elementos que NO SON el miembro a reemplazar y le agrego el nuevo miembro
     
       
-  def obtenerItem(item: Item) = {
-  this.integrantes.map(integrante => integrante.equiparItem(item)).//equipamos el item a los integrantes
-  sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).//comparamos por stat
-  head//nos quedamos con el head de la lista 
+  def obtenerItem(item: Item): Option[Heroe] = {
+   integrantes match{
+      case Nil => None
+      case unSoloHeroe::Nil => Some(unSoloHeroe.equiparItem(item)) // se lo damos a ese nunca va a producir algo negativo con el max
+      case integrantes => Some(integrantes.map(integrante => integrante.equiparItem(item)).sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head)
+    }
   }
   
   def realizarMision(unaMision:Mision) :Equipo = {
