@@ -16,6 +16,7 @@ var heroeGuerrero:Heroe = null
 var equipoConLiderLadron:Equipo = null
 var equipoSinLiderLadron:Equipo = null
 var estoNoEsUnEquipo:Equipo = null
+var equipoSoloLadron:Equipo = null
 
 // Items
 var arcoViejo:Item = null
@@ -32,6 +33,9 @@ var sinRequerimiento : List[RequerimientosItem] = List()
 var misionConRobar:Mision = null
 var soloRobar:Mision = null
 
+// Tareas
+var robarTalis:Tarea = null
+
   @Before
   def setup() = {
     mago=new Mago(Inteligencia, Map(Fuerza -> (100+)) )
@@ -43,22 +47,19 @@ var soloRobar:Mision = null
     heroeGuerrero = new Heroe(100,200,300,400,Some(guerrero),List())
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento)    
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
-    misionConRobar = new Mision(List(),List(RobarTalisman(arcoViejo),PelearContraMonstruo(10)))
-    soloRobar = new Mision(List(),List(RobarTalisman(arcoViejo)))
+    robarTalis = RobarTalisman(arcoViejo)
+    misionConRobar = new Mision(List(),List(robarTalis,PelearContraMonstruo(10)))
+    soloRobar = new Mision(List(),List(robarTalis))
+    equipoSoloLadron = new Equipo(0, "Solitario ladron", List(heroeLadron))
     
     equipoSinLiderLadron = new Equipo(0,"No tenemos lider ladron", List(heroeMago, heroeGuerrero))
   }
 
   @Test
-  def equipoCumpleCondicionTareaSimple()= {
-  // TODO
-       assertEquals(Success(equipoConLiderLadron),equipoConLiderLadron.realizarMision(soloRobar))
-  }
-
-  @Test
-  def equipoCumpleCondicionTareaCompleja()= {
-    //TODO
-       assertEquals(Success(equipoConLiderLadron),equipoConLiderLadron.realizarMision(misionConRobar))
+  def equipoCumpleCondicionTarea()= {
+    var heroeModificado = new Heroe(100,202,300,400, Some(ladron),List()).incorporarItem(arcoViejo)
+    var equipoSoloLadronModificado = equipoSoloLadron.reemplazarMiembro(heroeModificado, heroeLadron)
+       assertEquals(Success(equipoSoloLadronModificado),equipoSoloLadron.realizarMision(soloRobar))
   }
   
   @Test
