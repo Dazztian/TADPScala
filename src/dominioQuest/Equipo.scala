@@ -13,15 +13,15 @@ case class Equipo (
   }
     
   def lider(): Option[Heroe] = {
-    val heroesOrdenados= this.integrantes.
-    sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
+    val heroesOrdenados= this.integrantes.sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
     heroesOrdenados match{
      case Nil => None
      case unSoloHeroe::Nil => Some(unSoloHeroe)
-     case primerHeroe::_ =>  if(heroesOrdenados.size >1 && (heroesOrdenados(0).mainStatSegunEspecializacion() ==heroesOrdenados(1).mainStatSegunEspecializacion()))
-        {return None
+     case primerHeroe::_ =>  if(heroesOrdenados.size >1 && (heroesOrdenados(0).mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion()))
+        {
+         return None
        }else{
-    return Some(heroesOrdenados(0))
+        return Some(heroesOrdenados(0))
        }
     }
    
