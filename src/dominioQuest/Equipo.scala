@@ -48,9 +48,14 @@ case class Equipo (
     }
   }
   
-  def realizarMision(unaMision:Mision) :Equipo = {
-    return this
-  }
+  def realizarMision(unaMision:Mision) :Result = { 
+    unaMision.tareas.foldLeft(Result(this)) {
+      (semilla, tarea) => {
+        val heroeElegido = tarea.encontrarMejorHeroe(this)
+        tarea.cumplirTarea(heroeElegido, this)
+      }
+    }
+  }  
   
   /*def getCantLadrones():Int = {
     return integrantes.filter(heroe =>
@@ -66,7 +71,7 @@ case class Equipo (
       case _=> false}  )
       
       }
-  def puedeRealizarTarea(unaTarea :Tarea) :Result = {
-    unaTarea.puedeRealizarlaAlgunHeroe(this)
-  }
+//  def puedeRealizarTarea(unaTarea :Tarea) :Result = {
+//    unaTarea.puedeRealizarlaAlgunHeroe(this)
+//  }
 }

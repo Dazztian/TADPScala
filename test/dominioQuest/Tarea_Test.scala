@@ -27,25 +27,25 @@ var estoNoEsUnEquipo:Equipo = null
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
   }
 
-  @Test
-  def equipoNoCumpleCondicionTarea()= {
-       assertEquals(NoPuedeRealizarse(equipo),equipo.puedeRealizarTarea(RobarTalisman(arcoViejo)))
-   }
-  @Test
-  def equipoCumpleCondicionTarea()= {
-    var equipoConLiderLadron = equipo.obtenerMiembro(liderLadron)
-     assertEquals(Success(equipoConLiderLadron),equipoConLiderLadron.puedeRealizarTarea(RobarTalisman(arcoViejo)))
-   }
-  @Test
-  def equipoSinMiembrosNoCumpleTarea(){
-    assertEquals(NoPuedeRealizarse(estoNoEsUnEquipo),estoNoEsUnEquipo.puedeRealizarTarea(RobarTalisman(arcoViejo)))
-  }
-  @Test
-  def tareaSinConidcionEquipoVacio(){
-    assertEquals(NoPuedeRealizarse(estoNoEsUnEquipo),estoNoEsUnEquipo.puedeRealizarTarea(PelearContraMonstruo(10)))
-  }
-  @Test
-  def tareaSinCondicionEquipoConHeroes(){
-     assertEquals(Success(equipo),equipo.puedeRealizarTarea(PelearContraMonstruo(10)))
-  }
+//  @Test
+//  def equipoNoCumpleCondicionTarea()= {
+//       assertEquals(NoPuedeRealizarse(equipo),equipo.puedeRealizarTarea(RobarTalisman(arcoViejo)))
+//   }
+//  @Test
+//  def equipoCumpleCondicionTarea()= {
+//    var equipoConLiderLadron = equipo.obtenerMiembro(liderLadron)
+//     assertEquals(Success(equipoConLiderLadron),equipoConLiderLadron.puedeRealizarTarea(RobarTalisman(arcoViejo)))
+//   }
+//  @Test
+//  def equipoSinMiembrosNoCumpleTarea(){
+//    assertEquals(NoPuedeRealizarse(estoNoEsUnEquipo),estoNoEsUnEquipo.puedeRealizarTarea(RobarTalisman(arcoViejo)))
+//  }
+//  @Test
+//  def tareaSinConidcionEquipoVacio(){
+//    assertEquals(NoPuedeRealizarse(estoNoEsUnEquipo),estoNoEsUnEquipo.puedeRealizarTarea(PelearContraMonstruo(10)))
+//  }
+//  @Test
+//  def tareaSinCondicionEquipoConHeroes(){
+//     assertEquals(Success(equipo),equipo.puedeRealizarTarea(PelearContraMonstruo(10)))
+//  }
 }
