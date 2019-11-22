@@ -1,5 +1,7 @@
 package dominioQuest
 
+import dominioQuest.Heroe
+
  sealed trait Result { def equipo:  Equipo }
   object Result {
     def apply(equipo: =>  Equipo): Result = try {
@@ -27,10 +29,11 @@ abstract class Tarea{
   }
   
   def cumplirTarea(unHeroe:Heroe, equipo:Equipo): Result = {
-    val heroeNuevo = efectos.foldLeft(unHeroe){
-      (heroe,efecto) => efecto(heroe)
-    }
-    return Result(equipo)
+    Result(equipo)
+//    val heroeNuevo = efectos.foldLeft(unHeroe){
+//      (heroe,efecto) => efecto(heroe)
+//    }
+//    return Result(equipo)
   }
   
   def puedeRealizarlaAlgunHeroe(equipo :Equipo) :Result ={
@@ -84,6 +87,10 @@ case class RobarTalisman(unItem: Item) extends Tarea
      case Some(_) => NoPuedeRealizarse(equipo)
      case None => NoPuedeRealizarse(equipo)
    }
+   
+  override def cumplirTarea(unHeroe:Heroe, unEquipo:Equipo):Result ={
+    Success(unEquipo.reemplazarMiembro(unHeroe.equiparItem(unItem), unHeroe))
+  }
 }
 
 
