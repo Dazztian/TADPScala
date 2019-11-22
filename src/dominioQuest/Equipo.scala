@@ -8,8 +8,12 @@ case class Equipo (
   //val criterio1:PartialFunction[Heroe,Item]={ def apply(f:Item) = }
   
   //Devuelvo el heroe que mejor cumple el criterio
-  def mejorHeroeSegun(criterio: (Heroe=>Int) ) : Heroe = {
-    integrantes.sortWith(criterio(_) > criterio(_)).head
+  def mejorHeroeSegun(criterio: (Heroe=>Int) ) : Option[Heroe] = {
+    integrantes match{
+      case Nil => None
+      case unSoloHeroe::Nil => Some(unSoloHeroe)
+      case _ => Some(integrantes.sortWith(criterio(_) > criterio(_)).head)
+    }
   }
     
   def lider(): Option[Heroe] = {
