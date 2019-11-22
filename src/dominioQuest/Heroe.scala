@@ -28,14 +28,15 @@ def getStatActaul(unStat: Stat):Int ={
 
   def verificarParams = {
     if (this.hp < 1)
-     this.copy(hp.max(1))
+     this.copy(hp = hp.max(1))
     if (this.fuerza < 1)
-     this.copy(fuerza.max(1))
+     this.copy(fuerza = fuerza.max(1))
     if (this.inteligencia < 1)
-     this.copy(inteligencia.max(1))
+     this.copy(inteligencia = inteligencia.max(1))
     if (this.velocidad < 1)
-     this.copy(velocidad.max(1))
-    this
+     this.copy(velocidad = this.velocidad.max(1))
+    else this
+
  }
   
 def equiparItem(unItem: Item) :Heroe = 
@@ -83,21 +84,18 @@ def modificarStats(modificadores: Map[Stat, Int=>Int]):Heroe=
      (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
       case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2)
       case Hp => semilla.modificarHp(diccionarioStatEfecto._2)
-      case Velocidad => semilla.modificarInteligencia(diccionarioStatEfecto._2)
-      case Inteligencia => semilla.modificarVelocidad(diccionarioStatEfecto._2)})
+      case Velocidad => semilla.modificarVelocidad(diccionarioStatEfecto._2)
+      case Inteligencia => semilla.modificarInteligencia(diccionarioStatEfecto._2)})
      }
      
 //Funcion auxiliar, devuelve true si cumple con todas las condiciones dadas
 def cumpleCon(condiciones: Map[Stat, Int=>Boolean]) :Boolean = 
-return condiciones.foldLeft(true)
-{(semilla,diccionarioStatCondicion) => semilla &&  (diccionarioStatCondicion._1 match {
-    case Fuerza => diccionarioStatCondicion._2(this.fuerza)
-    case Hp => diccionarioStatCondicion._2(this.hp)
-    case Velocidad => diccionarioStatCondicion._2(this.velocidad)
-    case Inteligencia => diccionarioStatCondicion._2(this.inteligencia)
- })
-
-}
+return condiciones.forall(diccionarioStatCondicion => diccionarioStatCondicion._1 match {
+  case Fuerza => diccionarioStatCondicion._2(this.fuerza)
+  case Hp => diccionarioStatCondicion._2(this.hp)
+  case Velocidad => diccionarioStatCondicion._2(this.velocidad)
+  case Inteligencia => diccionarioStatCondicion._2(this.inteligencia)
+})
 
 
 def realizarTarea(unaTarea :Tarea):Heroe = {
