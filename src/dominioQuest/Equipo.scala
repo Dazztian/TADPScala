@@ -54,8 +54,20 @@ case class Equipo (
         val heroeElegido = tarea.encontrarMejorHeroe(this)
         tarea.cumplirTarea(heroeElegido, this)
       }
-    }
-  }  
+    } match{
+      case Success(equipo) => Success(unaMision.recompensa.foldLeft(equipo){
+        (Semilla,recompensa)=>{
+          recompensa(equipo)
+          }
+        })
+        case NoPuedeRealizarse(equipo) => NoPuedeRealizarse(equipo)
+        case Failure(equipo, error) => Failure(equipo, error)
+      } 
+  }
+
+  def agregarOroPozo(oro :Int)(equipo: Equipo) :Equipo ={
+    equipo.copy(pozoComun = equipo.pozoComun + oro)
+  }
   
   /*def getCantLadrones():Int = {
     return integrantes.filter(heroe =>
