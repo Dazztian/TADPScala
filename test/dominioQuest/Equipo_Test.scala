@@ -50,11 +50,12 @@ var talismanMinimalismo: Item = null
 }
 @Test
   def obtenerItem_test() = {
-    assertEquals(Some(liderLadron.equiparItem(arcoViejo)), equipo.obtenerItem(arcoViejo))
+   var equipoConItem = equipo.reemplazarMiembro(liderLadron.equiparItem(arcoViejo), liderLadron)
+    assertEquals(equipoConItem, equipo.obtenerItem(arcoViejo))
   }
 @Test
   def obtenerItemEquipoUnitario_test() = {
-    assertEquals(Some(heroe.equiparItem(arcoViejo)), equipoSolapa.obtenerItem(arcoViejo))
+    assertEquals(heroe.equiparItem(arcoViejo), equipoSolapa.obtenerItem(arcoViejo).integrantes(0))
   }
 @Test
   def obtenerMiembre_Test() = {
