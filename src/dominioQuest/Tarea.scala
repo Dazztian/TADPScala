@@ -33,7 +33,12 @@ abstract class Tarea{
     return heroeNuevo
   }
   
-  def puedeRealizarlaAlgunHeroe(equipo :Equipo) :Result = Success(equipo) // x default si no se tiene condiciones
+  def puedeRealizarlaAlgunHeroe(equipo :Equipo) :Result ={
+  equipo.integrantes match{
+    case Nil => NoPuedeRealizarse(equipo)
+    case _ =>Success(equipo) // x default si no se tiene condiciones
+  }
+  }
 
 }
 

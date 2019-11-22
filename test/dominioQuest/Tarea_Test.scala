@@ -14,6 +14,7 @@ var arcoViejo:Item = null
 var sinRequerimiento : List[RequerimientosItem] = List()
 var liderLadron:Heroe = null
 var ladron: Trabajo = null
+var estoNoEsUnEquipo:Equipo = null
 
   @Before
   def setup() = {
@@ -23,7 +24,7 @@ var ladron: Trabajo = null
     liderLadron = new Heroe(100,200,300,400,Some(ladron),List())
     equipo = new Equipo(0,"Equipo sin gracia",List(heroe))
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento)    
-
+    estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
   }
 
   @Test
@@ -32,7 +33,19 @@ var ladron: Trabajo = null
    }
   @Test
   def equipoCumpleCondicionTarea()= {
-      var equipoConLiderLadron = equipo.obtenerMiembro(liderLadron)
-       assertEquals(Success(equipoConLiderLadron),equipoConLiderLadron.puedeRealizarTarea(RobarTalisman(arcoViejo)))
+    var equipoConLiderLadron = equipo.obtenerMiembro(liderLadron)
+     assertEquals(Success(equipoConLiderLadron),equipoConLiderLadron.puedeRealizarTarea(RobarTalisman(arcoViejo)))
    }
+  @Test
+  def equipoSinMiembrosNoCumpleTarea(){
+    assertEquals(NoPuedeRealizarse(estoNoEsUnEquipo),estoNoEsUnEquipo.puedeRealizarTarea(RobarTalisman(arcoViejo)))
+  }
+  @Test
+  def tareaSinConidcionEquipoVacio(){
+    assertEquals(NoPuedeRealizarse(estoNoEsUnEquipo),estoNoEsUnEquipo.puedeRealizarTarea(PelearContraMonstruo(10)))
+  }
+  @Test
+  def tareaSinCondicionEquipoConHeroes(){
+     assertEquals(Success(equipo),equipo.puedeRealizarTarea(PelearContraMonstruo(10)))
+  }
 }
