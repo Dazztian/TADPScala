@@ -64,11 +64,8 @@ case class RobarTalisman(unItem: Item) extends Tarea
     
    override def puedeRealizarlaAlgunHeroe(equipo :Equipo) :Result = //esta vendria a ser la condicion
      equipo.lider() match{
-     case Some(lider)=> if(lider.especializacion == Ladron){
-           Success(equipo)
-         }else{
-           NoPuedeRealizarse(equipo)
-         }
+     case Some(Heroe(_,_,_,_,Some(Ladron(_,_)),_))=> Success(equipo)
+     case Some(_) => NoPuedeRealizarse(equipo)
      case None => NoPuedeRealizarse(equipo)
    }
 }
