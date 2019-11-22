@@ -53,7 +53,7 @@ var robarTalis:Tarea = null
     equipoSoloLadron = new Equipo(0, "Solitario ladron", List(heroeLadron))
     equipoSinLiderLadron = new Equipo(0,"No tenemos lider ladron", List(heroeMago, heroeGuerrero))
      misionConRobar = new Mision(List(_.agregarOroPozo(100)),List(robarTalis,PelearContraMonstruo(10)))
-    misionImposible = new Mision(List(_.agregarOroPozo(100),_.obtenerItem(arcoViejo)),List(robarTalis,PelearContraMonstruo(10)))
+    misionImposible = new Mision(List(_.agregarOroPozo(100),_.obtenerMiembro(heroeGuerrero)),List(robarTalis,PelearContraMonstruo(10)))
   }
 
 
@@ -77,10 +77,9 @@ var robarTalis:Tarea = null
   
        assertEquals(100,equipoSoloLadron.realizarMision(misionConRobar).equipo.pozoComun)
   }
-//   @Test
-//  def equipoGanaOroEItem()= {
-//    var equipoTomCruise = equipoSinLiderLadron.reemplazarMiembro(heroeMago.equiparItem(arcoViejo), heroeMago)
-//       assertEquals(equipoTomCruise,equipoSinLiderLadron.realizarMision(misionImposible).equipo)
-//  }
+   @Test
+  def equipoGanaRecompensaMiembro()= {
+      assertEquals(true,equipoSoloLadron.realizarMision(misionImposible).equipo.integrantes.contains(heroeGuerrero))
+  }
 
 }
