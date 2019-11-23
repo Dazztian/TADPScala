@@ -28,9 +28,9 @@ case class IncrementarStats(unEquipo:Equipo)(modificadores: Map[Stat, Int=>Int])
       unEquipo.integrantes.map(unHeroe => unHeroe.modificarStats(modificadores)))
   }
 }
-/*
-case class EquiparItem(unEquipo:Equipo)extends Recompensa {
-  override def obtenerRecompensa(unHeroe: Heroe):Equipo= {
-    return unEquipo.obtenerMiembro(unHeroe)
+
+case class EquiparItem(unEquipo:Equipo)(item: Item)extends Recompensa {
+  override def obtenerRecompensa:Equipo= {
+    return unEquipo.obtenerItem(item)
   }
-}*/
+}
