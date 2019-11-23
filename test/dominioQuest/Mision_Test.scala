@@ -62,7 +62,7 @@ var robarTalis:Tarea = null
   def equipoAgregaOro() = {
     assertEquals(888, soloRobar.recompensa.obtenerRecompensa.pozoComun)
   }
-  
+  //Queda probar 1)EquiparItem, 2)AgregarMiembro y 3)IncrementarStats
   @Test
   def equipoNoCumpleMisionSimple() = {
     assertEquals(NoPuedeRealizarse(equipoSinLiderLadron), equipoSinLiderLadron.realizarMision(soloRobar))
