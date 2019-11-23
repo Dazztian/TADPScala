@@ -16,12 +16,7 @@ class Taberna(val tablon : Seq[Mision]) {
   }
 
   def ordenarMisionesSegunCriterio(misiones:Seq[Mision],unEquipo:Equipo,criterio:criterio):Seq[Mision] = {
-    misiones match{
-      case unaMision::Nil => Seq(unaMision)
-      case Nil => Seq[Mision]()
-      case _ =>  misiones.sortWith((mision1,mision2) => criterio(unEquipo.realizarMision(mision1).equipo,unEquipo.realizarMision(mision2).equipo))
-
-    }
+        misiones.sortWith((mision1,mision2) => criterio(unEquipo.realizarMision(mision1).equipo,unEquipo.realizarMision(mision2).equipo))
   }
   
   def entrenar(unEquipo:Equipo,criterio:criterio) = {
@@ -44,16 +39,21 @@ class Taberna(val tablon : Seq[Mision]) {
     }*/
   }
   
-  def Entrenar(misiones:Seq[Mision], unEquipo:Equipo, criterio:criterio):Equipo = { //falta el caso de seguir con una mision falla
-    var misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
-    var resultado = unEquipo.realizarMision(misionesOrdenadas.head) //case loco
-    var equipoEntrenado = resultado match {
-      case Success(_) => resultado.equipo
-      case NoPuedeRealizarse(_)=> throw new Exception
-      case _ => //interrumpir todo y devolver el equipo en su ultima etapa
+   def Entrenar(misiones:Seq[Mision], unEquipo:Equipo, criterio:criterio):Equipo = { //falta el caso de seguir con una mision falla
+    misiones match{
+      case Nil => throw new NingunHeroeParaTareaException //TODO nueva exepcion
+      case _ => {
+          var misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
+          var resultado = unEquipo.realizarMision(misionesOrdenadas.head) //case loco
+          var equipoEntrenado = resultado match {
+            case Success(_) => resultado.equipo
+            case NoPuedeRealizarse(_)=> throw new NingunHeroeParaTareaException
+            case _ => throw new NingunHeroeParaTareaException
+          }
+      
+          Entrenar(misionesOrdenadas.tail,equipoEntrenado.asInstanceOf[Equipo],criterio)
+        }
+      }
     }
-
-    Entrenar(misionesOrdenadas.tail,equipoEntrenado.asInstanceOf[Equipo],criterio)
-  }
 }
 
