@@ -39,15 +39,16 @@ class Taberna(val tablon : Seq[Mision]) {
     }*/
   }
   
-  def aplicarRecursivo(misiones:Seq[Mision],unEquipo:Equipo,criterio:criterio):Equipo = { //falta el caso de seguir con una mision falla
+  def Entrenar(misiones:Seq[Mision], unEquipo:Equipo, criterio:criterio):Equipo = { //falta el caso de seguir con una mision falla
     var misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
     var resultado = unEquipo.realizarMision(misionesOrdenadas.head) //case loco
     var equipoEntrenado = resultado match {
       case Success(_) => resultado.equipo
+      case NoPuedeRealizarse(_)=> throw new Exception
       case _ => //interrumpir todo y devolver el equipo en su ultima etapa
     }
-    
-    aplicarRecursivo(misionesOrdenadas.tail,equipoEntrenado.asInstanceOf[Equipo],criterio)
+
+    Entrenar(misionesOrdenadas.tail,equipoEntrenado.asInstanceOf[Equipo],criterio)
   }
 }
 
