@@ -19,39 +19,20 @@ class Taberna(val tablon : Seq[Mision]) {
         misiones.sortWith((mision1,mision2) => criterio(unEquipo.realizarMision(mision1).equipo,unEquipo.realizarMision(mision2).equipo))
   }
   
-  def entrenar(unEquipo:Equipo,criterio:criterio) = {
-    
-   /*val misionesARealizar = tablon
-   val equipoEntrenando = unEquipo
-   for (i <- 0 to tablon.length) {
-     
-      val mejorMisionActual = elegirMision(misionesARealizar,equipoEntrenando,criterio)
-      val resultado = equipoEntrenando.realizarMision(mejorMisionActual)
-     breakable {
-        if (resultado != Success){
-          break
-        }else{
-          val equipoEntrenado:Equipo = resultado.equipo
-        }
-		            
-        }
-      val misionesARealizar:Seq[Mision] = misionesARealizar.filterNot(_ == mejorMisionActual)
-    }*/
-  }
   
-   def Entrenar(misiones:Seq[Mision], unEquipo:Equipo, criterio:criterio):Equipo = { //falta el caso de seguir con una mision falla
+   def entrenar(misiones:Seq[Mision], unEquipo:Equipo, criterio:criterio):Equipo = { //falta el caso de seguir con una mision falla
     misiones match{
-      case Nil => throw new NingunHeroeParaTareaException //TODO nueva exepcion
+     // case Nil => throw new NingunHeroeParaTareaException //TODO nueva exepcion
       case _ => {
           var misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
           var resultado = unEquipo.realizarMision(misionesOrdenadas.head) //case loco
-          var equipoEntrenado = resultado match {
-            case Success(_) => resultado.equipo
-            case NoPuedeRealizarse(_)=> throw new NingunHeroeParaTareaException
-            case _ => throw new NingunHeroeParaTareaException
+          resultado match {
+            case Success(equipo) =>  entrenar(misionesOrdenadas.tail,equipo,criterio)
+            case NoPuedeRealizarse(equipo)=> equipo
+            case Failure(equipo,_) => equipo
           }
       
-          Entrenar(misionesOrdenadas.tail,equipoEntrenado.asInstanceOf[Equipo],criterio)
+         
         }
       }
     }
