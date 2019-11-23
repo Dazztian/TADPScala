@@ -20,6 +20,7 @@ var equipoSoloLadron:Equipo = null
 
 // Items
 var arcoViejo:Item = null
+var zapatillaTrucha:Item = null
 
 // Trabajos
 var mago:Trabajo=null
@@ -33,9 +34,12 @@ var sinRequerimiento : List[RequerimientosItem] = List()
 var misionConRobar:Mision = null
 var soloRobar:Mision = null
 var misionImposible :Mision = null
+var obtenerRobando: Mision = null
+var roboNoConveniente: Mision = null
 
 // Tareas
 var robarTalis:Tarea = null
+var robarZapa:Tarea = null
 
   @Before
   def setup() = {
@@ -54,6 +58,10 @@ var robarTalis:Tarea = null
     equipoSinLiderLadron = new Equipo(0,"No tenemos lider ladron", List(heroeMago, heroeGuerrero))
      misionConRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(100),List(robarTalis,PelearContraMonstruo(10)))
     misionImposible = new Mision(new AgregarMiembro(equipoSoloLadron)(heroeGuerrero),List(robarTalis,PelearContraMonstruo(10)))
+    obtenerRobando = new Mision(new EquiparItem(equipoSoloLadron)(arcoViejo), List(robarTalis))
+    zapatillaTrucha = new Item(Some(Pies), Map(Fuerza -> (1-)), sinRequerimiento, 100)
+    robarTalis = RobarTalisman(zapatillaTrucha)
+    roboNoConveniente = new Mision(new EquiparItem(equipoSoloLadron)(zapatillaTrucha), List(RobarTalisman(zapatillaTrucha)))
   }
 
 
@@ -88,5 +96,15 @@ var robarTalis:Tarea = null
   def equipoGanaRecompensaMiembro()= {
       assertEquals(true,equipoSoloLadron.realizarMision(misionImposible).equipo.integrantes.contains(heroeGuerrero))
   }
+   
+   @Test
+   def equipoGanaItem() = {
+     assertEquals(true, equipoSoloLadron.realizarMision(obtenerRobando).equipo.integrantes(0).items.contains(arcoViejo))
+   }
+   
+   @Test
+   def equipoRobaItemPeroLoVende() = {
+     assertEquals(100, equipoSoloLadron.realizarMision(roboNoConveniente).equipo.pozoComun)
+   }
 
 }
