@@ -52,9 +52,8 @@ var robarTalis:Tarea = null
     equipoSoloLadron = new Equipo(0, "Solitario ladron", List(heroeLadron))
     soloRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(888),List(robarTalis))
     equipoSinLiderLadron = new Equipo(0,"No tenemos lider ladron", List(heroeMago, heroeGuerrero))
-    /*
-     misionConRobar = new Mision(_.agregarOroPozo(100),List(robarTalis,PelearContraMonstruo(10)))
-    misionImposible = new Mision(_.agregarOroPozo(100),_.obtenerMiembro(heroeGuerrero)),List(robarTalis,PelearContraMonstruo(10)))*/
+     misionConRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(100),List(robarTalis,PelearContraMonstruo(10)))
+    misionImposible = new Mision(new AgregarMiembro(equipoSoloLadron)(heroeGuerrero),List(robarTalis,PelearContraMonstruo(10)))
   }
 
 
@@ -75,9 +74,10 @@ var robarTalis:Tarea = null
   }
   @Test
   def equipoCumpleCondicionTarea()= {
-    var heroeModificado = new Heroe(100,202,300,400, Some(ladron),List()).incorporarItem(arcoViejo)
-    var equipoSoloLadronModificado = equipoSoloLadron.reemplazarMiembro(heroeModificado, heroeLadron)
-       assertEquals(Success(equipoSoloLadronModificado),equipoSoloLadron.realizarMision(soloRobar))
+    var heroeModificado = new Heroe(100,200,300,400, Some(ladron),List())
+    var equipoSoloLadronModificado = equipoSoloLadron.reemplazarMiembro(heroeModificado, heroeLadron).agregarOroPozo(100)
+    
+       assertEquals(Success(equipoSoloLadronModificado),equipoSoloLadron.realizarMision(misionConRobar))
   }
   @Test
   def equipoGanaRecompensaOro()= {

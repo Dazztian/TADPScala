@@ -25,7 +25,8 @@ import dominioQuest.Heroe
   case class Success(equipo: Equipo) extends Result
   
   case class Failure(equipo: Equipo, error: Exception) extends Result
-  //class NingunHeroeParaTareaException extends RuntimeException // TODO hay q mostrar la tarea q no se peude realizar
+  
+  class NingunHeroeParaTareaException extends RuntimeException // TODO hay q mostrar la tarea q no se peude realizar
 
 
 abstract class Tarea{
