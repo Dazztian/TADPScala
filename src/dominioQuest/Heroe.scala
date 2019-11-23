@@ -8,13 +8,13 @@ case class Heroe (val hp: Int,
     val items: List[Item],
     )  {
   
-  def modificarHp(modificacion: Int=>Int) = this.copy(hp = modificacion(this.hp)).verificarParams
-  def modificarFuerza(modificacion: Int=>Int) = this.copy(fuerza = modificacion(this.fuerza)).verificarParams
-  def modificarInteligencia(modificacion: Int=>Int) = this.copy(inteligencia = modificacion(this.inteligencia)).verificarParams
-  def modificarVelocidad(modificacion: Int=>Int) = this.copy(velocidad = modificacion(this.velocidad)).verificarParams
+  def modificarHp(modificacion: Int=>Int) = this.copy(hp = modificacion(this.hp).max(1))
+  def modificarFuerza(modificacion: Int=>Int) = this.copy(fuerza = modificacion(this.fuerza).max(1))
+  def modificarInteligencia(modificacion: Int=>Int) = this.copy(inteligencia = modificacion(this.inteligencia).max(1))
+  def modificarVelocidad(modificacion: Int=>Int) = this.copy(velocidad = modificacion(this.velocidad).max(1))
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
   
-def getStatActaul(unStat: Stat):Int ={ 
+def getStatActual(unStat: Stat):Int ={ 
     this.items.foldLeft(this.aplicarTrabajo(this.especializacion)){
        (semilla,unItem) => semilla.equiparItem(unItem)
      }

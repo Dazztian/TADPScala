@@ -23,11 +23,11 @@ class Taberna(val tablon : Seq[Mision]) {
    def entrenar(misiones:Seq[Mision], unEquipo:Equipo, criterio:criterio):Equipo = { //falta el caso de seguir con una mision falla
     misiones match{
       case Nil => unEquipo
-      case _ => {
-          var misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
-          var resultado = unEquipo.realizarMision(misionesOrdenadas.head) //case loco
+      case misiones@(primera :: misionesRestantes) => {
+          val misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
+          var resultado = unEquipo.realizarMision(primera) //case loco
           resultado match {
-            case Success(equipo) =>  entrenar(misionesOrdenadas.tail,equipo,criterio)
+            case Success(equipo) =>  entrenar(misionesRestantes,equipo,criterio)
             case NoPuedeRealizarse(equipo,_)=> equipo
             case Failure(equipo,_) => equipo
           }
