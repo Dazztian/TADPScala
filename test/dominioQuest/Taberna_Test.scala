@@ -64,6 +64,15 @@ class Taberna_Test {
     assertEquals(Some(misionConRobar), tabernita.elegirMision(tablonote,elEquipo,critiquin))
   }
 
+  @Test
+  def ordernarMisionesConTablonDeUnaSolaMision: Unit = {
+    assertEquals(soloRobar, tabernita.ordenarMisionesSegunCriterio(Seq(soloRobar),elEquipo,critiquin).head)
+  }
+
+  @Test
+  def ordenarTablonVacio: Unit = {
+    assertEquals(Seq[Mision](), tabernita.ordenarMisionesSegunCriterio(Seq[Mision](),elEquipo,critiquin))
+  }
 
 
 

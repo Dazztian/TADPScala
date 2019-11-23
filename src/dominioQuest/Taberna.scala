@@ -14,9 +14,14 @@ class Taberna(val tablon : Seq[Mision]) {
       case mision::_ => Some(ordenarMisionesSegunCriterio (misiones, unEquipo, criterio).head)
     }
   }
-  
+
   def ordenarMisionesSegunCriterio(misiones:Seq[Mision],unEquipo:Equipo,criterio:criterio):Seq[Mision] = {
-    misiones.sortWith((mision1,mision2) => criterio(unEquipo.realizarMision(mision1).equipo,unEquipo.realizarMision(mision2).equipo))
+    misiones match{
+      case unaMision::Nil => Seq(unaMision)
+      case Nil => Seq[Mision]()
+      case _ =>  misiones.sortWith((mision1,mision2) => criterio(unEquipo.realizarMision(mision1).equipo,unEquipo.realizarMision(mision2).equipo))
+
+    }
   }
   
   def entrenar(unEquipo:Equipo,criterio:criterio) = {
