@@ -57,7 +57,7 @@ case class Equipo (
       }
     }//Termina de foldear
     match{//Aca COBRA la recompensa
-      case Success(equipo) => Success(unaMision.recompensa.obtenerRecompensa)   
+      case Success(equipo) => Success(unaMision.recompensa.obtenerRecompensa(equipo))   
         case NoPuedeRealizarse(equipo,tarea) => NoPuedeRealizarse(equipo, tarea)
         case Failure(equipo, error) => Failure(equipo, error)
       } 

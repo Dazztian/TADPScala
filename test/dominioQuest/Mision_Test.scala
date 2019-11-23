@@ -54,21 +54,21 @@ var robarZapa:Tarea = null
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
     robarTalis = RobarTalisman(arcoViejo)
     equipoSoloLadron = new Equipo(0, "Solitario ladron", List(heroeLadron))
-    soloRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(888),List(robarTalis))
+    soloRobar = new Mision(new AgregarOroPozo(888),List(robarTalis))
     equipoSinLiderLadron = new Equipo(0,"No tenemos lider ladron", List(heroeMago, heroeGuerrero))
     
-    misionConRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(100),List(robarTalis,PelearContraMonstruo(10)))
-    misionImposible = new Mision(new AgregarMiembro(equipoSoloLadron)(heroeGuerrero),List(robarTalis,PelearContraMonstruo(10)))
-    obtenerRobando = new Mision(new EquiparItem(equipoSoloLadron)(arcoViejo), List(robarTalis))
+    misionConRobar = new Mision(new AgregarOroPozo(100),List(robarTalis,PelearContraMonstruo(10)))
+    misionImposible = new Mision(new AgregarMiembro(heroeGuerrero),List(robarTalis,PelearContraMonstruo(10)))
+    obtenerRobando = new Mision(new EquiparItem(arcoViejo), List(robarTalis))
     zapatillaTrucha = new Item(Some(Pies), Map(Fuerza -> (1-)), sinRequerimiento, 100)
     robarZapa = RobarTalisman(zapatillaTrucha)
-    roboNoConveniente = new Mision(new EquiparItem(equipoSoloLadron)(zapatillaTrucha), List(robarZapa))
+    roboNoConveniente = new Mision(new EquiparItem(zapatillaTrucha), List(robarZapa))
   }
 
 
   @Test
   def equipoAgregaOro() = {
-    assertEquals(888, soloRobar.recompensa.obtenerRecompensa.pozoComun)
+    assertEquals(888, soloRobar.recompensa.obtenerRecompensa(equipoSoloLadron).pozoComun)
   }
   //Queda probar 1)EquiparItem, 2)AgregarMiembro y 3)IncrementarStats
   @Test

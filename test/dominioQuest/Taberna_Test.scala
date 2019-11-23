@@ -52,8 +52,8 @@ class Taberna_Test {
 
     robarTalis = RobarTalisman(arcoViejo)
 
-    soloRobar = new Mision(new AgregarOroPozo(elEquipo)(88),List(robarTalis))
-    misionConRobar = new Mision(new AgregarOroPozo(elEquipo)(888),List(robarTalis,PelearContraMonstruo(10)))
+    soloRobar = new Mision(new AgregarOroPozo(88),List(robarTalis))
+    misionConRobar = new Mision(new AgregarOroPozo(888),List(robarTalis,PelearContraMonstruo(10)))
 
     tablonote=Seq(misionConRobar,soloRobar)
 
