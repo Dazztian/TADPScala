@@ -73,7 +73,11 @@ class Taberna_Test {
   def ordenarTablonVacio: Unit = {
     assertEquals(Seq[Mision](), tabernita.ordenarMisionesSegunCriterio(Seq[Mision](),elEquipo,critiquin))
   }
-
-
+ @Test
+  def entrenarEquipo: Unit = {
+   var equipoMisionero = elEquipo.realizarMision(misionConRobar).equipo.realizarMision(soloRobar).equipo
+    assertEquals(equipoMisionero, tabernita.entrenar(tablonote,elEquipo,critiquin))
+  }
+  
 
 }
