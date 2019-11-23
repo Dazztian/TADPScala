@@ -46,7 +46,7 @@ var robarTalis:Tarea = null
     equipoConLiderLadron = new Equipo(0,"Equipo sin gracia",List(heroeMago,heroeLadron))
     guerrero = new Guerrero(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
     heroeGuerrero = new Heroe(100,200,300,400,Some(guerrero),List())
-    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)    
+    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento)    
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
     robarTalis = RobarTalisman(arcoViejo)
     equipoSoloLadron = new Equipo(0, "Solitario ladron", List(heroeLadron))
@@ -62,7 +62,7 @@ var robarTalis:Tarea = null
   def equipoAgregaOro() = {
     assertEquals(888, soloRobar.recompensa.obtenerRecompensa.pozoComun)
   }
-  
+  //Queda probar 1)EquiparItem, 2)AgregarMiembro y 3)IncrementarStats
   @Test
   def equipoNoCumpleMisionSimple() = {
     assertEquals(NoPuedeRealizarse(equipoSinLiderLadron), equipoSinLiderLadron.realizarMision(soloRobar))
