@@ -33,28 +33,28 @@ class Trabajo_Test {
 
   @Test
   def aplicarUnTrabajo_test() = {
-    assertEquals(160, heroe.aplicarTrabajo(Some(hechicero)).fuerza)
+    assertEquals(160, heroe.aplicarEfectosDelTrabajo(Some(hechicero)).fuerza)
   }
   @Test
   def cambioDeTrabajo_test() = {
-    assertEquals(300, heroe.aplicarTrabajo(Some(berserk)).hp)
+    assertEquals(300, heroe.aplicarEfectosDelTrabajo(Some(berserk)).hp)
   }
   @Test
   def trabajoQueDejaEnCeroUnStat(): Unit = {
-    assertEquals(1, heroe.aplicarTrabajo(Some(trabajoRestador)).velocidad)
+    assertEquals(1, heroe.aplicarEfectosDelTrabajo(Some(trabajoRestador)).velocidad)
   }
   @Test
   def cambioDeTrabajoSinAtributosHeroe_test() = {
-    assertEquals(Some(trabajoInutil), heroe.aplicarTrabajo(Some(trabajoInutil)).especializacion)
+    assertEquals(Some(trabajoInutil), heroe.aplicarEfectosDelTrabajo(Some(trabajoInutil)).especializacion)
   }
   @Test
   def siUnHeroeSinTrabajoLeDoyUnTrabajoYLuegoSeLoQuitoQUedaIgualQueAlPrincipio() = {
-    assertEquals(heroe, heroe.aplicarTrabajo(Some(hechicero)).aplicarTrabajo(None))
+    assertEquals(heroe, heroe.aplicarEfectosDelTrabajo(Some(hechicero)).aplicarEfectosDelTrabajo(None))
   }
   @Test
   def heroeDesempleado_test() = {
     assertEquals(
       None,
-      heroe.aplicarTrabajo(None).especializacion)
+      heroe.aplicarEfectosDelTrabajo(None).especializacion)
   }
 }

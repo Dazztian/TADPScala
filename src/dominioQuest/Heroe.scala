@@ -15,7 +15,7 @@ case class Heroe (val hp: Int,
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
   
 def getStatActual(unStat: Stat):Int ={ 
-    this.items.foldLeft(this.aplicarTrabajo(this.especializacion)){
+    this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion)){
        (semilla,unItem) => semilla.equiparItem(unItem)
      }
     unStat match{
@@ -71,9 +71,12 @@ def itemsOcupandoParte(parteAOcupar :Equipamiento) :List[Item]=
      case None => false
 })
 
-def aplicarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
+def cambiarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
+  this.copy(especializacion = unTrabajo)
+
+def aplicarEfectosDelTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
 { unTrabajo match{
-  case Some(unTrabajo)=> this.modificarStats(unTrabajo.atributosHeroe).copy(especializacion = Some(unTrabajo))
+  case Some(unTrabajo)=> this.modificarStats(unTrabajo.atributosHeroe)
   case None => this
   }
 }
