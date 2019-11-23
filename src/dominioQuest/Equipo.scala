@@ -64,19 +64,47 @@ case class Equipo (
   
 //type Recompensa = Equipo
 
-  /*
-def agregarOroPozo(oroNuevo :Int) :Recompensa ={
+  
+def agregarOroPozo(oroNuevo :Int) :Equipo ={
     this.copy(pozoComun = this.pozoComun + oroNuevo)
-  }*/
+  }
 
 def obtenerItem(item: Item): Equipo = {
    integrantes match{
       case Nil => this
-      case unSoloHeroe::Nil => this.reemplazarMiembro(unSoloHeroe.equiparItem(item), unSoloHeroe) // se lo damos a ese nunca va a producir algo negativo con el max
-      case integrantes => this.reemplazarMiembro(integrantes.map(integrante =>
+      case unSoloHeroe::Nil => {
+        val heroeConItem = unSoloHeroe.equiparItem(item)
+        if(recibeAlgoPositivo(unSoloHeroe, heroeConItem))
+        {
+          return this.reemplazarMiembro(heroeConItem, unSoloHeroe) // se lo damos a ese nunca va a producir algo negativo con el max
+        }
+        else
+        {
+          return this.agregarOroPozo(item.precio)
+        }
+      }
+     case integrantes => {
+        if(integrantes.exists(i => recibeAlgoPositivo(i, i.equiparItem(item))))
+        {
+          this.reemplazarMiembro(integrantes.map(integrante =>
           integrante.equiparItem(item)).sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head, integrantes.sortWith
           (_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head )
-    }
+        }
+        else
+        {
+          return this.agregarOroPozo(item.precio)
+        }
+        
+      }
+   }
+  }
+  
+  def recibeAlgoPositivo(heroeOriginal:Heroe, heroeModificado:Heroe):Boolean =
+  {
+    return (heroeModificado.getStatActaul(Fuerza) > heroeOriginal.getStatActaul(Fuerza) 
+        || heroeModificado.getStatActaul(Hp) > heroeOriginal.getStatActaul(Hp) 
+        || heroeModificado.getStatActaul(Inteligencia) > heroeOriginal.getStatActaul(Inteligencia)  
+        || heroeModificado.getStatActaul(Velocidad) > heroeOriginal.getStatActaul(Velocidad) )
   }
   
   def obtenerMiembro(miembroNuevo :Heroe):Equipo =

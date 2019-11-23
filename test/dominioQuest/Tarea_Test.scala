@@ -23,7 +23,7 @@ var estoNoEsUnEquipo:Equipo = null
     ladron =new Ladron(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
     liderLadron = new Heroe(100,200,300,400,Some(ladron),List())
     equipo = new Equipo(0,"Equipo sin gracia",List(heroe))
-    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento)    
+    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)    
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
   }
 
