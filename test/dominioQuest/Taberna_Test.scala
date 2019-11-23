@@ -19,6 +19,7 @@ class Taberna_Test {
   var ladron: Trabajo=null
   var guerrero: Trabajo=null
 
+  var equipito: Equipo = null
   var elEquipo: Equipo=null
 
   var misionConRobar:Mision=null
@@ -44,6 +45,7 @@ class Taberna_Test {
     guerrerito= new  Heroe(50,2000,5,200, Some(guerrero), List())
 
     elEquipo = new Equipo(0,"Equipo sin gracia",List(maguitoDelBien,liderLadron,guerrerito))
+    equipito = new Equipo(0,"Equipo sin gracia",List(maguitoDelBien,guerrerito))
 
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,20)
     talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento,20)
@@ -78,6 +80,12 @@ class Taberna_Test {
    var equipoMisionero = elEquipo.realizarMision(misionConRobar).equipo.realizarMision(soloRobar).equipo
     assertEquals(equipoMisionero, tabernita.entrenar(tablonote,elEquipo,critiquin))
   }
-  
-
+  @Test
+  def entrenarEquipoSinMision: Unit = {
+    assertEquals(elEquipo, tabernita.entrenar(Seq[Mision](),elEquipo,critiquin))
+  }
+ @Test
+  def entrenarEquipoNoPuedeRealizarMision: Unit = {
+    assertEquals(equipito, tabernita.entrenar(tablonote,equipito,critiquin))
+  }
 }
