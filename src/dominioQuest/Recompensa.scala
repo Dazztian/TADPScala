@@ -12,7 +12,7 @@ abstract class Recompensa {
 
 case class AgregarOroPozo(unEquipo:Equipo)(oro: Int)extends Recompensa {
   override def obtenerRecompensa:Equipo= {
-    return unEquipo.copy(pozoComun = unEquipo.pozoComun + oro)
+    return unEquipo.agregarOroPozo(oro)
   }
 }
 

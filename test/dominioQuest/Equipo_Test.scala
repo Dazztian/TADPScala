@@ -28,10 +28,10 @@ var talismanMinimalismo: Item = null
     guerrero = new Guerrero(Fuerza, Map(Hp -> (10+), Inteligencia -> (10-), Fuerza ->(15+)))
     guerreroDragon = new Heroe(50,2000,5,200, Some(guerrero), List())
     equipo = new Equipo(0,"Equipo sin gracia",List(heroe,liderLadron,guerreroDragon))
-    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento)    
+    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)    
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
     equipoSolapa = new Equipo(100,"Mejor solo que mal acomppaniado",List(heroe))  
-    talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento)
+    talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento,10)
 
 }
 
