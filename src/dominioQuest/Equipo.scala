@@ -53,12 +53,8 @@ case class Equipo (
         }
       }
     }//Termina de foldear
-    match{
-      case Success(equipo) => Success(unaMision.recompensa.foldLeft(equipo){
-        (Semilla,recompensa)=>{
-          recompensa(equipo)
-          }
-        })
+    match{//Aca COBRA la recompensa
+      case Success(equipo) => Success(unaMision.recompensa.obtenerRecompensa)   
         case NoPuedeRealizarse(equipo) => NoPuedeRealizarse(equipo)
         case Failure(equipo, error) => Failure(equipo, error)
       } 
@@ -66,11 +62,12 @@ case class Equipo (
 
 //------------------------------------------   RECOMPENSA      ------------------------------------------------------------
   
-type Recompensa = Equipo
+//type Recompensa = Equipo
 
+  /*
 def agregarOroPozo(oroNuevo :Int) :Recompensa ={
     this.copy(pozoComun = this.pozoComun + oroNuevo)
-  }
+  }*/
 
 def obtenerItem(item: Item): Equipo = {
    integrantes match{

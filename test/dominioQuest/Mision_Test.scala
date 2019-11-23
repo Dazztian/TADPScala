@@ -49,19 +49,26 @@ var robarTalis:Tarea = null
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento)    
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
     robarTalis = RobarTalisman(arcoViejo)
-    soloRobar = new Mision(List(),List(robarTalis))
     equipoSoloLadron = new Equipo(0, "Solitario ladron", List(heroeLadron))
+    soloRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(888),List(robarTalis))
     equipoSinLiderLadron = new Equipo(0,"No tenemos lider ladron", List(heroeMago, heroeGuerrero))
-     misionConRobar = new Mision(List(_.agregarOroPozo(100)),List(robarTalis,PelearContraMonstruo(10)))
-    misionImposible = new Mision(List(_.agregarOroPozo(100),_.obtenerMiembro(heroeGuerrero)),List(robarTalis,PelearContraMonstruo(10)))
+    /*
+     misionConRobar = new Mision(_.agregarOroPozo(100),List(robarTalis,PelearContraMonstruo(10)))
+    misionImposible = new Mision(_.agregarOroPozo(100),_.obtenerMiembro(heroeGuerrero)),List(robarTalis,PelearContraMonstruo(10)))*/
   }
 
 
+  @Test
+  def equipoAgregaOro() = {
+    assertEquals(888, soloRobar.recompensa.obtenerRecompensa.pozoComun)
+  }
+  
   @Test
   def equipoNoCumpleMisionSimple() = {
     assertEquals(NoPuedeRealizarse(equipoSinLiderLadron), equipoSinLiderLadron.realizarMision(soloRobar))
   }
   
+
   @Test
   def equipoNoCumpleMisionCompleja() = {
     assertEquals(NoPuedeRealizarse(equipoSinLiderLadron), equipoSinLiderLadron.realizarMision(misionConRobar))

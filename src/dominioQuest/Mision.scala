@@ -1,7 +1,7 @@
 package dominioQuest
 
 case class Mision (
-    var recompensa: List[Equipo=>Equipo], //(_.agregarOroPozo(10))
+    var recompensa: Recompensa, //(_.agregarOroPozo(10))
     var tareas: List[Tarea]){
   
 //  def realizarMision(unEquipo:Equipo):Result = {//podemos devolver un equipo o lo que sea que devuelva una recompensa, o un exception de que no logro hace la mision

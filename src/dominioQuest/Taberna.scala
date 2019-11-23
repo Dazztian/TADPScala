@@ -1,4 +1,4 @@
-package dominioQuest
+/*package dominioQuest
 import scala.util.control.Breaks._
 
 class Taberna(val numeritos:Int) {
@@ -34,3 +34,4 @@ class Taberna(val numeritos:Int) {
     }
   }
 }
+*/
