@@ -9,11 +9,10 @@ case class Item (
 {
   def puedeSerPortadoPor(unHeroe: Heroe):Boolean ={
     //Resuelve automaticamente las condiciones asociadas a un trabajo
-    return condicionesPosta.foldLeft(true)( 
-        (semilla,unaCondicion) => semilla  || 
+    return condicionesPosta.forall( unaCondicion => { 
         (unHeroe.especializacion== unaCondicion.unTrabajo) &&
         unHeroe.cumpleCon(unaCondicion.restriccionesSobreElTrabajo)
-        )
+        } )
     }
 }
 

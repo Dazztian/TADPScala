@@ -104,10 +104,10 @@ def obtenerItem(item: Item): Equipo = {
   
   def recibeAlgoPositivo(heroeOriginal:Heroe, heroeModificado:Heroe):Boolean =
   {
-    return (heroeModificado.getStatActaul(Fuerza) > heroeOriginal.getStatActaul(Fuerza) 
-        || heroeModificado.getStatActaul(Hp) > heroeOriginal.getStatActaul(Hp) 
-        || heroeModificado.getStatActaul(Inteligencia) > heroeOriginal.getStatActaul(Inteligencia)  
-        || heroeModificado.getStatActaul(Velocidad) > heroeOriginal.getStatActaul(Velocidad) )
+    return (heroeModificado.getStatActual(Fuerza) > heroeOriginal.getStatActual(Fuerza) 
+        || heroeModificado.getStatActual(Hp) > heroeOriginal.getStatActual(Hp) 
+        || heroeModificado.getStatActual(Inteligencia) > heroeOriginal.getStatActual(Inteligencia)  
+        || heroeModificado.getStatActual(Velocidad) > heroeOriginal.getStatActual(Velocidad) )
   }
   
   def obtenerMiembro(miembroNuevo :Heroe):Equipo =
