@@ -1,34 +1,37 @@
 package dominioQuest
 
-import java.awt.TextArea
+//import java.awt.TextArea
 
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert._
 
 class Taberna_Test {
-  var maguitoDelBien:Heroe
-  var liderLadron:Heroe
-  var guerrerito:Heroe
 
-  var arcoViejo:Item
-  var talismanMinimalismo:Item
+  var maguitoDelBien:Heroe=null
+  var liderLadron:Heroe=null
+  var guerrerito:Heroe=null
 
-  var mago:Trabajo
-  var ladron: Trabajo
-  var guerrero: Trabajo
+  var arcoViejo:Item=null
+  var talismanMinimalismo:Item=null
 
-  var elEquipo: Equipo
+  var mago:Trabajo=null
+  var ladron: Trabajo=null
+  var guerrero: Trabajo=null
 
-  var misionConRobar:Mision
-  var soloRobar:Mision
+  var elEquipo: Equipo=null
 
-  var robarTalis: Tarea
+  var misionConRobar:Mision=null
+  var soloRobar:Mision=null
+
+  var robarTalis: Tarea=null
 
   var sinRequerimiento : List[RequerimientosItem] = List()
 
-  var tabernita:Taberna
-  var tablonote: Seq[Mision]
+  var tabernita:Taberna=null
+  var tablonote: Seq[Mision]=Seq[Mision]()
+
+  val critiquin = {(e1:Equipo, e2:Equipo) => e1.pozoComun > e2.pozoComun}
 
   @Before
   def setup() = {
@@ -42,21 +45,26 @@ class Taberna_Test {
 
     elEquipo = new Equipo(0,"Equipo sin gracia",List(maguitoDelBien,liderLadron,guerrerito))
 
-    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento)
-    talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento)
+    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,20)
+    talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento,20)
 
     robarTalis = RobarTalisman(arcoViejo)
 
-    misionConRobar = new Mision(List(_.agregarOroPozo(100)),List(robarTalis,PelearContraMonstruo(10)))
-    soloRobar = new Mision(List(),List(robarTalis))
+    soloRobar = new Mision(new AgregarOroPozo(elEquipo)(88),List(robarTalis))
+    misionConRobar = new Mision(new AgregarOroPozo(elEquipo)(888),List(robarTalis,PelearContraMonstruo(10)))
 
     tablonote=Seq(misionConRobar,soloRobar)
-    val critiquin = {(e1:Equipo, e2:Equipo) => e1.pozoComun > e2.pozoComun}
+
     tabernita = new Taberna(tablonote)
 
   }
 
   @Test
+  def elegirMisionMasBeneficiosa: Unit ={
+    assertEquals(Some(misionConRobar), tabernita.elegirMision(tablonote,elEquipo,critiquin))
+  }
+
+
 
 
 }

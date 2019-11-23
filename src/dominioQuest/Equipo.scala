@@ -20,7 +20,9 @@ case class Equipo (
     heroesOrdenados match{
      case Nil => None
      case unSoloHeroe::Nil => Some(unSoloHeroe)
-     case primerHeroe::_ =>  if(heroesOrdenados.size >1 && (heroesOrdenados(0).mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion()))
+     case primerHeroe::_ =>
+       if(heroesOrdenados.size >1 &&
+         (heroesOrdenados(0).mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion()))
         {
          return None
        }else{
