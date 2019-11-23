@@ -18,7 +18,7 @@ import dominioQuest.Heroe
 
 
   //case class NoPuedeRealizarse(equipo :Equipo) extends Result
-  case class NoPuedeRealizarse(equipo :Equipo) extends Result
+  case class NoPuedeRealizarse(equipo :Equipo, tarea :Tarea) extends Result
   {
     def cumplir(f: Equipo => Equipo) = this
   }
@@ -68,7 +68,7 @@ case class PelearContraMonstruo(vidaAReducir: Int) extends Tarea{
     }
  override def cumplirTarea(unHeroe:Option[Heroe], unEquipo:Equipo):Result ={
    unHeroe match{
-       case None => NoPuedeRealizarse(unEquipo)
+       case None => NoPuedeRealizarse(unEquipo,this)
        case Some(unHeroe) =>  unHeroe.fuerza<20 match{
          case true=> Success(unEquipo.reemplazarMiembro(unHeroe.copy(hp = unHeroe.hp-1), unHeroe))
          case _ => Success(unEquipo)
@@ -88,7 +88,7 @@ case class ForzarPuerta() extends Tarea
   
   override def cumplirTarea(unHeroe: Option[Heroe], unEquipo: Equipo):Result = {
     unHeroe match{
-       case None => NoPuedeRealizarse(unEquipo)
+       case None => NoPuedeRealizarse(unEquipo, this)
        case Some(unHeroe) => unHeroe.especializacion match{
          case Some(Mago(_,_))=> Success(unEquipo)
          case Some(Ladron(_,_)) => Success(unEquipo)
@@ -119,11 +119,11 @@ case class RobarTalisman(unItem: Item) extends Tarea
    override def cumplirTarea(unHeroe:Option[Heroe], unEquipo:Equipo):Result ={
      
      unHeroe match{
-       case None => NoPuedeRealizarse(unEquipo)
+       case None => NoPuedeRealizarse(unEquipo,this)
        case Some(unHeroe) => unEquipo.lider() match{
          case Some(Heroe(_,_,_,_,Some(Ladron(_,_)),_))=> Success(unEquipo.reemplazarMiembro(unHeroe.equiparItem(unItem), unHeroe))
-         case Some(_) => NoPuedeRealizarse(unEquipo)
-         case None => NoPuedeRealizarse(unEquipo)
+         case Some(_) => NoPuedeRealizarse(unEquipo,this)
+         case None => NoPuedeRealizarse(unEquipo,this)
        }
      }    
    } 

@@ -28,7 +28,7 @@ class Taberna(val tablon : Seq[Mision]) {
           var resultado = unEquipo.realizarMision(misionesOrdenadas.head) //case loco
           resultado match {
             case Success(equipo) =>  entrenar(misionesOrdenadas.tail,equipo,criterio)
-            case NoPuedeRealizarse(equipo)=> equipo
+            case NoPuedeRealizarse(equipo,_)=> equipo
             case Failure(equipo,_) => equipo
           }
       

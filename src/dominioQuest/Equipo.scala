@@ -41,7 +41,8 @@ case class Equipo (
       
      
   
-  def realizarMision(unaMision:Mision) :Result = { 
+  def realizarMision(unaMision:Mision) :Result = {
+    var equipoInicial = this.copy()
     unaMision.tareas.foldLeft(Result(this)) { 
       (previousResult, tarea) => {
         //previusResult.cumplirTarea(heroeElegido, tarea.aplicacion)
@@ -50,14 +51,14 @@ case class Equipo (
             val heroeElegido = tarea.encontrarMejorHeroe(this)
             tarea.cumplirTarea(heroeElegido, this) // devuelve un Result
           }
-          case NoPuedeRealizarse(_) => NoPuedeRealizarse(this)
-          case Failure(_,_) => Failure(this,new Exception)
+          case NoPuedeRealizarse(_,tarea) => NoPuedeRealizarse(equipoInicial,tarea)
+          case Failure(_,_) => Failure(equipoInicial,new Exception)
         }
       }
     }//Termina de foldear
     match{//Aca COBRA la recompensa
       case Success(equipo) => Success(unaMision.recompensa.obtenerRecompensa)   
-        case NoPuedeRealizarse(equipo) => NoPuedeRealizarse(equipo)
+        case NoPuedeRealizarse(equipo,tarea) => NoPuedeRealizarse(equipo, tarea)
         case Failure(equipo, error) => Failure(equipo, error)
       } 
   }

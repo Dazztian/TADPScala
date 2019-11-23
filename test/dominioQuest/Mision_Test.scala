@@ -56,12 +56,13 @@ var robarZapa:Tarea = null
     equipoSoloLadron = new Equipo(0, "Solitario ladron", List(heroeLadron))
     soloRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(888),List(robarTalis))
     equipoSinLiderLadron = new Equipo(0,"No tenemos lider ladron", List(heroeMago, heroeGuerrero))
-     misionConRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(100),List(robarTalis,PelearContraMonstruo(10)))
+    
+    misionConRobar = new Mision(new AgregarOroPozo(equipoSoloLadron)(100),List(robarTalis,PelearContraMonstruo(10)))
     misionImposible = new Mision(new AgregarMiembro(equipoSoloLadron)(heroeGuerrero),List(robarTalis,PelearContraMonstruo(10)))
     obtenerRobando = new Mision(new EquiparItem(equipoSoloLadron)(arcoViejo), List(robarTalis))
     zapatillaTrucha = new Item(Some(Pies), Map(Fuerza -> (1-)), sinRequerimiento, 100)
-    robarTalis = RobarTalisman(zapatillaTrucha)
-    roboNoConveniente = new Mision(new EquiparItem(equipoSoloLadron)(zapatillaTrucha), List(RobarTalisman(zapatillaTrucha)))
+    robarZapa = RobarTalisman(zapatillaTrucha)
+    roboNoConveniente = new Mision(new EquiparItem(equipoSoloLadron)(zapatillaTrucha), List(robarZapa))
   }
 
 
@@ -72,13 +73,13 @@ var robarZapa:Tarea = null
   //Queda probar 1)EquiparItem, 2)AgregarMiembro y 3)IncrementarStats
   @Test
   def equipoNoCumpleMisionSimple() = {
-    assertEquals(NoPuedeRealizarse(equipoSinLiderLadron), equipoSinLiderLadron.realizarMision(soloRobar))
+    assertEquals(NoPuedeRealizarse(equipoSinLiderLadron,robarTalis), equipoSinLiderLadron.realizarMision(soloRobar))
   }
   
 
   @Test
   def equipoNoCumpleMisionCompleja() = {
-    assertEquals(NoPuedeRealizarse(equipoSinLiderLadron), equipoSinLiderLadron.realizarMision(misionConRobar))
+    assertEquals(NoPuedeRealizarse(equipoSinLiderLadron,robarTalis), equipoSinLiderLadron.realizarMision(misionConRobar))
   }
   @Test
   def equipoCumpleCondicionTarea()= {
