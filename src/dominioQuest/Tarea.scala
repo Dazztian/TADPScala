@@ -45,20 +45,19 @@ abstract class Tarea{
 case class PelearContraMonstruo(vidaAReducir: Int) extends Tarea{
  override def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int = 
     unEquipo.lider().flatMap(_.especializacion) match{ //si tiene lider(devuelve Option[Heroe]) y si este tiene especializacion (Devuelve Option[Trabajo])
-      case None => 0
       case Some(Guerrero(_,_)) => 20 
       case Some(_) => 10
     }
  override def cumplirTarea(unHeroe:Option[Heroe], unEquipo:Equipo):Result ={
    unHeroe match{
        case None => NoPuedeRealizarse(unEquipo,this)
-       case Some(unHeroe) =>  unHeroe.fuerza<20 match{
-         case true=> Success(unEquipo.reemplazarMiembro(unHeroe.copy(hp = unHeroe.hp-1), unHeroe))
-         case _ => Success(unEquipo)
+       case Some(unHeroe) if  (unHeroe.fuerza<20) =>
+         Success(unEquipo.reemplazarMiembro(unHeroe.copy(hp = unHeroe.hp-1), unHeroe))
+        case _ => Success(unEquipo)
        }
      }
  }
-}
+
   
 
 case class ForzarPuerta() extends Tarea

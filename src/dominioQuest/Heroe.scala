@@ -107,7 +107,7 @@ def devolverStat(unStat: Stat) :Int = {
       case Inteligencia => return this.inteligencia
       case Velocidad => return this.velocidad
  }
-
+ 
 }
 }
 
