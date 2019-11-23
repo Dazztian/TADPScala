@@ -17,14 +17,8 @@ case class Heroe (val hp: Int,
 def getStatActual(unStat: Stat):Int ={ 
     this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion)){
        (semilla,unItem) => semilla.equiparItem(unItem)
-     }
-    unStat match{
-      case Hp => return this.hp
-      case Fuerza => return this.fuerza
-      case Inteligencia => return this.inteligencia
-      case Velocidad => return this.velocidad
-    }
-  }
+     }//Termina el fold
+    devolverStat(unStat)}
 
   def verificarParams = {
     if (this.hp < 1)
@@ -102,17 +96,18 @@ return condiciones.forall(diccionarioStatCondicion => diccionarioStatCondicion._
 
 
 def mainStatSegunEspecializacion(): Int = {
-  //return this.hp 
-  especializacion.get.atributoPrincipal match {
+  this.devolverStat(especializacion.get.atributoPrincipal) 
+    }
+  
+
+def devolverStat(unStat: Stat) :Int = {
+  unStat match {
       case Hp => return this.hp
       case Fuerza => return this.fuerza
       case Inteligencia => return this.inteligencia
       case Velocidad => return this.velocidad
-      case _ => return 0
-    }
-  }
+ }
 
-
-
+}
 }
 
