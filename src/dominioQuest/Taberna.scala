@@ -11,7 +11,7 @@ class Taberna(val tablon : Seq[Mision]) {
     misiones match {
       case Nil=> None
       case mision::nil=>Some(mision)
-      case mision::_ => Some(ordenarMisionesSegunCriterio (misiones, unEquipo, criterio).head)
+      case mision::_ => ordenarMisionesSegunCriterio (misiones, unEquipo, criterio).headOption
     }
   }
 
