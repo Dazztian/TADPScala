@@ -1,10 +1,8 @@
 package dominioQuest
 import scala.util.control.Breaks._
 
-class Taberna(val numeritos:Int) {
+class Taberna(val tablon : Seq[Mision]) {
   type criterio = (Equipo,Equipo) => Boolean
-  
-  val tablon = Seq[Mision]()
   
   def elegirMision(misiones:Seq[Mision],unEquipo:Equipo,criterio:criterio):Mision = {
      ordenarMisionesSegunCriterio(misiones,unEquipo,criterio).head
