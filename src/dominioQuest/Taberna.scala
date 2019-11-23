@@ -1,7 +1,7 @@
-/*package dominioQuest
+package dominioQuest
 import scala.util.control.Breaks._
 
-class Taberna(val numeritos:Int) {
+class Taberna() {
   type criterio = (Equipo,Equipo) => Boolean
   
   val tablon = Seq[Mision]()
@@ -16,7 +16,7 @@ class Taberna(val numeritos:Int) {
   
   def entrenar(unEquipo:Equipo,criterio:criterio) = {
     
-   val misionesARealizar = tablon
+   /*val misionesARealizar = tablon
    val equipoEntrenando = unEquipo
    for (i <- 0 to tablon.length) {
      
@@ -31,7 +31,17 @@ class Taberna(val numeritos:Int) {
 		            
         }
       val misionesARealizar:Seq[Mision] = misionesARealizar.filterNot(_ == mejorMisionActual)
+    }*/
+  }
+  
+  def aplicarRecursivo(misiones:Seq[Mision],unEquipo:Equipo,criterio:criterio):Equipo = { //falta el caso de seguir con una mision falla
+    var misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
+    var resultado = unEquipo.realizarMision(misionesOrdenadas.head) //case loco
+    var equipoEntrenado = resultado match {
+      case Success(_) => resultado.equipo
+      case _ => //interrumpir todo y devolver el equipo en su ultima etapa
     }
+    
+    aplicarRecursivo(misionesOrdenadas.tail,equipoEntrenado.asInstanceOf[Equipo],criterio)
   }
 }
-*/
