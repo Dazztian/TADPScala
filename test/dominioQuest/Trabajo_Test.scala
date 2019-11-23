@@ -27,8 +27,8 @@ var cabeza= new ParteDelCuerpo(None)
      berserk=new Trabajo(Inteligencia, Map(Hp -> (299+)))
      trabajoRestador = new Trabajo (Velocidad, Map(Velocidad -> (_-300) ))
      trabajoInutil = new Trabajo(Hp,Map())
-     cascoVikingo=new Item(Some(Cabeza),Map(Hp -> (10+)),List(new RequerimientosItem(None, Map(Fuerza -> (30<)))))
-     laMataDragones= new Item(Some(ManoDerecha),Map(Fuerza ->(1000*)),List(new RequerimientosItem(None, Map(Fuerza -> (10>)))))
+     cascoVikingo=new Item(Some(Cabeza),Map(Hp -> (10+)),List(new RequerimientosItem(None, Map(Fuerza -> (30<)))),10)
+     laMataDragones= new Item(Some(ManoDerecha),Map(Fuerza ->(1000*)),List(new RequerimientosItem(None, Map(Fuerza -> (10>)))),10)
         
      
      heroe = new Heroe(1,2,3,4, None, List(cascoVikingo))
