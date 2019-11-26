@@ -15,23 +15,12 @@ case class Heroe (val hp: Int,
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
   
 def getStatActual(unStat: Stat):Int ={ 
-    this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion)){
+    this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion))
+      {
        (semilla,unItem) => semilla.equiparItem(unItem)
-     }//Termina el fold
-    devolverStat(unStat)}
-
-  def verificarParams = {
-    if (this.hp < 1)
-     this.copy(hp = hp.max(1))
-    if (this.fuerza < 1)
-     this.copy(fuerza = fuerza.max(1))
-    if (this.inteligencia < 1)
-     this.copy(inteligencia = inteligencia.max(1))
-    if (this.velocidad < 1)
-     this.copy(velocidad = this.velocidad.max(1))
-    else this
-
- }
+      }
+    devolverStat(unStat)
+}
   
 def equiparItem(unItem: Item) :Heroe = 
 {

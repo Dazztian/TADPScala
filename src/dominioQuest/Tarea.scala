@@ -13,11 +13,7 @@ import dominioQuest.Heroe
   }
 
   sealed trait Result { def equipo:  Equipo }
-  
-  // y se debe informar el estado del equipo, junto con la tarea que no pudo ser resuelta.
 
-
-  //case class NoPuedeRealizarse(equipo :Equipo) extends Result
   case class NoPuedeRealizarse(equipo :Equipo, tarea :Tarea) extends Result
   {
     def cumplir(f: Equipo => Equipo) = this
@@ -43,6 +39,7 @@ abstract class Tarea{
 
 
 case class PelearContraMonstruo(vidaAReducir: Int) extends Tarea{
+
  override def facilidad(unHeroe: Heroe, unEquipo: Equipo):Int = 
     unEquipo.lider().flatMap(_.especializacion) match{ //si tiene lider(devuelve Option[Heroe]) y si este tiene especializacion (Devuelve Option[Trabajo])
       case Some(Guerrero(_,_)) => 20 

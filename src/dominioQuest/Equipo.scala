@@ -1,32 +1,28 @@
 package dominioQuest
 
 case class Equipo (
-    var pozoComun: Int,
-    var nombre: String,
-    var integrantes: List[Heroe]) 
+    val pozoComun: Int,
+    val nombre: String,
+    val integrantes: List[Heroe])
 {
-  //val criterio1:PartialFunction[Heroe,Item]={ def apply(f:Item) = }
   
-  def mejorHeroeSegun(criterio: (Heroe=>Int) ) : Option[Heroe] = { // TODO repetimos muchas veces logica de match con cantiadad de losta de integrantes
-    integrantes match{
-      case Nil => None
-      case unSoloHeroe::Nil => Some(unSoloHeroe)
-      case _ => Some(integrantes.sortWith(criterio(_) > criterio(_)).head)
-    }
+  def mejorHeroeSegun(criterio: (Heroe=>Int) ) : Option[Heroe] = {
+    integrantes.sortWith(criterio(_) > criterio(_)).headOption
   }
     
   def lider(): Option[Heroe] = {
-    val heroesOrdenados= this.integrantes.sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
+    val heroesOrdenados=this.integrantes.sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
+    val elLider= mejorHeroeSegun(_.mainStatSegunEspecializacion)
     heroesOrdenados match{
      case Nil => None
      case unSoloHeroe::Nil => Some(unSoloHeroe)
      case primerHeroe::_ =>
-       if(heroesOrdenados.size >1 &&
-         (heroesOrdenados(0).mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion()))
+       if(
+         (heroesOrdenados.head.mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion()))
         {
          return None
        }else{
-        return Some(heroesOrdenados(0))
+        return Some(primerHeroe)
        }
     }
    
@@ -42,17 +38,15 @@ case class Equipo (
      
   
   def realizarMision(unaMision:Mision) :Result = {
-    var equipoInicial = this.copy()
     unaMision.tareas.foldLeft(Result(this)) { 
       (previousResult, tarea) => {
-        //previusResult.cumplirTarea(heroeElegido, tarea.aplicacion)
         previousResult match{
           case Success(_) => {
-            val heroeElegido = tarea.encontrarMejorHeroe(this)
-            tarea.cumplirTarea(heroeElegido, this) // devuelve un Result
+            val heroeElegido = tarea.encontrarMejorHeroe(previousResult.equipo)
+            tarea.cumplirTarea(heroeElegido, previousResult.equipo) // devuelve un Result
           }
-          case NoPuedeRealizarse(_,tarea) => NoPuedeRealizarse(equipoInicial,tarea)
-          case Failure(_,_) => Failure(equipoInicial,new Exception)
+          case NoPuedeRealizarse(_,tarea) => NoPuedeRealizarse(this,tarea)
+          case Failure(_,_) => Failure(this,new Exception)
         }
       }
     }//Termina de foldear
@@ -128,7 +122,3 @@ def obtenerItem(item: Item): Equipo = {
       case _=> false}  )
       
       }
-//  def puedeRealizarTarea(unaTarea :Tarea) :Result = {
-//    unaTarea.puedeRealizarlaAlgunHeroe(this)
-//  }
-}

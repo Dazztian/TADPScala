@@ -25,14 +25,12 @@ class Taberna(val tablon : Seq[Mision]) {
       case Nil => unEquipo
       case misiones@(primera :: misionesRestantes) => {
           val misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
-          var resultado = unEquipo.realizarMision(primera) //case loco
+          var resultado = unEquipo.realizarMision(primera)
           resultado match {
             case Success(equipo) =>  entrenar(misionesRestantes,equipo,criterio)
             case NoPuedeRealizarse(equipo,_)=> equipo
             case Failure(equipo,_) => equipo
           }
-      
-         
         }
       }
     }
