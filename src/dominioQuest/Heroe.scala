@@ -15,11 +15,9 @@ case class Heroe (val hp: Int,
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
   
 def getStatActual(unStat: Stat):Int ={ 
-    this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion))
-      {
-       (semilla,unItem) => semilla.equiparItem(unItem)
-      }
-    devolverStat(unStat)
+    val heroeAplicandoTrabajoEquipandoItem=this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion))
+      {(semilla,unItem) => semilla.equiparItem(unItem) }
+    devolverStat(unStat, heroeAplicandoTrabajoEquipandoItem)
 }
   
 def equiparItem(unItem: Item) :Heroe = 
@@ -89,12 +87,12 @@ def mainStatSegunEspecializacion(): Int = {
     }
   
 
-def devolverStat(unStat: Stat) :Int = {
+def devolverStat(unStat: Stat, unHeroe:Heroe) :Int = {
   unStat match {
-      case Hp => return this.hp
-      case Fuerza => return this.fuerza
-      case Inteligencia => return this.inteligencia
-      case Velocidad => return this.velocidad
+      case Hp => return unHeroe.hp
+      case Fuerza => return unHeroe.fuerza
+      case Inteligencia => return unHeroe.inteligencia
+      case Velocidad => return unHeroe.velocidad
  }
  
 }
