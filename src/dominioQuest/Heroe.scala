@@ -18,7 +18,12 @@ case class Heroe (
   def modificarFuerza(modificacion: Int=>Int) = this.copy(fuerza = modificacion(this.fuerza).max(1))
   def modificarInteligencia(modificacion: Int=>Int) = this.copy(inteligencia = modificacion(this.inteligencia).max(1))
   def modificarVelocidad(modificacion: Int=>Int) = this.copy(velocidad = modificacion(this.velocidad).max(1))
+  
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
+  
+   def modificarStat(unStat:Stat,modificacion: Int=>Int): Heroe = { 
+    return unStat.modificar(this,modificacion)
+  }
 
 def getStatActual(unStat: Stat):Int ={ 
     val heroeconTrabajoAplicadoYItemEquipado=this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion))
@@ -66,23 +71,29 @@ def aplicarEfectosDelTrabajo(unTrabajo: Option[Trabajo]) :Heroe = {
 }
 
 
-def modificarStats(modificadores: Map[Stat, Int=>Int]):Heroe=
+def modificarStats(modificadores: Map[Stat, Int=>Int]):Heroe= {
+//  modificadores.foldLeft(this){
+//     (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
+//      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2)
+//      case Hp => semilla.modificarHp(diccionarioStatEfecto._2)
+//      case Velocidad => semilla.modificarVelocidad(diccionarioStatEfecto._2)
+//      case Inteligencia => semilla.modificarInteligencia(diccionarioStatEfecto._2)})
+//     }
+  
   modificadores.foldLeft(this){
-     (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
-      case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2)
-      case Hp => semilla.modificarHp(diccionarioStatEfecto._2)
-      case Velocidad => semilla.modificarVelocidad(diccionarioStatEfecto._2)
-      case Inteligencia => semilla.modificarInteligencia(diccionarioStatEfecto._2)})
-     }
+  (semilla,diccionarioStatEfecto) => (semilla.modificarStat(diccionarioStatEfecto._1,diccionarioStatEfecto._2))}
+}
      
 //Funcion auxiliar, devuelve true si cumple con todas las condiciones dadas
 def cumpleCon(condiciones: Map[Stat, Int=>Boolean]) :Boolean = 
-return condiciones.forall(diccionarioStatCondicion => diccionarioStatCondicion._1 match {
-  case Fuerza => diccionarioStatCondicion._2(this.fuerza)
-  case Hp => diccionarioStatCondicion._2(this.hp)
-  case Velocidad => diccionarioStatCondicion._2(this.velocidad)
-  case Inteligencia => diccionarioStatCondicion._2(this.inteligencia)
-})
+//return condiciones.forall(diccionarioStatCondicion => diccionarioStatCondicion._1 match {
+//  case Fuerza => diccionarioStatCondicion._2(this.fuerza)
+//  case Hp => diccionarioStatCondicion._2(this.hp)
+//  case Velocidad => diccionarioStatCondicion._2(this.velocidad)
+//  case Inteligencia => diccionarioStatCondicion._2(this.inteligencia)
+//})
+  condiciones.forall(diccionarioStatCondicion => diccionarioStatCondicion._1.cumpleCon(this,diccionarioStatCondicion._2))
+  
 
 
 def mainStatSegunEspecializacion(): Int = {
@@ -90,14 +101,7 @@ def mainStatSegunEspecializacion(): Int = {
     }
   
 
-def devolverStat(unStat: Stat, unHeroe:Heroe) :Int = {
-  unStat match {
-      case Hp => return unHeroe.hp
-      case Fuerza => return unHeroe.fuerza
-      case Inteligencia => return unHeroe.inteligencia
-      case Velocidad => return unHeroe.velocidad
- }
+def devolverStat(unStat: Stat, unHeroe:Heroe) :Int = unStat.devolver(this)
  
-}
 }
 
