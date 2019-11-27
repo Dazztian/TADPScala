@@ -16,7 +16,7 @@ class Taberna(val tablon : Seq[Mision]) {
   }
 
   def ordenarMisionesSegunCriterio(misiones:Seq[Mision],unEquipo:Equipo,criterio:criterio):Seq[Mision] = {
-        misiones.sortWith((mision1,mision2) => criterio(unEquipo.realizarMision(mision1).equipo,unEquipo.realizarMision(mision2).equipo))
+        misiones.sortWith((mision1,mision2) => criterio(mision1.realizarMision(unEquipo).equipo,mision2.realizarMision(unEquipo).equipo))
   }
   
   
@@ -25,7 +25,7 @@ class Taberna(val tablon : Seq[Mision]) {
       case Nil => unEquipo
       case misiones@(primera :: misionesRestantes) => {
           val misionesOrdenadas = ordenarMisionesSegunCriterio(misiones,unEquipo,criterio)
-          var resultado = unEquipo.realizarMision(primera)
+          var resultado = primera.realizarMision(unEquipo)
           resultado match {
             case Success(equipo) =>  entrenar(misionesRestantes,equipo,criterio)
             case NoPuedeRealizarse(equipo,_)=> equipo

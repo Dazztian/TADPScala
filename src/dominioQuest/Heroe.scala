@@ -15,9 +15,9 @@ case class Heroe (val hp: Int,
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
   
 def getStatActual(unStat: Stat):Int ={ 
-    val heroeAplicandoTrabajoEquipandoItem=this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion))
+    val heroeconTrabajoAplicadoYItemEquipado=this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion))
       {(semilla,unItem) => semilla.equiparItem(unItem) }
-    devolverStat(unStat, heroeAplicandoTrabajoEquipandoItem)
+    devolverStat(unStat, heroeconTrabajoAplicadoYItemEquipado)
 }
   
 def equiparItem(unItem: Item) :Heroe = 
@@ -55,16 +55,16 @@ def itemsOcupandoParte(parteAOcupar :Equipamiento) :List[Item]=
 def cambiarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
   this.copy(especializacion = unTrabajo)
 
-def aplicarEfectosDelTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
-{ unTrabajo match{
+def aplicarEfectosDelTrabajo(unTrabajo: Option[Trabajo]) :Heroe = {
+  unTrabajo match{
   case Some(unTrabajo)=> this.modificarStats(unTrabajo.atributosHeroe)
   case None => this
   }
 }
 
+
 def modificarStats(modificadores: Map[Stat, Int=>Int]):Heroe=
-  modificadores.foldLeft(this)
-    {
+  modificadores.foldLeft(this){
      (semilla,diccionarioStatEfecto) =>   (diccionarioStatEfecto._1 match {
       case Fuerza =>  semilla.modificarFuerza(diccionarioStatEfecto._2)
       case Hp => semilla.modificarHp(diccionarioStatEfecto._2)

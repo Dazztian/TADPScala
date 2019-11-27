@@ -9,7 +9,19 @@ case class Equipo (
   def mejorHeroeSegun(criterio: (Heroe=>Int) ) : Option[Heroe] = {
     integrantes.sortWith(criterio(_) > criterio(_)).headOption
   }
-    
+   
+ /* 
+ def lider(): Option[Heroe] = {
+    val heroesOrdenados=this.integrantes.sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
+    val elLider= mejorHeroeSegun(_.mainStatSegunEspecializacion)
+    heroesOrdenados match{
+      case primerHeroe::_ 
+      if(heroesOrdenados.head.mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion()) 
+        => return None
+      case _ => return elLider   
+  }
+}*/
+  
   def lider(): Option[Heroe] = {
     val heroesOrdenados=this.integrantes.sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
     val elLider= mejorHeroeSegun(_.mainStatSegunEspecializacion)
@@ -17,16 +29,16 @@ case class Equipo (
      case Nil => None
      case unSoloHeroe::Nil => Some(unSoloHeroe)
      case primerHeroe::_ =>
-       if(
-         (heroesOrdenados.head.mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion()))
+       if
+         (heroesOrdenados.head.mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion())
         {
          return None
        }else{
         return Some(primerHeroe)
        }
     }
+    }
    
-  }
   
      
   def reemplazarMiembro(miembroNuevo :Heroe,miembroAReemplazar :Heroe):Equipo =
@@ -36,7 +48,7 @@ case class Equipo (
     
       
      
-  
+ /* 
   def realizarMision(unaMision:Mision) :Result = {
     unaMision.tareas.foldLeft(Result(this)) { 
       (previousResult, tarea) => {
@@ -56,6 +68,7 @@ case class Equipo (
         case Failure(equipo, error) => Failure(equipo, error)
       } 
   }
+*/
 
 //------------------------------------------   RECOMPENSA      ------------------------------------------------------------
   
@@ -71,26 +84,18 @@ def obtenerItem(item: Item): Equipo = {
       case Nil => this
       case unSoloHeroe::Nil => {
         val heroeConItem = unSoloHeroe.equiparItem(item)
-        if(recibeAlgoPositivo(unSoloHeroe, heroeConItem))
-        {
+        if(recibeAlgoPositivo(unSoloHeroe, heroeConItem)){
           return this.reemplazarMiembro(heroeConItem, unSoloHeroe) // se lo damos a ese nunca va a producir algo negativo con el max
         }
-        else
-        {
-          return this.agregarOroPozo(item.precio)
-        }
+        else { return this.agregarOroPozo(item.precio)}
       }
      case integrantes => {
-        if(integrantes.exists(i => recibeAlgoPositivo(i, i.equiparItem(item))))
-        {
+        if(integrantes.exists(i => recibeAlgoPositivo(i, i.equiparItem(item)))){
           this.reemplazarMiembro(integrantes.map(integrante =>
           integrante.equiparItem(item)).sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head, integrantes.sortWith
           (_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion()).head )
         }
-        else
-        {
-          return this.agregarOroPozo(item.precio)
-        }
+        else { return this.agregarOroPozo(item.precio)}
         
       }
    }

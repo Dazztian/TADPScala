@@ -73,39 +73,39 @@ var robarZapa:Tarea = null
   //Queda probar 1)EquiparItem, 2)AgregarMiembro y 3)IncrementarStats
   @Test
   def equipoNoCumpleMisionSimple() = {
-    assertEquals(NoPuedeRealizarse(equipoSinLiderLadron,robarTalis), equipoSinLiderLadron.realizarMision(soloRobar))
+    assertEquals(NoPuedeRealizarse(equipoSinLiderLadron,robarTalis), soloRobar.realizarMision(equipoSinLiderLadron))
   }
   
 
   @Test
   def equipoNoCumpleMisionCompleja() = {
-    assertEquals(NoPuedeRealizarse(equipoSinLiderLadron,robarTalis), equipoSinLiderLadron.realizarMision(misionConRobar))
+    assertEquals(NoPuedeRealizarse(equipoSinLiderLadron,robarTalis), misionConRobar.realizarMision(equipoSinLiderLadron))
   }
   @Test
   def equipoCumpleCondicionTarea()= {
     var heroeModificado = new Heroe(100,200,300,400, Some(ladron),List())
     var equipoSoloLadronModificado = equipoSoloLadron.reemplazarMiembro(heroeModificado, heroeLadron).agregarOroPozo(100)
     
-       assertEquals(Success(equipoSoloLadronModificado),equipoSoloLadron.realizarMision(misionConRobar))
+       assertEquals(Success(equipoSoloLadronModificado),misionConRobar.realizarMision(equipoSoloLadron))
   }
   @Test
   def equipoGanaRecompensaOro()= {
   
-       assertEquals(100,equipoSoloLadron.realizarMision(misionConRobar).equipo.pozoComun)
+       assertEquals(100,misionConRobar.realizarMision(equipoSoloLadron).equipo.pozoComun)
   }
    @Test
   def equipoGanaRecompensaMiembro()= {
-      assertEquals(true,equipoSoloLadron.realizarMision(misionImposible).equipo.integrantes.contains(heroeGuerrero))
+      assertEquals(true,misionImposible.realizarMision(equipoSoloLadron).equipo.integrantes.contains(heroeGuerrero))
   }
    
    @Test
    def equipoGanaItem() = {
-     assertEquals(true, equipoSoloLadron.realizarMision(obtenerRobando).equipo.integrantes(0).items.contains(arcoViejo))
+     assertEquals(true, obtenerRobando.realizarMision(equipoSoloLadron).equipo.integrantes(0).items.contains(arcoViejo))
    }
    
    @Test
    def equipoRobaItemPeroLoVende() = {
-     assertEquals(100, equipoSoloLadron.realizarMision(roboNoConveniente).equipo.pozoComun)
+     assertEquals(100, roboNoConveniente.realizarMision(equipoSoloLadron).equipo.pozoComun)
    }
 
 }

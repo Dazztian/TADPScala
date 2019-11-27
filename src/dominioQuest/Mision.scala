@@ -4,14 +4,23 @@ case class Mision (
     var recompensa: Recompensa, //(_.agregarOroPozo(10))
     var tareas: List[Tarea]){
   
-//  def realizarMision(unEquipo:Equipo):Result = {//podemos devolver un equipo o lo que sea que devuelva una recompensa, o un exception de que no logro hace la mision
-//   tareas.foldLeft(Result(unEquipo)){
-//     (semilla,tarea)=> tarea.puedeRealizarlaAlgunHeroe(unEquipo) match{
-//      case previousResult: NoPuedeRealizarse  => previousResult
-//      case previousResult: Failure  => previousResult
-//      case Success(unEquipo) => tarea.cumplirTarea(tarea.encontrarMejorHeroe(unEquipo),unEquipo)
-//     }
-//   }
-//  }
+  def realizarMision(unEquipo:Equipo):Result = {
+    tareas.foldLeft(Result(unEquipo)){ 
+      (previousResult, tarea) => {
+        previousResult match{
+          case Success(_) => {
+            val heroeElegido = tarea.encontrarMejorHeroe(previousResult.equipo)
+            tarea.cumplirTarea(heroeElegido, previousResult.equipo) }// devuelve un Result
+          case NoPuedeRealizarse(_,tarea) => NoPuedeRealizarse(unEquipo,tarea)
+          case Failure(_,_) => Failure(unEquipo,new Exception)
+        }
+      }
+    }//Termina de foldear
+    match{//Aca COBRA la recompensa
+      case Success(equipo) => Success(this.recompensa.obtenerRecompensa(equipo))   
+        case NoPuedeRealizarse(equipo,tarea) => NoPuedeRealizarse(equipo, tarea)
+        case Failure(equipo, error) => Failure(equipo, error)
+      } 
+  }
   
 }
