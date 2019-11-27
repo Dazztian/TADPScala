@@ -83,7 +83,7 @@ return condiciones.forall(diccionarioStatCondicion => diccionarioStatCondicion._
 
 
 def mainStatSegunEspecializacion(): Int = {
-  this.devolverStat(especializacion.get.atributoPrincipal) 
+  this.devolverStat(especializacion.get.atributoPrincipal, this) 
     }
   
 
