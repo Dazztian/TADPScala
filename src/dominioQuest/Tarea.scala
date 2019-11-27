@@ -33,8 +33,9 @@ abstract class Tarea{
   
   def cumplirTarea(unHeroe:Option[Heroe], equipo:Equipo): Result
 
-  def encontrarMejorHeroe(equipo :Equipo):Option[Heroe] =
-    equipo.integrantes.sortWith((primerHeroe,segundoHeroe)=>this.facilidad(primerHeroe, equipo)> this.facilidad(segundoHeroe, equipo)).headOption
+  def encontrarMejorHeroe(equipo :Equipo):Option[Heroe] = {
+     equipo.mejorHeroeSegun(equipo.integrantes, facilidad(_, equipo)) // (Heroe=>Int) 
+  }
 }
 
 
@@ -88,7 +89,7 @@ case class RobarTalisman(unItem: Item) extends Tarea
      unHeroe match{
        case None => NoPuedeRealizarse(unEquipo,this)
        case Some(unHeroe) => unEquipo.lider() match{
-         //case Some(Heroe(_,_,_,_,Some(Ladron(_,_)),_))=> Success(unEquipo.reemplazarMiembro(unHeroe.equiparItem(unItem), unHeroe)) TODO CAMBIAR
+         case Some(Heroe(_,_,_,_,_,_,_,_,_,Some(Ladron(_,_)),_))=> Success(unEquipo.reemplazarMiembro(unHeroe.equiparItem(unItem), unHeroe)) 
          case Some(_) => NoPuedeRealizarse(unEquipo,this)
          case None => NoPuedeRealizarse(unEquipo,this)
        }
