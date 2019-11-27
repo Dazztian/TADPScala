@@ -35,7 +35,7 @@ var manoDerecha= new ParteDelCuerpo(None)
 
 @Test
   def statModificado_test() = {
-  assertEquals(20000, heroe.equiparItem(palitoMagico).getStatActual(Fuerza))
+  assertEquals(2010000, heroe.equiparItem(palitoMagico).getStatActual(Fuerza))
 }
 @Test
   def aceptaItem_test() = {

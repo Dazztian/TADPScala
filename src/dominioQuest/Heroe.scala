@@ -97,11 +97,14 @@ def cumpleCon(condiciones: Map[Stat, Int=>Boolean]) :Boolean =
 
 
 def mainStatSegunEspecializacion(): Int = {
-  this.devolverStat(especializacion.get.atributoPrincipal, this) 
-    }
+  this.especializacion match{
+    case Some(esp) => devolverStat(esp.atributoPrincipal, this)
+    case _ => 0
+  }
+}
   
 
-def devolverStat(unStat: Stat, unHeroe:Heroe) :Int = unStat.devolver(this)
+def devolverStat(unStat: Stat, unHeroe:Heroe) :Int = unStat.devolver(unHeroe)
  
 }
 
