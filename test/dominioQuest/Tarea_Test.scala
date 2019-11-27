@@ -19,9 +19,9 @@ var estoNoEsUnEquipo:Equipo = null
   @Before
   def setup() = {
     mago=new Mago(Inteligencia, Map(Fuerza -> (100+)) )
-    heroe = new Heroe(2,100,1,1, 2,100,1,1, Some(mago),List())
+    heroe = new Heroe(0, 2,100,1,1, 2,100,1,1, Some(mago),List())
     ladron =new Ladron(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
-    liderLadron = new Heroe(100,200,300,400, 100,200,300,400,Some(ladron),List())
+    liderLadron = new Heroe(1, 100,200,300,400, 100,200,300,400,Some(ladron),List())
     equipo = new Equipo(0,"Equipo sin gracia",List(heroe))
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)    
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())

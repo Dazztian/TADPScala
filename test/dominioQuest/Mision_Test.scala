@@ -44,12 +44,12 @@ var robarZapa:Tarea = null
   @Before
   def setup() = {
     mago=new Mago(Inteligencia, Map(Fuerza -> (100+)) )
-    heroeMago = new Heroe(2,100,1,1, 2,100,1,1, Some(mago),List())
+    heroeMago = new Heroe(0, 2,100,1,1, 2,100,1,1, Some(mago),List())
     ladron =new Ladron(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
-    heroeLadron = new Heroe(100,200,300,400, 100,200,300,400,Some(ladron),List())
+    heroeLadron = new Heroe(1, 100,200,300,400, 100,200,300,400,Some(ladron),List())
     equipoConLiderLadron = new Equipo(0,"Equipo sin gracia",List(heroeMago,heroeLadron))
     guerrero = new Guerrero(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
-    heroeGuerrero = new Heroe(100,200,300,400, 100,200,300,400,Some(guerrero),List())
+    heroeGuerrero = new Heroe(2, 100,200,300,400, 100,200,300,400,Some(guerrero),List())
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,20)
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
     robarTalis = RobarTalisman(arcoViejo)
@@ -83,7 +83,7 @@ var robarZapa:Tarea = null
   }
   @Test
   def equipoCumpleCondicionTarea()= {
-    var heroeModificado = new Heroe(100,200,300,400, 100,200,300,400, Some(ladron),List())
+    var heroeModificado = new Heroe(1, 100,200,300,400, 100,200,300,400, Some(ladron),List())
     var equipoSoloLadronModificado = equipoSoloLadron.reemplazarMiembro(heroeModificado, heroeLadron).agregarOroPozo(100)
     
        assertEquals(Success(equipoSoloLadronModificado),misionConRobar.realizarMision(equipoSoloLadron))

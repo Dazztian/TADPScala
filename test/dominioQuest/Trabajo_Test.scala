@@ -28,7 +28,7 @@ class Trabajo_Test {
     cascoVikingo = new Item(Some(Cabeza), Map(Hp -> (10+)), List(new RequerimientosItem(None, Map(Fuerza -> (30<)))), 10)
     laMataDragones = new Item(Some(ManoDerecha), Map(Fuerza -> (1000*)), List(new RequerimientosItem(None, Map(Fuerza -> (10>)))), 10)
 
-    heroe = new Heroe(1, 2, 3, 4, 1, 2, 3, 4, None, List(cascoVikingo))
+    heroe = new Heroe(0, 1, 2, 3, 4, 1, 2, 3, 4, None, List(cascoVikingo))
   }
 
 //  @Test

@@ -22,11 +22,11 @@ var talismanMinimalismo: Item = null
 @Before
   def setup() = {
     mago=new Mago(Inteligencia, Map(Fuerza -> (100+)) )
-    heroe = new Heroe(2,100,1,1, 2,100,1,1, Some(mago),List())
+    heroe = new Heroe(0,2,100,1,1, 2,100,1,1, Some(mago),List())
     ladron =new Ladron(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
-    liderLadron = new Heroe(100,200,3000,400, 100,200,3000,400,Some(ladron),List())
+    liderLadron = new Heroe(1,100,200,3000,400, 100,200,3000,400,Some(ladron),List())
     guerrero = new Guerrero(Fuerza, Map(Hp -> (10+), Inteligencia -> (10-), Fuerza ->(15+)))
-    guerreroDragon = new Heroe(50,2000,5,200, 50,2000,5,200, Some(guerrero), List())
+    guerreroDragon = new Heroe(2,50,2000,5,200, 50,2000,5,200, Some(guerrero), List())
     equipo = new Equipo(0,"Equipo sin gracia",List(heroe,liderLadron,guerreroDragon))
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)    
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
@@ -37,16 +37,16 @@ var talismanMinimalismo: Item = null
 
 @Test
   def mejorHeroeSegun_test() = {
-  assertEquals(Some(liderLadron),equipo.mejorHeroeSegun(_.hp))
+  assertEquals(Some(liderLadron),equipo.mejorHeroeSegun(equipo.integrantes, _.hp))
 }
 
 @Test
   def mejorHeroeSegunEquipoVacio_test() = {
-  assertEquals(None,estoNoEsUnEquipo.mejorHeroeSegun(_.hp))
+  assertEquals(None,estoNoEsUnEquipo.mejorHeroeSegun(equipo.integrantes, _.hp))
 }
 @Test
   def mejorHeroeSegunEquipoUnitario_test() = {
-  assertEquals(Some(heroe),equipoSolapa.mejorHeroeSegun(_.hp))
+  assertEquals(Some(heroe),equipoSolapa.mejorHeroeSegun(equipo.integrantes, _.hp))
 }
 @Test
   def obtenerItem_test() = {

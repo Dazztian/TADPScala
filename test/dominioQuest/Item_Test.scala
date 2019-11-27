@@ -36,7 +36,7 @@ var kaerinDefensor:Heroe = null
      
     var listaItems: List[Item]= List(laBotellita)
     
-    kaerin = new Heroe(1,40,3,4,1,40,3,4, Some(druida), listaItems)
+    kaerin = new Heroe(0, 1,40,3,4,1,40,3,4, Some(druida), listaItems)
      
    
     druida=new Trabajo(Hp, Map(Fuerza -> (1+)))
@@ -53,8 +53,8 @@ var kaerinDefensor:Heroe = null
      var listaItemsRecargada: List[Item]= List(laBotellita, palitoMagico)
      var listaItemsDefensor: List[Item]=List(arcoViejo)
 
-    kaerinRecargado =new Heroe(10,40,3,4, 10,40,3,4, Some(druida), listaItemsRecargada)//,partesDelCuerpo ))
-    kaerinDefensor= new Heroe(10,4,3,4, 10,4,3,4,Some(druida),listaItemsDefensor)
+    kaerinRecargado =new Heroe(1, 10,40,3,4, 10,40,3,4, Some(druida), listaItemsRecargada)//,partesDelCuerpo ))
+    kaerinDefensor= new Heroe(2, 10,4,3,4, 10,4,3,4,Some(druida),listaItemsDefensor)
   }
 
   @Test

@@ -40,9 +40,9 @@ class Taberna_Test {
     ladron =new Ladron(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
     guerrero = new Guerrero(Fuerza, Map(Hp -> (10+), Inteligencia -> (10-), Fuerza ->(15+)))
 
-    maguitoDelBien= new Heroe(2,100,1,1, 2,100,1,1, Some(mago),List())
-    liderLadron= new Heroe(100,200,3000,400, 100,200,3000,400,Some(ladron),List())
-    guerrerito= new  Heroe(50,2000,5,200, 50,2000,5,200, Some(guerrero), List())
+    maguitoDelBien= new Heroe(0, 2,100,1,1, 2,100,1,1, Some(mago),List())
+    liderLadron= new Heroe(1, 100,200,3000,400, 100,200,3000,400,Some(ladron),List())
+    guerrerito= new  Heroe(2, 50,2000,5,200, 50,2000,5,200, Some(guerrero), List())
 
     elEquipo = new Equipo(0,"Equipo sin gracia",List(maguitoDelBien,liderLadron,guerrerito))
     equipito = new Equipo(0,"Equipo sin gracia",List(maguitoDelBien,guerrerito))

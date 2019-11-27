@@ -1,6 +1,7 @@
 package dominioQuest
 
 case class Heroe (
+    val id: Int,
     val hpBase: Int,
     val fuerzaBase: Int,
     val velocidadBase: Int,
