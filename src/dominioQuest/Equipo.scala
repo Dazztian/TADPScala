@@ -10,36 +10,16 @@ case class Equipo (
     integrantes.sortWith(criterio(_) > criterio(_)).headOption
   }
    
- /* 
+ 
  def lider(): Option[Heroe] = {
     val heroesOrdenados=this.integrantes.sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
-    val elLider= mejorHeroeSegun(_.mainStatSegunEspecializacion)
     heroesOrdenados match{
-      case primerHeroe::_ 
-      if(heroesOrdenados.head.mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion()) 
+      case primerHeroe::(segundoHeroe::_)
+      if(primerHeroe.mainStatSegunEspecializacion() == segundoHeroe.mainStatSegunEspecializacion()) 
         => return None
-      case _ => return elLider   
+      case _ => return mejorHeroeSegun(_.mainStatSegunEspecializacion)  
   }
-}*/
-  
-  def lider(): Option[Heroe] = {
-    val heroesOrdenados=this.integrantes.sortWith(_.mainStatSegunEspecializacion()>_.mainStatSegunEspecializacion())
-    val elLider= mejorHeroeSegun(_.mainStatSegunEspecializacion)
-    heroesOrdenados match{
-     case Nil => None
-     case unSoloHeroe::Nil => Some(unSoloHeroe)
-     case primerHeroe::_ =>
-       if
-         (heroesOrdenados.head.mainStatSegunEspecializacion() == heroesOrdenados(1).mainStatSegunEspecializacion())
-        {
-         return None
-       }else{
-        return Some(primerHeroe)
-       }
-    }
-    }
-   
-  
+}
      
   def reemplazarMiembro(miembroNuevo :Heroe,miembroAReemplazar :Heroe):Equipo =
       this.copy(integrantes=miembroNuevo ::
