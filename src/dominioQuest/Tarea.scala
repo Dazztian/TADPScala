@@ -88,7 +88,7 @@ case class RobarTalisman(unItem: Item) extends Tarea
      unHeroe match{
        case None => NoPuedeRealizarse(unEquipo,this)
        case Some(unHeroe) => unEquipo.lider() match{
-         case Some(Heroe(_,_,_,_,Some(Ladron(_,_)),_))=> Success(unEquipo.reemplazarMiembro(unHeroe.equiparItem(unItem), unHeroe))
+         //case Some(Heroe(_,_,_,_,Some(Ladron(_,_)),_))=> Success(unEquipo.reemplazarMiembro(unHeroe.equiparItem(unItem), unHeroe)) TODO CAMBIAR
          case Some(_) => NoPuedeRealizarse(unEquipo,this)
          case None => NoPuedeRealizarse(unEquipo,this)
        }

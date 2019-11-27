@@ -22,11 +22,11 @@ var talismanMinimalismo: Item = null
 @Before
   def setup() = {
     mago=new Mago(Inteligencia, Map(Fuerza -> (100+)) )
-    heroe = new Heroe(2,100,1,1, Some(mago),List())
+    heroe = new Heroe(2,100,1,1, 2,100,1,1, Some(mago),List())
     ladron =new Ladron(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
-    liderLadron = new Heroe(100,200,3000,400,Some(ladron),List())
+    liderLadron = new Heroe(100,200,3000,400, 100,200,3000,400,Some(ladron),List())
     guerrero = new Guerrero(Fuerza, Map(Hp -> (10+), Inteligencia -> (10-), Fuerza ->(15+)))
-    guerreroDragon = new Heroe(50,2000,5,200, Some(guerrero), List())
+    guerreroDragon = new Heroe(50,2000,5,200, 50,2000,5,200, Some(guerrero), List())
     equipo = new Equipo(0,"Equipo sin gracia",List(heroe,liderLadron,guerreroDragon))
     arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)    
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())

@@ -1,11 +1,16 @@
 package dominioQuest
 
-case class Heroe (val hp: Int,
+case class Heroe (
+    val hpBase: Int,
+    val fuerzaBase: Int,
+    val velocidadBase: Int,
+    val inteligenciaBase: Int,
+    val hp: Int,
     val fuerza: Int,
     val velocidad: Int,
     val inteligencia: Int,
     val especializacion: Option[Trabajo],
-    val items: List[Item],
+    val items: List[Item]
     )  {
   
   def modificarHp(modificacion: Int=>Int) = this.copy(hp = modificacion(this.hp).max(1))
@@ -13,7 +18,7 @@ case class Heroe (val hp: Int,
   def modificarInteligencia(modificacion: Int=>Int) = this.copy(inteligencia = modificacion(this.inteligencia).max(1))
   def modificarVelocidad(modificacion: Int=>Int) = this.copy(velocidad = modificacion(this.velocidad).max(1))
   def modificarListaItems(listaNueva: List[(Item)]) = this.copy(items = listaNueva)
-  
+
 def getStatActual(unStat: Stat):Int ={ 
     val heroeconTrabajoAplicadoYItemEquipado=this.items.foldLeft(this.aplicarEfectosDelTrabajo(this.especializacion))
       {(semilla,unItem) => semilla.equiparItem(unItem) }
@@ -56,10 +61,7 @@ def cambiarTrabajo(unTrabajo: Option[Trabajo]) :Heroe =
   this.copy(especializacion = unTrabajo)
 
 def aplicarEfectosDelTrabajo(unTrabajo: Option[Trabajo]) :Heroe = {
-  unTrabajo match{
-  case Some(unTrabajo)=> this.modificarStats(unTrabajo.atributosHeroe)
-  case None => this
-  }
+  unTrabajo.map(trabajo => this.modificarStats(trabajo.atributosHeroe)).getOrElse(this.copy(hp= hpBase, fuerza = fuerzaBase, inteligencia = inteligenciaBase))
 }
 
 
