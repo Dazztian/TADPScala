@@ -6,14 +6,8 @@ class Taberna(val tablon : Seq[Mision]) {
 
   type criterio = (Equipo,Equipo) => Boolean
 
-  
   def elegirMision(misiones:Seq[Mision],unEquipo:Equipo,criterio:criterio):Option[Mision] = {
-    misiones match {
-      case Nil=> None
-      case mision::nil=>Some(mision)
-      case mision::_ => ordenarMisionesSegunCriterio (misiones, unEquipo, criterio).headOption
-    }
-  }
+    ordenarMisionesSegunCriterio (misiones, unEquipo, criterio).headOption }
 
   def ordenarMisionesSegunCriterio(misiones:Seq[Mision],unEquipo:Equipo,criterio:criterio):Seq[Mision] = {
         misiones.sortWith((mision1,mision2) => criterio(mision1.realizarMision(unEquipo).equipo,mision2.realizarMision(unEquipo).equipo))
