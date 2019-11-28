@@ -10,9 +10,13 @@ case class Mision (
         previousResult match{
           case Success(_) => {
             val heroeElegido = tarea.encontrarMejorHeroe(previousResult.equipo)
-            tarea.cumplirTarea(heroeElegido, previousResult.equipo) }// devuelve un Result
+            heroeElegido match {
+              case Some(heroe) => tarea.cumplirTarea(heroeElegido, previousResult.equipo) // devuelve un Result
+              case _ => NoPuedeRealizarse(unEquipo,tarea)
+            }
+          }
           case NoPuedeRealizarse(_,tarea) => NoPuedeRealizarse(unEquipo,tarea)
-          case Failure(unEquipo,unaExcepcion) => Failure(unEquipo,unaExcepcion)
+          case Failure(_,unaExcepcion) => Failure(unEquipo,unaExcepcion)
         }
       }
     }//Termina de foldear
@@ -24,3 +28,5 @@ case class Mision (
   }
   
 }
+
+

@@ -65,6 +65,10 @@ var robarZapa:Tarea = null
     roboNoConveniente = new Mision(new EquiparItem(zapatillaTrucha), List(robarZapa))
   }
 
+ @Test
+  def equipoSinHeroe() = {
+    assertEquals(NoPuedeRealizarse(estoNoEsUnEquipo,robarTalis), obtenerRobando.realizarMision(estoNoEsUnEquipo))
+  }
 
   @Test
   def equipoAgregaOro() = {
@@ -83,7 +87,7 @@ var robarZapa:Tarea = null
   }
   @Test
   def equipoCumpleCondicionTarea()= {
-    var heroeModificado = new Heroe(1, 100,200,300,400, 100,200,300,400, Some(ladron),List())
+    var heroeModificado = new Heroe(1, 100,200,300,400, 100,200,300,400, Some(ladron),List()).equiparItem(arcoViejo)
     var equipoSoloLadronModificado = equipoSoloLadron.reemplazarMiembro(heroeModificado, heroeLadron).agregarOroPozo(100)
     
        assertEquals(Success(equipoSoloLadronModificado),misionConRobar.realizarMision(equipoSoloLadron))

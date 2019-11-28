@@ -16,8 +16,6 @@ class Trabajo_Test {
   var cascoVikingo: Item = null
   var laMataDragones: Item = null
 
-  var manoDerecha = new ParteDelCuerpo(None)
-  var cabeza = new ParteDelCuerpo(None)
 
   @Before
   def setup() = {

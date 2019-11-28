@@ -9,7 +9,6 @@ class Heroe_Test {
 var heroe:Heroe = null
 var mago:Trabajo = null
 var palitoMagico:Item = null
-var manoDerecha= new ParteDelCuerpo(None)
 
 
 
@@ -25,7 +24,6 @@ var manoDerecha= new ParteDelCuerpo(None)
      
      palitoMagico= new Item(Some(ManoDerecha), Map(Fuerza ->(100* )),requerimientoPalitoMagico,10)
      
-     manoDerecha.itemAsociado=Some(palitoMagico)
      
      var listaItems: List[Item]= List(palitoMagico)
         
