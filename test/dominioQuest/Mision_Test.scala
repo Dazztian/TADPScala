@@ -43,24 +43,29 @@ var robarZapa:Tarea = null
 
   @Before
   def setup() = {
-    mago=new Mago(Inteligencia, Map(Fuerza -> (100+)) )
+    mago=new Mago(Inteligencia,  List(_.modificarFuerza(100+)) )
     heroeMago = new Heroe(0, 2,100,1,1, 2,100,1,1, Some(mago),List())
-    ladron =new Ladron(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
+    ladron =new Ladron(Velocidad,  List(_.modificarVelocidad(10+),_.modificarHp(5-)))
     heroeLadron = new Heroe(1, 100,200,300,400, 100,200,300,400,Some(ladron),List())
+
     equipoConLiderLadron = new Equipo(0,"Equipo sin gracia",List(heroeMago,heroeLadron))
-    guerrero = new Guerrero(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
+
+    guerrero = new Guerrero(Velocidad, List(_.modificarVelocidad(10+),_.modificarHp(5-)))
     heroeGuerrero = new Heroe(2, 100,200,300,400, 100,200,300,400,Some(guerrero),List())
-    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,20)
+
+    arcoViejo = new Item(Some(Manos),List(_.modificarFuerza( 2+)), sinRequerimiento,20)
+
     estoNoEsUnEquipo = new Equipo(0,"Equipo sin nadie",List())
     robarTalis = RobarTalisman(arcoViejo)
+
     equipoSoloLadron = new Equipo(0, "Solitario ladron", List(heroeLadron))
     soloRobar = new Mision(new AgregarOroPozo(888),List(robarTalis))
     equipoSinLiderLadron = new Equipo(0,"No tenemos lider ladron", List(heroeMago, heroeGuerrero))
-    
+
     misionConRobar = new Mision(new AgregarOroPozo(100),List(robarTalis,PelearContraMonstruo(10)))
     misionImposible = new Mision(new AgregarMiembro(heroeGuerrero),List(robarTalis,PelearContraMonstruo(10)))
     obtenerRobando = new Mision(new EquiparItem(arcoViejo), List(robarTalis))
-    zapatillaTrucha = new Item(Some(Pies), Map(Fuerza -> (1-)), sinRequerimiento, 100)
+   zapatillaTrucha = new Item(Some(Pies), List(_.modificarFuerza(1-)), sinRequerimiento, 100)
     robarZapa = RobarTalisman(zapatillaTrucha)
     roboNoConveniente = new Mision(new EquiparItem(zapatillaTrucha), List(robarZapa))
   }
@@ -74,6 +79,7 @@ var robarZapa:Tarea = null
   def equipoAgregaOro() = {
     assertEquals(888, soloRobar.recompensa.obtenerRecompensa(equipoSoloLadron).pozoComun)
   }
+
   //Queda probar 1)EquiparItem, 2)AgregarMiembro y 3)IncrementarStats
   @Test
   def equipoNoCumpleMisionSimple() = {
