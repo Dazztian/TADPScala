@@ -12,7 +12,7 @@ case class Mision (
             val heroeElegido = tarea.encontrarMejorHeroe(previousResult.equipo)
             tarea.cumplirTarea(heroeElegido, previousResult.equipo) }// devuelve un Result
           case NoPuedeRealizarse(_,tarea) => NoPuedeRealizarse(unEquipo,tarea)
-          case Failure(_,_) => Failure(unEquipo,new Exception)
+          case Failure(unEquipo,unaExcepcion) => Failure(unEquipo,unaExcepcion)
         }
       }
     }//Termina de foldear
