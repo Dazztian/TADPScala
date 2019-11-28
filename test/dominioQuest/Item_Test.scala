@@ -48,7 +48,7 @@ var kaerinDefensor:Heroe = null
     palitoMagico = new Item(Some(ManoIzquierda),Map(Hp ->(40* )), requerimientoPalitoMagico,10)
     //talismanDedicacion = new Item(None,Map(Trabajo -> (Trabajo.atributoPrincipal*0.1*)), requerimientoPalitoMagico)
     talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento,10)
-    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)    
+    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)
     
      var listaItemsRecargada: List[Item]= List(laBotellita, palitoMagico)
      var listaItemsDefensor: List[Item]=List(arcoViejo)
@@ -59,7 +59,7 @@ var kaerinDefensor:Heroe = null
 
   @Test
   def puedePortarItem_test() = {
-    assertEquals(true, kaerin.puedePortarItem(laBotellita))
+    assertEquals(true, laBotellita.puedeSerPortadoPor(kaerin))
    // println("por dios kaerin, largá la botellita!")
   }
   

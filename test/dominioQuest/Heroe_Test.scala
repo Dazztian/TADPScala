@@ -39,7 +39,7 @@ var manoDerecha= new ParteDelCuerpo(None)
 }
 @Test
   def aceptaItem_test() = {
-    assertEquals(true, heroe.puedePortarItem(palitoMagico))
+    assertEquals(true, palitoMagico.puedeSerPortadoPor(heroe))
   }
 
  @Test
