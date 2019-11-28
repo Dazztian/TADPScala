@@ -19,6 +19,10 @@ var talismanDedicacion:Item = null
 var talismanMinimalismo: Item = null
 var arcoViejo:Item = null
 var kaerinDefensor:Heroe = null
+  var espadaDeLaVida:Item = null
+  var vinchaDelBufaloDeAgua:Item = null
+  var kaerinDesempleado:Heroe = null
+  var kaerinInteligente:Heroe= null
 
   @Before
   def setup() = {
@@ -34,17 +38,32 @@ var kaerinDefensor:Heroe = null
     var listaItems: List[Item]= List(laBotellita)
     
     kaerin = new Heroe(0, 1,40,3,4,1,40,3,4, Some(druida), listaItems)
+    kaerinDesempleado = new Heroe(0, 1,40,3,4,1,40,3,4, None, listaItems)
+    kaerinInteligente = new Heroe(0, 1,40,3,400,1,40,3,400, None, listaItems)
         
 
     //ITEMS
-    //val modificarHpFuerza :Heroe =>Heroe = _.modificarHp(40*)
+
     laBotellitaDeRicky = new Item(Some(ManoDerecha),List(_.modificarHp(40*)), requerimientoPalitoMagico,10)
     tacosDeSarkany = new Item(Some(Pies),List(_.modificarFuerza(300*)), List(new RequerimientosItem(Some(druida), Map(Inteligencia ->(0<)))),10)
     palitoMagico = new Item(Some(ManoIzquierda),List(_.modificarInteligencia(20+)), requerimientoPalitoMagico,10)
     //talismanDedicacion = new Item(None,Map(Trabajo -> (Trabajo.atributoPrincipal*0.1*)), requerimientoPalitoMagico)
     talismanMinimalismo = new Item(None, List(_.modificarHp(50+)),sinRequerimiento,10)
     arcoViejo = new Item(Some(Manos),List(_.modificarFuerza(2+)), sinRequerimiento,10)
-    
+    espadaDeLaVida = new Item (Some(ManoDerecha),
+      List(_.modificarFuerza( 0*),unHeroe => unHeroe.modificarFuerza(unHeroe.hp +)),
+      sinRequerimiento,
+      30 )
+
+    vinchaDelBufaloDeAgua= new Item (Some(Cabeza),
+      List(unHeroe=>
+        if (unHeroe.fuerza > unHeroe.inteligencia){
+          unHeroe.modificarInteligencia(30+)
+        }
+        else
+          unHeroe.modificarStats(List(_.modificarHp(10+),_.modificarFuerza(10+),_.modificarVelocidad(10+)))
+    ),List(new RequerimientosItem(None , Map())),30)
+
      var listaItemsRecargada: List[Item]= List(laBotellita, palitoMagico)
      var listaItemsDefensor: List[Item]=List(arcoViejo)
 
@@ -61,7 +80,7 @@ var kaerinDefensor:Heroe = null
   @Test
   def estadoPostPortarItem_test() = {
     var kaerinConNuevoItem=kaerin.equiparItem(laBotellita)
-    assertEquals(4, kaerinConNuevoItem.hp)
+    assertEquals(5, kaerinConNuevoItem.hp)
   }
   @Test
   def cantItemPOSTEquipamientoDeIgualParte_test() = {// como ya tenia un item en la mano derecha, se le reemplaza
@@ -108,5 +127,24 @@ var kaerinDefensor:Heroe = null
   def cantItemPOSTEquipamientoDeItemAmbasManosss_test() = { //antes tenia un item en ambas manos
     var kaerinDefensorArmado=kaerinDefensor.equiparItem(laBotellitaDeRicky) 
     assertEquals(1, kaerinDefensorArmado.items.size)
-  } 
+  }
+
+  @Test
+  def espadaDeLaVida_Test(): Unit ={
+    assertEquals(11, kaerinDefensor.equiparItem(espadaDeLaVida).fuerza)
+  }
+
+  @Test
+  def vinchaDelBufaloDeAguaHeroeDesempleado_Test: Unit ={
+    assertEquals(34,kaerinDesempleado.equiparItem(vinchaDelBufaloDeAgua).inteligencia)
+  }
+
+  @Test
+  def vinchaDelBufaloDeAguaHeroeEmpleado_Test: Unit ={
+    assertEquals(kaerin,kaerin.equiparItem(vinchaDelBufaloDeAgua))
+  }
+  @Test
+  def vinchaDelBufaloDeAguaHeroeEmpleadoInteligente_Test: Unit ={
+    assertEquals(11,kaerinInteligente.equiparItem(vinchaDelBufaloDeAgua).hp)
+  }
 }
