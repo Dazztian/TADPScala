@@ -36,9 +36,9 @@ class Taberna_Test {
 
   @Before
   def setup() = {
-    mago = new Mago(Inteligencia, Map(Fuerza -> (100 +)))
-    ladron =new Ladron(Velocidad, Map(Velocidad -> (10+),Hp ->(5-)) )
-    guerrero = new Guerrero(Fuerza, Map(Hp -> (10+), Inteligencia -> (10-), Fuerza ->(15+)))
+    mago = new Mago(Inteligencia, List(_.modificarFuerza(100+)))
+    ladron =new Ladron(Velocidad, List(_.modificarVelocidad(10+), _.modificarHp(5-)) ) // Map(Velocidad -> (10+),Hp ->(5-))
+    guerrero = new Guerrero(Fuerza, List(_.modificarHp(10+), _.modificarInteligencia(10-), _.modificarFuerza(15+))) // Map(Hp -> (10+), Inteligencia -> (10-), Fuerza ->(15+))
 
     maguitoDelBien= new Heroe(0, 2,100,1,1, 2,100,1,1, Some(mago),List())
     liderLadron= new Heroe(1, 100,200,3000,400, 100,200,3000,400,Some(ladron),List())
@@ -47,8 +47,8 @@ class Taberna_Test {
     elEquipo = new Equipo(0,"Equipo sin gracia",List(maguitoDelBien,liderLadron,guerrerito))
     equipito = new Equipo(0,"Equipo sin gracia",List(maguitoDelBien,guerrerito))
 
-    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,20)
-    talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento,20)
+    arcoViejo = new Item(Some(Manos),List(_.modificarFuerza(2+)), sinRequerimiento,20) // Map(Fuerza -> (2+))
+    talismanMinimalismo = new Item(None, List(_.modificarHp(50+)),sinRequerimiento,20) // Map(Hp ->(50+))
 
     robarTalis = RobarTalisman(arcoViejo)
 

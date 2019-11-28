@@ -19,12 +19,13 @@ class Trabajo_Test {
 
   @Before
   def setup() = {
-    hechicero = new Trabajo(Fuerza, Map(Fuerza -> (158+)))
-    berserk = new Trabajo(Inteligencia, Map(Hp -> (299+)))
-    trabajoRestador = new Trabajo(Velocidad, Map(Velocidad -> (_ - 300)))
-    trabajoInutil = new Trabajo(Hp, Map())
-    cascoVikingo = new Item(Some(Cabeza), Map(Hp -> (10+)), List(new RequerimientosItem(None, Map(Fuerza -> (30<)))), 10)
-    laMataDragones = new Item(Some(ManoDerecha), Map(Fuerza -> (1000*)), List(new RequerimientosItem(None, Map(Fuerza -> (10>)))), 10)
+    //List(_.modificarFuerza(100+))
+    hechicero = new Trabajo(Fuerza, List(_.modificarFuerza(158+))) // Map(Fuerza -> (158+))
+    berserk = new Trabajo(Inteligencia, List(_.modificarHp(299+))) // Map(Hp -> (299+))
+    trabajoRestador = new Trabajo(Velocidad,List(_.modificarVelocidad(300-))) //  Map(Velocidad -> (_ - 300)
+    trabajoInutil = new Trabajo(Hp, List())
+    cascoVikingo = new Item(Some(Cabeza), List(_.modificarHp(10+)), List(new RequerimientosItem(None, Map(Fuerza -> (30<)))), 10) // Map(Hp -> (10+) / 
+    laMataDragones = new Item(Some(ManoDerecha), List(_.modificarFuerza(1000*)), List(new RequerimientosItem(None, Map(Fuerza -> (10>)))), 10) // Map(Fuerza -> (1000*)
 
     heroe = new Heroe(0, 1, 2, 3, 4, 1, 2, 3, 4, None, List(cascoVikingo))
   }
