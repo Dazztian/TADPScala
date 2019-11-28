@@ -2,7 +2,7 @@ package dominioQuest
 
 case class Item (
     var parte: Option[Equipamiento],
-    var efectos: Map[Stat, Int=>Int],
+    var efectos: List [Heroe => Heroe], //(_.modificarHp(40*))
     var condicionesPosta: List[RequerimientosItem],
     var precio: Int
     )

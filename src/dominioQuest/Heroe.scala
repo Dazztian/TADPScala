@@ -63,9 +63,9 @@ def aplicarEfectosDelTrabajo(unTrabajo: Option[Trabajo]) :Heroe = {
 }
 
 
-def modificarStats(modificadores: Map[Stat, Int=>Int]):Heroe= {
+def modificarStats(modificadores: List[Heroe => Heroe]):Heroe= {
   modificadores.foldLeft(this){
-  (semilla,diccionarioStatEfecto) => (diccionarioStatEfecto._1.modificar(semilla,diccionarioStatEfecto._2))}
+  (semilla,efecto) => efecto(semilla)}//(diccionarioStatEfecto._1.modificar(semilla,diccionarioStatEfecto._2))}
 
 }
      

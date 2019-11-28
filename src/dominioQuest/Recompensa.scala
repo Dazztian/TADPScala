@@ -20,7 +20,7 @@ case class AgregarMiembro(unHeroe: Heroe)extends Recompensa {
   }
 }
 
-case class IncrementarStats(modificadores: Map[Stat, Int=>Int])extends Recompensa {
+case class IncrementarStats(modificadores: List[Heroe =>Heroe])extends Recompensa {
   override def obtenerRecompensa(unEquipo:Equipo):Equipo= {
     return unEquipo.copy(integrantes=
       unEquipo.integrantes.map(unHeroe => unHeroe.modificarStats(modificadores)))

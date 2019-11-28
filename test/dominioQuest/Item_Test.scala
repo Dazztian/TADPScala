@@ -23,30 +23,27 @@ var kaerinDefensor:Heroe = null
   @Before
   def setup() = {
    
-   
-    druida=new Trabajo(Hp, Map(Fuerza -> (1+)))
+    druida =new Trabajo(Hp, List(_.modificarFuerza(1+)))
     
     var funcionPrueba: Int=>Boolean=(30<)
     var requi:RequerimientosItem=new RequerimientosItem(Some(druida), Map(Fuerza -> funcionPrueba))
     var requerimientoPalitoMagico: List[RequerimientosItem]= List(requi) 
      
-    laBotellita=new Item(Some(ManoDerecha),Map(Hp ->(4* )), requerimientoPalitoMagico,10)
+    laBotellita=new Item(Some(ManoDerecha),List(_.modificarHp(4+)), requerimientoPalitoMagico,10)
      
     var listaItems: List[Item]= List(laBotellita)
     
     kaerin = new Heroe(0, 1,40,3,4,1,40,3,4, Some(druida), listaItems)
-     
-   
-    druida=new Trabajo(Hp, Map(Fuerza -> (1+)))
-    
+        
 
     //ITEMS
-    laBotellitaDeRicky = new Item(Some(ManoDerecha),Map(Hp ->(40* )), requerimientoPalitoMagico,10)
-    tacosDeSarkany = new Item(Some(Pies), Map(Fuerza -> (300*)), List(new RequerimientosItem(None, Map(Inteligencia ->(3 ==)))),10)
-    palitoMagico = new Item(Some(ManoIzquierda),Map(Hp ->(40* )), requerimientoPalitoMagico,10)
+    //val modificarHpFuerza :Heroe =>Heroe = _.modificarHp(40*)
+    laBotellitaDeRicky = new Item(Some(ManoDerecha),List(_.modificarHp(40*)), requerimientoPalitoMagico,10)
+    tacosDeSarkany = new Item(Some(Pies),List(_.modificarFuerza(300*)), List(new RequerimientosItem(Some(druida), Map(Inteligencia ->(0<)))),10)
+    palitoMagico = new Item(Some(ManoIzquierda),List(_.modificarInteligencia(20+)), requerimientoPalitoMagico,10)
     //talismanDedicacion = new Item(None,Map(Trabajo -> (Trabajo.atributoPrincipal*0.1*)), requerimientoPalitoMagico)
-    talismanMinimalismo = new Item(None, Map(Hp ->(50+)),sinRequerimiento,10)
-    arcoViejo = new Item(Some(Manos),Map(Fuerza -> (2+)), sinRequerimiento,10)
+    talismanMinimalismo = new Item(None, List(_.modificarHp(50+)),sinRequerimiento,10)
+    arcoViejo = new Item(Some(Manos),List(_.modificarFuerza(2+)), sinRequerimiento,10)
     
      var listaItemsRecargada: List[Item]= List(laBotellita, palitoMagico)
      var listaItemsDefensor: List[Item]=List(arcoViejo)

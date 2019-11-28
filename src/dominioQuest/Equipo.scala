@@ -117,7 +117,7 @@ def obtenerItem(item: Item): Equipo = {
   def obtenerMiembro(miembroNuevo :Heroe):Equipo =
      this.copy(integrantes=miembroNuevo:: this.integrantes )
      
-  def incrementarStats(modificadores: Map[Stat, Int=>Int]) :Equipo =
+  def incrementarStats(modificadores: List[Heroe => Heroe]) :Equipo =
     this.copy(integrantes= this.integrantes.map(unHeroe => unHeroe.modificarStats(modificadores)))
      
   
