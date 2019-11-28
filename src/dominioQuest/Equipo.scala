@@ -28,76 +28,37 @@ case class Equipo (
   }
       
     //Obtengo los elementos que NO SON el miembro a reemplazar y le agrego el nuevo miembro
-    
-      
-     
- /* 
-  def realizarMision(unaMision:Mision) :Result = {
-    unaMision.tareas.foldLeft(Result(this)) { 
-      (previousResult, tarea) => {
-        previousResult match{
-          case Success(_) => {
-            val heroeElegido = tarea.encontrarMejorHeroe(previousResult.equipo)
-            tarea.cumplirTarea(heroeElegido, previousResult.equipo) // devuelve un Result
-          }
-          case NoPuedeRealizarse(_,tarea) => NoPuedeRealizarse(this,tarea)
-          case Failure(_,_) => Failure(this,new Exception)
-        }
-      }
-    }//Termina de foldear
-    match{//Aca COBRA la recompensa
-      case Success(equipo) => Success(unaMision.recompensa.obtenerRecompensa(equipo))   
-        case NoPuedeRealizarse(equipo,tarea) => NoPuedeRealizarse(equipo, tarea)
-        case Failure(equipo, error) => Failure(equipo, error)
-      } 
-  }
-*/
 
 //------------------------------------------   RECOMPENSA      ------------------------------------------------------------
   
 //type Recompensa = Equipo
 
   
-def agregarOroPozo(oroNuevo :Int) :Equipo ={
-    this.copy(pozoComun = this.pozoComun + oroNuevo)
+  def agregarOroPozo(oroNuevo :Int) :Equipo ={
+      this.copy(pozoComun = this.pozoComun + oroNuevo)
+    }
+
+  def obtenerItem(item: Item): Equipo = {
+    if(integrantes.exists(i => recibeAlgoPositivo(i, i.equiparItem(item)))){
+      equipaItemAlMejorMiembro(item, integrantes)
+    }
+    else {
+      return this.vender(item)
+    }
   }
 
-def obtenerItem(item: Item): Equipo = {
-  
-  
-  
-  
-   integrantes match{
-      case Nil => this
-      case unSoloHeroe::Nil => {
-        val heroeConItem = unSoloHeroe.equiparItem(item)
-        if(recibeAlgoPositivo(unSoloHeroe, heroeConItem)){
-          return this.reemplazarMiembro(heroeConItem, unSoloHeroe) 
-        }
-        else { return this.vender(item)}
+  def equipaItemAlMejorMiembro(item: Item, integrantes: List[Heroe]): Equipo = {
+    val integrantesConItem = integrantes.map(integrante => integrante.equiparItem(item))
+    val mejorIntegranteConItem = mejorHeroeSegun(integrantesConItem, _.mainStatSegunEspecializacion)
+    mejorIntegranteConItem match {
+      case Some(integranteConItem) => {
+        val miembroAReemplazar = getIntegrante(integranteConItem.id).getOrElse(integranteConItem)
+        this.reemplazarMiembro(integranteConItem, miembroAReemplazar)
       }
-     case integrantes => {
-        if(integrantes.exists(i => recibeAlgoPositivo(i, i.equiparItem(item)))){
-          val integrantesConItem = integrantes.map(integrante => integrante.equiparItem(item))
-          val mejorIntegranteConItem = mejorHeroeSegun(integrantesConItem, _.mainStatSegunEspecializacion)
-          mejorIntegranteConItem match {
-            case Some(integranteConItem) => {
-              val miembroAReemplazar = getIntegrante(integranteConItem.id).getOrElse(integranteConItem)
-              this.reemplazarMiembro(integranteConItem, miembroAReemplazar)
-            }
-            case _ => this
-          }
-        }
-        else { 
-          return this.vender(item) 
-        }
-        
-      }
-   }
+      case _ => this
+    }
   }
 
-
-  
   def recibeAlgoPositivo(heroeOriginal:Heroe, heroeModificado:Heroe):Boolean =
   {
     return (heroeModificado.getStatActual(Fuerza) > heroeOriginal.getStatActual(Fuerza) 
